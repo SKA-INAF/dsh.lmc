@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            DS ARCHIVER CONFIGURATION           -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{archiver_ds_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{archiver_ds_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{archiver_ds_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{archiver_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{archiver_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{archiver_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{archiver_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{archiver_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{archiver_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{archiver_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{archiver_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{archiver_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{archiver_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{archiver_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{archiver_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{archiver_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{archiver_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{archiver_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{archiver_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{archiver_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{archiver_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{archiver_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{archiver_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{archiver_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{archiver_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{archiver_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{archiver_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->		
+		<DeviceProperty name="LibConfiguration">
+			<Value> host={{archiver_db_host}} </Value>
+			<Value> user={{archiver_db_user}} </Value>
+			<Value> password={{archiver_db_user_password}} </Value>
+			<Value> dbname={{archiver_db_name}} </Value>
+			<Value> port={{archiver_db_port}} </Value>
+			<Value> libname={{archiver_db_lib}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SubscribeRetryPeriod">
+			<Value> {{archiver_subscribe_retry_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatisticsTimeWindow">
+			<Value> {{archiver_stats_time_window}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="CheckPeriodicTimeoutDelay">
+			<Value> {{archiver_periodic_timeout_delay}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ContextsList">
+			<Value> ALWAYS:always stored </Value>
+			<Value> RUN:stored during run </Value>
+			<Value> SHUTDOWN:stored during shutdown </Value>
+			<Value> SERVICE:stored during maintenance activities </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DefaultStrategy">
+			<Value> {{archiver_default_strategy}} </Value>
+		</DeviceProperty>
+		
+		<!--
+		<DeviceProperty name="AttributeList">
+			<Value>  </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+	</Attributes>
+	-->
+
+	<!-- ************************************************** -->
+	<!-- **              ARCHIVED ATTRS                     -->
+	<!-- ************************************************** -->
+	{% if ds_enabled_in_config | bool %}	
+	<ArchivedAttributes>
+
+		<!-- States & Modes -->
+		<ArchivedAttribute>
+			<Name> {{ds_manager}}/operatingMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{ds_manager}}/pointingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+
+	</ArchivedAttributes>
+	{% endif %}
+
+</DeviceConfiguration>
+

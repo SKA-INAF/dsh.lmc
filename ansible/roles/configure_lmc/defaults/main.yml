@@ -1,0 +1,1865 @@
+---
+
+############################################
+###     TANGO CS DEFAULT VARS            ###
+############################################
+lmc_tango_syslog_dir: "{{ ansible_env.DSHLMC_LOG }}"
+lmc_tango_syslog_forward_host: localhost
+lmc_tango_syslog_forward_port: 10514
+lmc_tango_syslog_forward_level: warn
+#lmc_archive_user: 'lmc-archiver'
+#lmc_archive_user_pass: 'lmc$archive'
+#lmc_archive_db_name: 'lmc_histdb'
+
+lmc_tango_host: "{{ ansible_env.TANGO_HOST }}"
+#lmc_tango_hostname: localhost
+#lmc_tango_port: 10000
+lmc_domain_name: mid_dish_0001
+##lmc_fqdn_prefix: "tango://{{lmc_tango_hostname}}:{{lmc_tango_port}}" 
+lmc_fqdn_prefix: "tango://{{lmc_tango_host}}" 
+lmc_device_family_name: elt
+lmc_internal_device_family_name: lmc
+lmc_config_mode: full
+spf_device_family_name: spf
+rx_device_family_name: spfrx
+
+# - ElementLogger
+lmc_logger_alias: "lmc_logger"
+lmc_logger_device_name: "logger"
+lmc_logger_server_name: "ElementLogger"
+lmc_logger_server_instance: "1"
+lmc_logger: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_logger_device_name}}"
+
+# - ElementMaster
+lmc_master_alias: "dish_master"
+lmc_master_device_name: "master"
+lmc_master_server_name: "DishManager"
+lmc_master_server_instance: "1"
+lmc_master: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_master_device_name}}"
+
+# - DSManager
+ds_manager_alias: "ds_manager"
+ds_manager_device_name: "ds_manager"
+ds_manager_server_name: "DSManager"
+dsmgr_server_name: "DSManager" ## Used by Nagios (override this to monitor the emulator instead of the real device)
+ds_manager_server_instance: "1"
+ds_manager: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{ds_manager_device_name}}"
+
+# - LMCMonitor
+lmc_monitor_alias: "lmc_monitor"
+lmc_monitor_device_name: "lmc_monitor"
+lmc_monitor_server_name: "LMCMonitor"
+lmc_monitor_server_instance: "1"
+lmc_monitor: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{lmc_monitor_device_name}}"
+
+
+# - LMCStarter
+lmc_starter_alias: lmc_starter
+lmc_starter_server_name: LMCStarter
+#lmc_starter: "{{lmc_fqdn_prefix}}/tango/admin/{{lmc_tango_hostname}}"
+lmc_starter_server_instance: "1"
+lmc_starter: "{{lmc_fqdn_prefix}}/tango/admin/{{ ansible_hostname }}"
+
+# - AlarmHandler
+lmc_alarm_alias: "alarm_handler"
+lmc_alarm_device_name: "alarms"
+lmc_alarm_server_name: "AlarmHandler"
+lmc_alarm_server_instance: "1"
+alarm_handler: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_alarm_device_name}}"
+
+# - Archiver 
+archiver_server_name: "LMCArchiver"
+archiver_server_instance: "1"
+
+# - Archiver LMC
+archiver_lmc_alias: "archiver-lmc"
+archiver_lmc_device_name: "archiver-lmc"
+archiver_lmc_server_name: "LMCArchiver"
+archiver_lmc_server_instance: "1"
+archiver_lmc: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_lmc_device_name}}"
+
+# - Archiver SPF
+archiver_spf_alias: "archiver-spf"
+archiver_spf_device_name: "archiver-spf"
+archiver_spf_server_name: "LMCArchiver"
+archiver_spf_server_instance: "1"
+archiver_spf: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_spf_device_name}}"
+
+# - Archiver SPFRx
+archiver_rx_alias: "archiver-spfrx"
+archiver_rx_device_name: "archiver-spfrx"
+archiver_rx_server_name: "LMCArchiver"
+archiver_rx_server_instance: "1"
+archiver_rx: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_rx_device_name}}"
+
+# - Archiver DS
+archiver_ds_alias: "archiver-ds"
+archiver_ds_device_name: "archiver-ds"
+archiver_ds_server_name: "LMCArchiver"
+archiver_ds_server_instance: "1"
+archiver_ds: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_ds_device_name}}"
+
+# - Archiver Configurator Manager
+archiver_cm_alias: "archiver-cm"
+archiver_cm_device_name: "archiver-cm"
+archiver_cm_server_name: "LMCArchiverConfigurator"
+archiver_cm_server_instance: "1"
+archiver_cm: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_cm_device_name}}"
+
+# - SPFEmulator (set by default to the emulator)
+spf_emulator_alias: "spf_emulator"
+spf_emulator_device_name: "emulator"
+spf_emulator_server_name: "SPFEmulator"
+spf_emulator_server_instance: "1"
+spf_controller: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+spf_vacuum: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+spf_helium: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+spf_B1: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+spf_B2: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+spf_B345: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{spf_device_family_name}}/{{spf_emulator_device_name}}"
+
+# - RxEmulator (set by default to the emulator)
+rx_emulator_alias: "spfrx_emulator"
+rx_emulator_device_name: "emulator"
+rx_emulator_server_name: "RxEmulator"
+rx_emulator_server_instance: "1"
+rx_controller: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{rx_device_family_name}}/{{rx_emulator_device_name}}"
+
+# - DSEmulator 
+ds_emulator_alias: "ds_emulator"
+ds_emulator_device_name: "ds_emulator"
+ds_emulator_server_name: "DSEmulator"
+ds_emulator_server_instance: "1"
+ds_emulator: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{ds_emulator_device_name}}"
+
+# - PDUEmulator 
+pdu_emulator_alias: "pdu_emulator"
+pdu_emulator_device_name: "pdu_emulator"
+pdu_emulator_server_name: "PDUEmulator"
+pdu_emulator_server_instance: "1"
+pdu_emulator: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{pdu_emulator_device_name}}"
+
+# - PDUManager
+pdu_manager_alias: "pdu_manager"
+pdu_manager_device_name: "pdu_manager"
+pdu_manager_server_name: "PDUManager"
+pdumgr_server_name: "PDUManager" ## Used by Nagios (override this to monitor the emulator instead of the real device)
+pdu_manager_server_instance: "1"
+pdu_manager: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{pdu_manager_device_name}}"
+
+# - TMEmulator 
+tm_emulator_alias: "tm_emulator"
+tm_emulator_device_name: "tm_emulator"
+tm_emulator_server_name: "TMEmulator"
+tm_emulator_server_instance: "1"
+tm_emulator: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{tm_emulator_device_name}}"
+
+# - Log Printer 
+logprinter_alias: "logprinter"
+logprinter_device_name: "log_printer"
+logprinter_server_name: "LogPrinter"
+logprinter_server_instance: "1"
+logprinter: "{{lmc_fqdn_prefix}}/{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{logprinter_device_name}}"
+
+
+# - TangoDB server
+element_databased: "{{lmc_fqdn_prefix}}/sys/database/2"
+
+# - TM device managing dish
+tm_proxy: "ska_mid/tm_leaf_node/d0001"
+
+
+############################################
+###     CONFIG FILES & OPTIONS           ###
+############################################
+# - Main config
+lmc_ds_dir: "{{ ansible_env.DSHLMC_DEVICE_DIR }}"
+lmc_config_dir: "{{ ansible_env.DSHLMC_CONFIG }}" #/opt/Software/SKA/DishLMC/config
+lmc_config_file: lmc_cfg.xml
+lmc_config_schema_file: lmc_cfg.xsd
+lmc_log_dir: "{{ ansible_env.DSHLMC_LOG }}" #/opt/Software/SKA/DishLMC/log
+lmc_log_file_min_rotate_size: '100M'
+lmc_log_file_nrotations: 5 
+
+# - Device Server config
+spf_emulator_config:
+  name: "spf_emulator_cfg.xml"
+  template: "spf_emulator_cfg.j2"
+
+rx_emulator_config:
+  name: "rx_emulator_cfg.xml"
+  template: "rx_emulator_cfg.j2"
+
+ds_emulator_config:
+  name: "ds_emulator_cfg.xml"
+  template: "ds_emulator_cfg.j2"
+
+ds_manager_config:
+  name: "ds_manager_cfg.xml"
+  template: "ds_manager_cfg.j2"
+
+dish_manager_config:
+  name: "dish_manager_cfg.xml"
+  template: "dish_manager_cfg.j2"
+
+element_logger_config:
+  name: "element_logger_cfg.xml"
+  template: "element_logger_cfg.j2"
+
+lmc_starter_config:
+  name: "lmc_starter_cfg.xml"
+  template: "lmc_starter_cfg.j2"
+
+lmc_monitor_config:
+  name: "lmc_monitor_cfg.xml"
+  template: "lmc_monitor_cfg.j2"
+
+alarm_handler_config:
+  name: "alarm_handler_cfg.xml"
+  template: "alarm_handler_cfg.j2"
+
+archiver_lmc_config:
+  name: "archiver_lmc_cfg.xml"
+  template: "archiver_lmc_cfg.j2"
+
+archiver_spf_config:
+  name: "archiver_spf_cfg.xml"
+  template: "archiver_spf_cfg.j2"
+
+archiver_rx_config:
+  name: "archiver_rx_cfg.xml"
+  template: "archiver_rx_cfg.j2"
+
+archiver_ds_config:
+  name: "archiver_ds_cfg.xml"
+  template: "archiver_ds_cfg.j2"
+
+archiver_cm_config:
+  name: "archiver_cm_cfg.xml"
+  template: "archiver_cm_cfg.j2"
+
+ds_config_vars:
+  - "{{spf_emulator_config}}"
+  - "{{rx_emulator_config}}"
+  - "{{ds_emulator_config}}"
+  - "{{ds_manager_config}}"
+  - "{{dish_manager_config}}"
+  - "{{lmc_starter_config}}"
+  - "{{element_logger_config}}"
+  - "{{lmc_monitor_config}}"
+  - "{{alarm_handler_config}}"
+  - "{{archiver_lmc_config}}"
+  - "{{archiver_spf_config}}"
+  - "{{archiver_rx_config}}"
+  - "{{archiver_ds_config}}"
+  - "{{archiver_cm_config}}"
+
+# - Configuration options
+lmc_clear_servers: yes
+lmc_export_servers: no
+
+#- Enable/disable LMC servers in configuration
+dshmgr_enabled_in_config: yes
+lmcmon_enabled_in_config: yes
+alarmhandler_enabled_in_config: yes
+lmclogger_enabled_in_config: yes
+lmcstarter_enabled_in_config: yes
+archiver_enabled_in_config: yes
+archiver_lmc_enabled_in_config: yes
+archiver_spf_enabled_in_config: yes
+archiver_rx_enabled_in_config: yes
+archiver_ds_enabled_in_config: yes
+archiver_cm_enabled_in_config: yes
+pdu_enabled_in_config: yes
+
+#######################################
+###     Tango DS CONFIGURATION      ###
+#######################################
+##================
+##  PROPERTIES
+##================
+#### GENERAL ###
+enable_config_from_file: !!str true
+enable_dyn_attr_cleanup: !!str false
+enable_dyn_attr_randomize: !!str false
+
+#### LOGGING VARS ###
+enable_central_log_target: !!str false
+central_log_target: ""
+central_log_level: 3
+enable_element_log_target: !!str true
+element_log_target: "{{lmc_domain_name}}/elt/logger"
+element_log_level: 4
+enable_storage_log_target: !!str true
+storage_log_target: "localhost"
+storage_log_level: 4
+syslog_facility: "local6"
+syslog_host: "localhost"
+enable_logger_init_polling: !!str true
+logger_init_poll_period: 60000 # ms
+
+#### FORMULA VARS ###
+formula_var_max_time_interval: 20  ## in seconds
+
+#### EVENT VARS ###
+process_events_in_queue_thread: !!str true
+
+##================
+##  ATTRIBUTES
+##================
+very_fast_poll_period: 100
+fast_poll_period: 1000
+default_poll_period: 3000
+medium_poll_period: 5000
+slow_poll_period: 10000
+very_slow_poll_period: 60000
+very_very_slow_poll_period: 3600000
+
+default_attr_rel_change: 1 # in %
+small_attr_rel_change: 20 # in %
+medium_attr_rel_change: 50 # in %
+high_attr_rel_change: 80 # in %
+
+
+######################
+#### SPF EMULATOR  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+spf_ska_level: 2
+
+# - General properties
+spf_enable_config_from_file: "{{enable_config_from_file}}"
+spf_config_file: "{{lmc_config_dir}}/{{spf_emulator_config.name}}"
+spf_log_file: "spf_controller.log"
+spf_astor_controlled: !!str false
+spf_startup_level: 1
+spf_admin_mode_default: "MAINTENANCE" # see SKA Guidelines
+
+spf_enabled_in_config: yes
+spf_enable_b1_in_config: yes
+spf_enable_b2_in_config: yes
+spf_enable_b3_in_config: yes
+spf_enable_b4_in_config: yes
+spf_enable_b5_in_config: yes
+
+# - Dyn attr creation & management properties
+spf_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+spf_enable_dyn_attr_randomize: !!str true
+spf_dyn_attr_randomize_period: 3000
+spf_enable_fwd_attr_init_polling: !!str false
+spf_enable_status_attr_update_polling: !!str false
+
+# - Logging properties
+spf_enable_central_log_target: !!str false ## "{{enable_central_log_target}}"
+spf_central_log_target: "{{central_log_target}}"
+spf_central_log_level: "{{central_log_level}}"
+spf_enable_element_log_target: !!str false ### "{{enable_element_log_target}}"
+spf_element_log_target: "{{element_log_target}}"
+spf_element_log_level: "{{element_log_level}}"
+spf_enable_storage_log_target: !!str false ### "{{enable_storage_log_target}}"
+spf_storage_log_target: "{{storage_log_target}}"
+spf_storage_log_level: "{{storage_log_level}}"
+spf_syslog_facility: "{{syslog_facility}}"
+spf_syslog_host: "{{syslog_host}}"
+spf_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+spf_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+spf_enable_proxy_monitoring: !!str false
+spf_enable_proxy_status_attr_creation: !!str false
+spf_enable_auto_admin_proxy_registration: !!str false
+spf_enable_dev_proxy_init_polling: !!str false
+
+# - Formula attr properties
+spf_enable_formula_attr_update_polling: !!str false
+
+# - Task management properties
+spf_enable_clear_task_polling: !!str false
+
+# - SPF emulator properties
+spf_enable_auto_startup: !!str true
+spf_startup_time: 5
+spf_enable_startup_failure: !!str false
+spf_startup_failure_prob: 0.1
+spf_go_operational_time: 60
+spf_enable_operational_failure: !!str false
+spf_operational_failure_prob: 0.1
+spf_go_standbylp_time: 10
+spf_enable_standbylp_failure: !!str false
+spf_standbylp_failure_prob: 0.1
+spf_go_maintenance_time: 20
+spf_enable_maintenance_failure: !!str false
+spf_maintenance_failure_prob: 0.1
+
+# - SPF properties
+spf_rfe1_temp_setpoint_default: 4
+spf_rfe2_temp_setpoint_default: 4
+spf_cal_source_temp_setpoint_default: 4
+spf_expected_online_default: 0
+
+##================
+##  ATTRIBUTES
+##================
+spf_fast_poll_period: "{{fast_poll_period}}"
+spf_fast_periodic_event_period: "{{fast_poll_period}}"
+spf_fast_archive_event_period: "{{fast_poll_period}}"
+spf_default_poll_period: "{{default_poll_period}}"
+spf_default_periodic_event_period: "{{default_poll_period}}"
+spf_default_archive_event_period: "{{default_poll_period}}"
+spf_medium_poll_period: "{{medium_poll_period}}"
+spf_medium_periodic_event_period: "{{medium_poll_period}}"
+spf_medium_archive_event_period: "{{medium_poll_period}}"
+spf_slow_poll_period: "{{slow_poll_period}}"
+spf_slow_periodic_event_period: "{{slow_poll_period}}"
+spf_slow_archive_event_period: "{{slow_poll_period}}"
+spf_very_slow_poll_period: "{{very_slow_poll_period}}"
+spf_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+spf_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+spf_very_very_slow_archive_event_period: "{{very_very_slow_poll_period}}"
+
+##================
+##  ALARM PARS
+##================
+## Bool flag to set/unset range values in config files
+spf_set_attr_range: yes
+
+## Controller pars
+spf_ctrl_temp_init: 30 # °C
+spf_ctrl_temp_min: -50 # °C
+spf_ctrl_temp_max: 100  # °C
+spf_ctrl_temp_min_warn: -10 # °C
+spf_ctrl_temp_max_warn: 50  # °C
+spf_ctrl_temp_min_alarm: -50 # °C
+spf_ctrl_temp_max_alarm: 80 # °C
+spf_ctrl_temp_min_rand: -10 # °C
+spf_ctrl_temp_max_rand: 50 # °C
+
+spf_ctrl_curr_init: 275 # mA
+spf_ctrl_curr_min: 0 # mA
+spf_ctrl_curr_max: 1000 # mA
+spf_ctrl_curr_min_warn: 150 # mA
+spf_ctrl_curr_max_warn: 400 # mA
+spf_ctrl_curr_min_alarm: 100 # mA
+spf_ctrl_curr_max_alarm: 600 # mA
+spf_ctrl_curr_min_rand: 150 # mA
+spf_ctrl_curr_max_rand: 400 # mA
+
+spf_ctrl_volt_init: 7 # V
+spf_ctrl_volt_min: 0 # V
+spf_ctrl_volt_max: 20 # V 
+spf_ctrl_volt_min_warn: 6.5 # V
+spf_ctrl_volt_max_warn: 7.5 # V
+spf_ctrl_volt_min_alarm: 5 # V
+spf_ctrl_volt_max_alarm: 9 # V
+spf_ctrl_volt_min_rand: 6.5 # V
+spf_ctrl_volt_max_rand: 7.5 # V
+
+## Helium system pars
+spf_he_suppl_press_init: 19 # bar
+spf_he_suppl_press_min: 0 # bar
+spf_he_suppl_press_max: 30 # bar
+spf_he_suppl_press_min_warn: 16 # bar
+spf_he_suppl_press_max_warn: 22 # bar
+spf_he_suppl_press_min_alarm: 0 # bar
+spf_he_suppl_press_max_alarm: 23 # bar
+spf_he_suppl_press_min_rand: 16 # bar
+spf_he_suppl_press_max_rand: 22 # bar
+
+spf_he_ret_press_init: 7 # bar
+spf_he_ret_press_min: 0 # bar
+spf_he_ret_press_max: 20 # bar
+spf_he_ret_press_min_warn: 3 # bar
+spf_he_ret_press_max_warn: 11 # bar
+spf_he_ret_press_min_alarm: 0 # bar 
+spf_he_ret_press_max_alarm: 15 # bar 
+spf_he_ret_press_min_rand: 3 # bar
+spf_he_ret_press_max_rand: 11 # bar
+
+
+## LNA pars
+spf_lna_drain_volt_init: 2.28 # V
+spf_lna_drain_volt_min: 0 # V
+spf_lna_drain_volt_max: 10 # V
+spf_lna_drain_volt_min_warn: 2.05 # V
+spf_lna_drain_volt_max_warn: 2.51 # V
+spf_lna_drain_volt_min_alarm: 0 # V
+spf_lna_drain_volt_max_alarm: 3 # V
+spf_lna_drain_volt_min_rand: 2.05 # V
+spf_lna_drain_volt_max_rand: 2.51 # V
+
+spf_lna_gate_volt_init: -0.55 # V
+spf_lna_gate_volt_min: -5 # V
+spf_lna_gate_volt_max: 5 # V
+spf_lna_gate_volt_min_warn: -0.9 # V
+spf_lna_gate_volt_max_warn: -0.2 # V
+spf_lna_gate_volt_min_alarm: -3 # V
+spf_lna_gate_volt_max_alarm: 0 # V
+spf_lna_gate_volt_min_rand: -0.9 # V
+spf_lna_gate_volt_max_rand: -0.2 # V
+
+spf_lna_drain_curr_init: 20 # mA
+spf_lna_drain_curr_min: 0 # mA
+spf_lna_drain_curr_max: 50 # mA
+spf_lna_drain_curr_min_warn: 16 # mA
+spf_lna_drain_curr_max_warn: 24 # mA
+spf_lna_drain_curr_min_alarm: 0 # mA
+spf_lna_drain_curr_max_alarm: 30 # mA
+spf_lna_drain_curr_min_rand: 16 # mA
+spf_lna_drain_curr_max_rand: 24 # mA
+
+spf_lna_mean_gain_init: 2.5 # dB
+spf_lna_mean_gain_min: 0 # dB
+spf_lna_mean_gain_max: 20 # dB
+spf_lna_mean_gain_min_warn: 0 # dB
+spf_lna_mean_gain_max_warn: 5 # dB
+spf_lna_mean_gain_min_alarm: 0 # dB
+spf_lna_mean_gain_max_alarm: 10 # dB
+spf_lna_mean_gain_min_rand: 0 # dB
+spf_lna_mean_gain_max_rand: 5 # dB
+
+## AMP2 pars
+spf_amp2_curr_init: 150 # mA
+spf_amp2_curr_min: 0 # mA
+spf_amp2_curr_max: 200 # mA
+spf_amp2_curr_min_warn: 135 # mA
+spf_amp2_curr_max_warn: 165 # mA
+spf_amp2_curr_min_alarm: 0 # mA
+spf_amp2_curr_max_alarm: 175 # mA
+spf_amp2_curr_min_rand: 135 # mA
+spf_amp2_curr_max_rand: 165 # mA
+
+spf_amp2_volt_init: 5 # V
+spf_amp2_volt_min: 0 # V
+spf_amp2_volt_max: 20 # V
+spf_amp2_volt_min_warn: 0 # V
+spf_amp2_volt_max_warn: 7 # V
+spf_amp2_volt_min_alarm: 0 # V
+spf_amp2_volt_max_alarm: 10 # V
+spf_amp2_volt_min_rand: 0 # V
+spf_amp2_volt_max_rand: 7 # V
+
+## Cal Source pars
+spf_cal_source_curr_init: 5 # mA
+spf_cal_source_curr_min: 0 # mA
+spf_cal_source_curr_max: 20 # mA
+spf_cal_source_curr_min_warn: 4.5 # mA
+spf_cal_source_curr_max_warn: 5.5 # mA
+spf_cal_source_curr_min_alarm: 0 # mA
+spf_cal_source_curr_max_alarm: 10 # mA
+spf_cal_source_curr_min_rand: 4.5 # mA
+spf_cal_source_curr_max_rand: 5.5 # mA
+
+spf_cal_source_volt_init: 6 # V
+spf_cal_source_volt_min: 0 # V
+spf_cal_source_volt_max: 20 # V
+spf_cal_source_volt_min_warn: 0 # V
+spf_cal_source_volt_max_warn: 12 # V
+spf_cal_source_volt_min_alarm: 0 # V
+spf_cal_source_volt_max_alarm: 14 # V
+spf_cal_source_volt_min_rand: 0 # V
+spf_cal_source_volt_max_rand: 12 # V
+
+spf_cal_source_temp_init: 20 # K
+spf_cal_source_temp_min: 0 # K
+spf_cal_source_temp_max: 200 # K
+spf_cal_source_temp_min_warn: 10 # K
+spf_cal_source_temp_max_warn: 50 # K
+spf_cal_source_temp_min_alarm: 5 # K
+spf_cal_source_temp_max_alarm: 100 # K
+spf_cal_source_temp_min_rand: 10 # K
+spf_cal_source_temp_max_rand: 50 # K
+
+
+## RFE PID pars
+spf_rfe1_pid_curr_init: 75 # mA
+spf_rfe1_pid_curr_min: 0 # mA
+spf_rfe1_pid_curr_max: 500 # mA
+spf_rfe1_pid_curr_min_warn: 0 # mA
+spf_rfe1_pid_curr_max_warn: 150 # mA
+spf_rfe1_pid_curr_min_alarm: 0 # mA
+spf_rfe1_pid_curr_max_alarm: 200 # mA
+spf_rfe1_pid_curr_min_rand: 0 # mA
+spf_rfe1_pid_curr_max_rand: 150 # mA
+ 
+spf_rfe2_pid_curr_init: 175 # mA
+spf_rfe2_pid_curr_min: 0 # mA
+spf_rfe2_pid_curr_max: 500 # mA
+spf_rfe2_pid_curr_min_warn: 0 # mA
+spf_rfe2_pid_curr_max_warn: 350 # mA
+spf_rfe2_pid_curr_min_alarm: 0 # mA
+spf_rfe2_pid_curr_max_alarm: 400 # mA
+spf_rfe2_pid_curr_min_rand: 0 # mA
+spf_rfe2_pid_curr_max_rand: 350 # mA
+
+spf_cal_source_pid_curr_init: 5 # mA
+spf_cal_source_pid_curr_min: 0 # mA
+spf_cal_source_pid_curr_max: 20 # mA
+spf_cal_source_pid_curr_min_warn: 4.5 # mA
+spf_cal_source_pid_curr_max_warn: 5.5 # mA
+spf_cal_source_pid_curr_min_alarm: 0 # mA
+spf_cal_source_pid_curr_max_alarm: 10 # mA
+spf_cal_source_pid_curr_min_rand: 4.5 # mA
+spf_cal_source_pid_curr_max_rand: 5.5 # mA
+
+## Cryostat pars
+spf_cryo_press_init: 0.025 # mbar
+spf_cryo_press_min: 0 # mbar
+spf_cryo_press_max: 0.1 # mbar
+spf_cryo_press_min_warn: 1.332e-5 # mbar
+spf_cryo_press_max_warn: 5e-2 # mbar
+spf_cryo_press_min_alarm: 1.332e-5 # mbar
+spf_cryo_press_max_alarm: 1014 # mbar
+spf_cryo_press_min_rand: 1.332e-5 # mbar
+spf_cryo_press_max_rand: 5e-2 # mbar
+
+spf_manifold_press_init: 0.025 # mbar
+spf_manifold_press_min: 0 # mbar
+spf_manifold_press_max: 0.1 # mbar
+spf_manifold_press_min_warn: 1.332e-5 # mbar
+spf_manifold_press_max_warn: 5e-2 # mbar
+spf_manifold_press_min_alarm: 1.332e-5 # mbar
+spf_manifold_press_max_alarm: 1014 # mbar
+spf_manifold_press_min_rand: 1.332e-5 # mbar
+spf_manifold_press_max_rand: 5e-2 # mbar
+
+spf_cryo_body_temp_init: 293 # K
+spf_cryo_body_temp_min: 0 # K
+spf_cryo_body_temp_max: 600 # K
+spf_cryo_body_temp_min_warn: 263 # K
+spf_cryo_body_temp_max_warn: 323 # K
+spf_cryo_body_temp_min_alarm: 0 # K
+spf_cryo_body_temp_max_alarm: 480 # K
+spf_cryo_body_temp_min_rand: 263 # K
+spf_cryo_body_temp_max_rand: 323 # K
+
+spf_cryo_motor_speed_init: 60 # rpm
+spf_cryo_motor_speed_min: 45 # rpm
+spf_cryo_motor_speed_max: 90 # rpm
+spf_cryo_motor_speed_min_warn: 0 # rpm
+spf_cryo_motor_speed_max_warn: 90 # rpm
+spf_cryo_motor_speed_min_alarm: 0 # rpm
+spf_cryo_motor_speed_max_alarm: 90 # rpm
+ 
+
+ 
+## RFE temp pars
+spf_rfe1_temp_init: 20 # K
+spf_rfe1_temp_min: 0 # K
+spf_rfe1_temp_max: 350 # K
+spf_rfe1_temp_min_warn: 10 # K
+spf_rfe1_temp_max_warn: 30 # K
+spf_rfe1_temp_min_alarm: 0 # K
+spf_rfe1_temp_max_alarm: 323 # K
+spf_rfe1_temp_min_rand: 10 # K
+spf_rfe1_temp_max_rand: 30 # K
+
+spf_rfe2_temp_init: 296 # K 
+spf_rfe2_temp_min: 0 # K
+spf_rfe2_temp_max: 350 # K
+spf_rfe2_temp_min_warn: 293 # K
+spf_rfe2_temp_max_warn: 299 # K
+spf_rfe2_temp_min_alarm: 0 # K
+spf_rfe2_temp_max_alarm: 323 # K
+spf_rfe2_temp_min_rand: 293 # K
+spf_rfe2_temp_max_rand: 299 # K
+
+## Omt temp pars
+spf_omt_temp_init: 161.5 # K
+spf_omt_temp_min: 0 # K
+spf_omt_temp_max: 600 # K
+spf_omt_temp_min_warn: 0 # K
+spf_omt_temp_max_warn: 323 # K
+spf_omt_temp_min_alarm: 0 # K
+spf_omt_temp_max_alarm: 480 # K
+spf_omt_temp_min_rand: 0 # K
+spf_omt_temp_max_rand: 323 # K
+
+# Cryocooler temp pars
+spf_cryocooler_stage1_temp_init: 161.5 # 
+spf_cryocooler_stage1_temp_min: 0 # K
+spf_cryocooler_stage1_temp_max: 600 # K
+spf_cryocooler_stage1_temp_min_warn: 0 # K
+spf_cryocooler_stage1_temp_max_warn: 323 # K
+spf_cryocooler_stage1_temp_min_alarm: 0 # K
+spf_cryocooler_stage1_temp_max_alarm: 480 # K
+spf_cryocooler_stage1_temp_min_rand: 0 # K
+spf_cryocooler_stage1_temp_max_rand: 323 # K
+#####################
+
+
+
+
+######################
+#### Rx EMULATOR  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+rx_ska_level: 2
+
+# - General properties
+rx_enable_config_from_file: "{{enable_config_from_file}}"
+rx_config_file: "{{lmc_config_dir}}/{{rx_emulator_config.name}}"
+rx_log_file: "rx_controller.log"
+rx_astor_controlled: !!str false
+rx_startup_level: 1
+rx_admin_mode_default: "MAINTENANCE" # see SKA Guidelines
+
+rx_enabled_in_config: yes
+rx_enable_b1_in_config: yes
+rx_enable_b2_in_config: yes
+rx_enable_b3_in_config: yes
+rx_enable_b4_in_config: yes
+rx_enable_b5a_in_config: yes
+rx_enable_b5b_in_config: yes
+
+# - Dyn attr creation & management properties
+rx_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+rx_enable_dyn_attr_randomize: !!str true
+rx_dyn_attr_randomize_period: 3000
+rx_enable_fwd_attr_init_polling: !!str false
+rx_enable_status_attr_update_polling: !!str false
+
+# - Logging properties
+rx_enable_central_log_target: !!str false ## "{{enable_central_log_target}}"
+rx_central_log_target: "{{central_log_target}}"
+rx_central_log_level: "{{central_log_level}}"
+rx_enable_element_log_target: !!str false ## "{{enable_element_log_target}}"
+rx_element_log_target: "{{element_log_target}}"
+rx_element_log_level: "{{element_log_level}}"
+rx_enable_storage_log_target: !!str false ## "{{enable_storage_log_target}}"
+rx_storage_log_target: "{{storage_log_target}}"
+rx_storage_log_level: "{{storage_log_level}}"
+rx_syslog_facility: "{{syslog_facility}}"
+rx_syslog_host: "{{syslog_host}}"
+rx_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+rx_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+rx_enable_proxy_monitoring: !!str false
+rx_enable_proxy_status_attr_creation: !!str false
+rx_enable_auto_admin_proxy_registration: !!str false
+rx_enable_dev_proxy_init_polling: !!str false
+
+# - Formula attr properties
+rx_enable_formula_attr_update_polling: !!str false
+
+# - Task management properties
+rx_enable_clear_task_polling: !!str false
+
+# - Rx emulator properties
+#rx_enable_auto_startup: !!str true
+rx_startup_time: 5
+rx_enable_startup_failure: !!str false
+rx_startup_failure_prob: 0.1
+rx_configure_time: 20
+rx_enable_configure_failure: !!str false
+rx_configure_failure_prob: 0.1
+
+# - Rx properties
+#rx_attenuation_default: 10 # dB (DEPRECATED)
+rx_b1_polh_nominal_attenuation: 0 # dB
+rx_b2_polh_nominal_attenuation: 0 # dB
+rx_b3_polh_nominal_attenuation: 0 # dB
+rx_b4_polh_nominal_attenuation: 0 # dB
+rx_b5a_polh_nominal_attenuation: 0 # dB
+rx_b5b_polh_nominal_attenuation: 0 # dB
+rx_b1_polv_nominal_attenuation: 0 # dB
+rx_b2_polv_nominal_attenuation: 0 # dB
+rx_b3_polv_nominal_attenuation: 0 # dB
+rx_b4_polv_nominal_attenuation: 0 # dB
+rx_b5a_polv_nominal_attenuation: 0 # dB
+rx_b5b_polv_nominal_attenuation: 0 # dB
+
+rx_b1_nominal_gain: 6 # dB
+rx_b2_nominal_gain: 6 # dB
+rx_b3_nominal_gain: 6 # dB
+rx_b4_nominal_gain: 6 # dB
+rx_b5a_nominal_gain: 6 # dB
+rx_b5b_nominal_gain: 6 # dB
+
+#rx_b1_gain_default: 6 # dB (DEPRECATED)
+#rx_b2_gain_default: 4 # dB (DEPRECATED)
+#rx_b3_gain_default: 4 # dB (DEPRECATED)
+#rx_b4_gain_default: 4 # dB (DEPRECATED)
+#rx_b5_gain_default: 4 # dB (DEPRECATED)
+
+rx_b1_max_gain: 30 # dB
+rx_b2_max_gain: 30 # dB
+rx_b3_max_gain: 30 # dB
+rx_b4_max_gain: 30 # dB
+rx_b5_max_gain: 30 # dB
+
+#rx_b1_max_gain_default: 30 # dB (DEPRECATED)
+#rx_b2_max_gain_default: 30 # dB (DEPRECATED)
+#rx_b3_max_gain_default: 30 # dB (DEPRECATED)
+#rx_b4_max_gain_default: 30 # dB (DEPRECATED)
+#rx_b5_max_gain_default: 30 # dB (DEPRECATED)
+
+rx_noise_diode_genmodel_default: 0 # 0=PERIODIC, 1=PSEUDO-RANDOM
+rx_noise_source_starttime_default: 0
+rx_noise_source_period_default: 10
+rx_noise_source_ontime_default: 2
+rx_noise_source_offtime_default: 1
+
+rx_b1_nominal_sampling_clock_frequency: 1 # GHz
+rx_b2_nominal_sampling_clock_frequency: 2 # GHz
+rx_b3_nominal_sampling_clock_frequency: 3 # GHz
+rx_b4_nominal_sampling_clock_frequency: 4 # GHz
+rx_b5a_nominal_sampling_clock_frequency: 5 # GHz
+rx_b5b_nominal_sampling_clock_frequency: 6 # GHz
+
+rx_configured_band_default: 0
+rx_expected_online_default: 0
+
+##================
+##  ATTRIBUTES
+##================
+rx_fast_poll_period: "{{fast_poll_period}}"
+rx_fast_periodic_event_period: "{{fast_poll_period}}"
+rx_fast_archive_event_period: "{{fast_poll_period}}"
+rx_default_poll_period: "{{default_poll_period}}"
+rx_default_periodic_event_period: "{{default_poll_period}}"
+rx_default_archive_event_period: "{{default_poll_period}}"
+rx_medium_poll_period: "{{medium_poll_period}}"
+rx_medium_periodic_event_period: "{{medium_poll_period}}"
+rx_medium_archive_event_period: "{{medium_poll_period}}"
+rx_slow_poll_period: "{{slow_poll_period}}"
+rx_slow_periodic_event_period: "{{slow_poll_period}}"
+rx_slow_archive_event_period: "{{slow_poll_period}}"
+rx_very_slow_poll_period: "{{very_slow_poll_period}}"
+rx_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+rx_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+rx_very_very_slow_archive_event_period: "{{very_very_slow_poll_period}}"
+#####################
+
+##================
+##  ALARM PARS
+##================
+## Bool flag to set/unset range values in config files
+rx_set_attr_range: yes
+
+## Band pars
+rx_suppl_voltage_init: 7 # V
+rx_suppl_voltage_min: 0 # V
+rx_suppl_voltage_max: 10 # V
+rx_suppl_voltage_min_warn: 6.5 # V
+rx_suppl_voltage_max_warn: 7.5 # V
+rx_suppl_voltage_min_alarm: 5 # V
+rx_suppl_voltage_max_alarm: 10 # V
+rx_suppl_voltage_min_rand: 6.5 # V
+rx_suppl_voltage_max_rand: 7.5 # V
+
+rx_suppl_current_init: 275 # mA
+rx_suppl_current_min: 0 # mA
+rx_suppl_current_max: 1000 # mA
+rx_suppl_current_min_warn: 150 # mA
+rx_suppl_current_max_warn: 400 # mA
+rx_suppl_current_min_alarm: 100 # mA
+rx_suppl_current_max_alarm: 600 # mA
+rx_suppl_current_min_rand: 150 # mA
+rx_suppl_current_max_rand: 400 # mA
+
+rx_temperature_init: 30 # °C
+rx_temperature_min: -10 # °C
+rx_temperature_max: 100 # °C
+rx_temperature_min_warn: 0 # °C
+rx_temperature_max_warn: 50 # °C
+rx_temperature_min_alarm: 0 # °C
+rx_temperature_max_alarm: 80 # °C
+rx_temperature_min_rand: 0 # °C
+rx_temperature_max_rand: 50 # °C
+
+rx_adc_power_init: -50 # dBm
+rx_adc_power_min: -200 # dBm
+rx_adc_power_max: 0 # dBm
+rx_adc_power_min_warn: -200 # dBm
+rx_adc_power_max_warn: 0 # dBm
+rx_adc_power_min_alarm: -200 # dBm
+rx_adc_power_max_alarm: 0 # dBm
+rx_adc_power_min_rand: -200 # dBm
+rx_adc_power_max_rand: 0 # dBm
+
+rx_adc_variance_init: 5 # dBm
+rx_adc_variance_min: 0 # dBm
+rx_adc_variance_max: 10 # dBm
+rx_adc_variance_min_warn: 0 # dBm
+rx_adc_variance_max_warn: 10 # dBm
+rx_adc_variance_min_alarm: 0 # dBm
+rx_adc_variance_max_alarm: 10 # dBm
+rx_adc_variance_min_rand: 0 # dBm
+rx_adc_variance_max_rand: 10 # dBm
+
+######################
+#### DS EMULATOR    ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+ds_ska_level: 2
+
+# - General properties
+ds_enable_config_from_file: "{{enable_config_from_file}}"
+ds_config_file: "{{lmc_config_dir}}/{{ds_emulator_config.name}}"
+ds_log_file: "ds_emulator.log"
+ds_astor_controlled: !!str true
+ds_startup_level: 2
+ds_admin_mode_default: "MAINTENANCE" # see SKA Guidelines
+
+# - Dyn attr creation & management properties
+ds_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+ds_enable_dyn_attr_randomize: !!str false
+ds_dyn_attr_randomize_period: 3000
+ds_enable_fwd_attr_init_polling: !!str false
+ds_enable_status_attr_update_polling: !!str false
+
+# - Logging properties
+ds_enable_central_log_target: "{{enable_central_log_target}}"
+ds_central_log_target: "{{central_log_target}}"
+ds_central_log_level: "{{central_log_level}}"
+ds_enable_element_log_target: "{{enable_element_log_target}}"
+ds_element_log_target: "{{element_log_target}}"
+ds_element_log_level: "{{element_log_level}}"
+ds_enable_storage_log_target: "{{enable_storage_log_target}}"
+ds_storage_log_target: "{{storage_log_target}}"
+ds_storage_log_level: "{{storage_log_level}}"
+ds_syslog_facility: "{{syslog_facility}}"
+ds_syslog_host: "{{syslog_host}}"
+ds_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+ds_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+ds_enable_proxy_monitoring: !!str false
+ds_enable_proxy_status_attr_creation: !!str false
+ds_enable_auto_admin_proxy_registration: !!str false
+ds_enable_dev_proxy_init_polling: !!str false
+
+# - Formula attr properties
+ds_enable_formula_attr_update_polling: !!str false
+
+# - Task management properties
+ds_enable_clear_task_polling: !!str false
+
+# - DS Emulator properties
+#ds_enable_auto_startup: !!str true
+ds_startup_time: 10
+ds_enable_startup_failure: !!str false
+ds_startup_failure_prob: 0.1
+ds_stow_time: 20
+ds_enable_stow_failure: !!str false
+ds_stow_failure_prob: 0.1
+ds_indexing_time: 30
+ds_enable_indexing_failure: !!str false
+ds_indexing_failure_prob: 0.1
+ds_set_mode_time: 5
+ds_enable_set_mode_failure: !!str false
+ds_set_mode_failure_prob: 0.2
+ds_indexer_position_default: 1
+ds_smear_pnt_coords: 1
+ds_pnt_resolution: 1 # in arcsec
+ds_max_pnt_queue_size: 200 
+ds_use_utc_in_pnt: 1
+ds_track_program_max_size: 50
+ds_track_program_time_step: 100 # ms
+ds_min_azimuth: -270 # degrees
+ds_max_azimuth: 270 # degrees
+ds_min_elevation: 15 # degrees
+ds_max_elevation: 85 # degrees
+ds_slew_rate: 10 # degrees/seconds
+ds_slew_time_step: 100 # ms
+ds_stow_azimuth: 180 # degrees
+ds_stow_elevation: 85 # degrees
+ds_shutdown_time: 30 # in seconds
+
+##================
+##  ATTRIBUTES
+##================
+ds_very_fast_poll_period: "{{very_fast_poll_period}}"
+ds_very_fast_periodic_event_period: "{{very_fast_poll_period}}"
+ds_very_fast_archive_event_period: "{{very_fast_poll_period}}"
+ds_fast_poll_period: "{{fast_poll_period}}"
+ds_fast_periodic_event_period: "{{fast_poll_period}}"
+ds_fast_archive_event_period: "{{fast_poll_period}}"
+ds_default_poll_period: "{{default_poll_period}}"
+ds_default_periodic_event_period: "{{default_poll_period}}"
+ds_default_archive_event_period: "{{default_poll_period}}"
+ds_medium_poll_period: "{{medium_poll_period}}"
+ds_medium_periodic_event_period: "{{medium_poll_period}}"
+ds_medium_archive_event_period: "{{medium_poll_period}}"
+ds_slow_poll_period: "{{slow_poll_period}}"
+ds_slow_periodic_event_period: "{{slow_poll_period}}"
+ds_slow_archive_event_period: "{{slow_poll_period}}"
+ds_very_slow_poll_period: "{{very_slow_poll_period}}"
+ds_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+ds_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+ds_very_very_slow_archive_event_period: "{{very_very_slow_poll_period}}"
+#####################
+
+
+
+######################
+#### DISH MANAGER  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+dshmgr_ska_level: 1
+dshmgr_telmodel_address: ""
+#dshmgr_admin_mode_default: "MAINTENANCE" # see SKA Guidelines
+dshmgr_admin_mode_default: 3 # see SKA Guidelines
+
+# - General properties
+dshmgr_enable_config_from_file: "{{enable_config_from_file}}"
+dshmgr_config_file: "{{lmc_config_dir}}/{{dish_manager_config.name}}"
+dshmgr_log_file: "dish_manager.log"
+dshmgr_config_mode: full
+dshmgr_astor_controlled: !!str true
+dshmgr_startup_level: 4
+
+# - Dyn attr creation & management properties
+dshmgr_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+dshmgr_enable_dyn_attr_randomize: !!str false
+dshmgr_dyn_attr_randomize_period: 3000
+dshmgr_enable_fwd_attr_init_polling: !!str true
+dshmgr_fwd_attr_init_poll_period: 5000
+dshmgr_enable_status_attr_update_polling: !!str true
+dshmgr_status_attr_update_poll_period: 3000
+
+# - Logging properties
+dshmgr_enable_central_log_target: "{{enable_central_log_target}}"
+dshmgr_central_log_target: "{{central_log_target}}"
+dshmgr_central_log_level: "{{central_log_level}}"
+dshmgr_enable_element_log_target: "{{enable_element_log_target}}"
+dshmgr_element_log_target: "{{element_log_target}}"
+dshmgr_element_log_level: "{{element_log_level}}"
+dshmgr_enable_storage_log_target: "{{enable_storage_log_target}}"
+dshmgr_storage_log_target: "{{storage_log_target}}"
+dshmgr_storage_log_level: "{{storage_log_level}}"
+dshmgr_syslog_facility: "{{syslog_facility}}"
+dshmgr_syslog_host: "{{syslog_host}}"
+dshmgr_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+dshmgr_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+dshmgr_enable_proxy_monitoring: !!str true
+dshmgr_enable_proxy_status_attr_creation: !!str true
+dshmgr_enable_auto_admin_proxy_registration: !!str false
+dshmgr_proxy_monitoring_period: 5000 # ms
+dshmgr_proxy_status_attr_polling_period: 10000
+dshmgr_proxy_status_attr_periodic_event_period: 10000
+dshmgr_proxy_status_attr_archive_event_period: -1
+dshmgr_proxy_timeout: 20 # s
+dshmgr_enable_dev_proxy_init_polling: !!str true
+dshmgr_dev_proxy_init_poll_period: 10000
+
+
+# - Formula attr properties
+dshmgr_enable_formula_attr_update_polling: !!str true
+dshmgr_formula_attr_update_poll_period: 5000
+dshmgr_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+dshmgr_enable_clear_task_polling: !!str true
+dshmgr_clear_task_poll_period: 10000
+dshmgr_max_queuable_tasks: 20
+dshmgr_max_trackable_tasks: 100
+dshmgr_task_history_time_depth: 600
+dshmgr_default_task_timeout: 60
+
+# - DishManager specific properties
+dshmgr_asynch_cmd_reply_timeout: 500 # ms
+dshmgr_asynch_cmd_reply_nretries: 5
+dshmgr_synch_cmd_reply_timeout: 3000 # ms
+dshmgr_stow_task_timeout: 60 # s
+dshmgr_configure_task_timeout: 60 #s
+dshmgr_operate_task_timeout: 60 #s
+dshmgr_shutdown_task_timeout: 60 #s
+dshmgr_rx_shutdown_time_delay: 30 # s
+dshmgr_control_mode_default: 0 # REMOTE
+dshmgr_requested_band_default: 0 # NONE 
+
+
+##================
+##  ATTRIBUTES
+##================
+dshmgr_fast_poll_period: "{{fast_poll_period}}"
+dshmgr_fast_periodic_event_period: "{{fast_poll_period}}"
+dshmgr_fast_archive_event_period: "{{fast_poll_period}}"
+dshmgr_default_poll_period: "{{default_poll_period}}"
+dshmgr_default_periodic_event_period: "{{default_poll_period}}"
+dshmgr_default_archive_event_period: "{{default_poll_period}}"
+dshmgr_medium_poll_period: "{{medium_poll_period}}"
+dshmgr_medium_periodic_event_period: "{{medium_poll_period}}"
+dshmgr_medium_archive_event_period: "{{medium_poll_period}}"
+dshmgr_slow_poll_period: "{{slow_poll_period}}"
+dshmgr_slow_periodic_event_period: "{{slow_poll_period}}"
+dshmgr_slow_archive_event_period: "{{slow_poll_period}}"
+dshmgr_very_slow_poll_period: "{{very_slow_poll_period}}"
+dshmgr_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+dshmgr_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+dshmgr_very_very_slow_archive_event_period: "{{very_very_slow_poll_period}}"
+#####################
+
+######################
+#### DS MANAGER    ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+dsmgr_ska_level: 2
+
+# - General properties
+dsmgr_enable_config_from_file: "{{enable_config_from_file}}"
+dsmgr_config_file: "{{lmc_config_dir}}/{{ds_manager_config.name}}"
+dsmgr_log_file: "ds_manager.log"
+dsmgr_astor_controlled: !!str true
+dsmgr_startup_level: 2
+dsmgr_admin_mode_default: "MAINTENANCE" # see SKA Guidelines
+
+ds_enabled_in_config: yes
+
+# - Dyn attr creation & management properties
+dsmgr_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+dsmgr_enable_dyn_attr_randomize: !!str false
+dsmgr_dyn_attr_randomize_period: 3000
+dsmgr_enable_fwd_attr_init_polling: !!str false
+dsmgr_enable_status_attr_update_polling: !!str false
+
+# - Logging properties
+dsmgr_enable_central_log_target: "{{enable_central_log_target}}"
+dsmgr_central_log_target: "{{central_log_target}}"
+dsmgr_central_log_level: "{{central_log_level}}"
+dsmgr_enable_element_log_target: "{{enable_element_log_target}}"
+dsmgr_element_log_target: "{{element_log_target}}"
+dsmgr_element_log_level: "{{element_log_level}}"
+dsmgr_enable_storage_log_target: "{{enable_storage_log_target}}"
+dsmgr_storage_log_target: "{{storage_log_target}}"
+dsmgr_storage_log_level: "{{storage_log_level}}"
+dsmgr_syslog_facility: "{{syslog_facility}}"
+dsmgr_syslog_host: "{{syslog_host}}"
+dsmgr_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+dsmgr_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+dsmgr_enable_proxy_monitoring: !!str false
+dsmgr_enable_proxy_status_attr_creation: !!str false
+dsmgr_enable_auto_admin_proxy_registration: !!str false
+dsmgr_enable_dev_proxy_init_polling: !!str false
+
+# - Formula attr properties
+dsmgr_enable_formula_attr_update_polling: !!str false
+
+# - Task management properties
+dsmgr_enable_clear_task_polling: !!str false
+
+# - DS Manager properties
+#dsmgr_enable_auto_startup: !!str true
+dsmgr_startup_time: 10
+dsmgr_enable_startup_failure: !!str false
+dsmgr_startup_failure_prob: 0.1
+dsmgr_stow_time: 20
+dsmgr_enable_stow_failure: !!str false
+dsmgr_stow_failure_prob: 0.1
+dsmgr_indexing_time: 30
+dsmgr_enable_indexing_failure: !!str false
+dsmgr_indexing_failure_prob: 0.1
+
+# - DS Manager properties
+
+
+##================
+##  ATTRIBUTES
+##================
+dsmgr_very_fast_poll_period: "{{very_fast_poll_period}}"
+dsmgr_very_fast_periodic_event_period: "{{very_fast_poll_period}}"
+dsmgr_very_fast_archive_event_period: "{{very_fast_poll_period}}"
+dsmgr_fast_poll_period: "{{fast_poll_period}}"
+dsmgr_fast_periodic_event_period: "{{fast_poll_period}}"
+dsmgr_fast_archive_event_period: "{{fast_poll_period}}"
+dsmgr_default_poll_period: "{{default_poll_period}}"
+dsmgr_default_periodic_event_period: "{{default_poll_period}}"
+dsmgr_default_archive_event_period: "{{default_poll_period}}"
+dsmgr_medium_poll_period: "{{medium_poll_period}}"
+dsmgr_medium_periodic_event_period: "{{medium_poll_period}}"
+dsmgr_medium_archive_event_period: "{{medium_poll_period}}"
+dsmgr_slow_poll_period: "{{slow_poll_period}}"
+dsmgr_slow_periodic_event_period: "{{slow_poll_period}}"
+dsmgr_slow_archive_event_period: "{{slow_poll_period}}"
+dsmgr_very_slow_poll_period: "{{very_slow_poll_period}}"
+dsmgr_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+dsmgr_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+#####################
+
+########################
+#### ELEMENT LOGGER  ###
+########################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+lmclogger_ska_level: 1
+
+# - General properties
+lmclogger_enable_config_from_file: "{{enable_config_from_file}}"
+lmclogger_config_file: "{{lmc_config_dir}}/{{element_logger_config.name}}"
+lmclogger_log_file: "element_logger.log"
+lmclogger_astor_controlled: !!str true
+lmclogger_startup_level: 1
+
+# - Dyn attr creation & management properties
+lmclogger_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+lmclogger_enable_dyn_attr_randomize: !!str false
+lmclogger_dyn_attr_randomize_period: 3000
+lmclogger_enable_fwd_attr_init_polling: !!str false
+lmclogger_enable_status_attr_update_polling: !!str false
+
+# - Logging properties
+lmclogger_enable_central_log_target: !!str false
+lmclogger_central_log_target: "{{central_log_target}}"
+lmclogger_central_log_level: "{{central_log_level}}"
+lmclogger_enable_element_log_target: !!str false
+lmclogger_element_log_target: ""
+#"{{element_log_target}}"
+lmclogger_element_log_level: "{{element_log_level}}"
+lmclogger_enable_storage_log_target: !!str false
+lmclogger_storage_log_target: "{{storage_log_target}}"
+lmclogger_storage_log_level: "{{storage_log_level}}"
+lmclogger_syslog_facility: "{{syslog_facility}}"
+lmclogger_syslog_host: "{{syslog_host}}"
+lmclogger_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+lmclogger_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+lmclogger_enable_proxy_monitoring: !!str false
+lmclogger_enable_proxy_status_attr_creation: !!str false
+lmclogger_enable_auto_admin_proxy_registration: !!str false
+lmclogger_enable_dev_proxy_init_polling: !!str false
+
+# - Formula attr properties
+lmclogger_enable_formula_attr_update_polling: !!str false
+
+# - Task management properties
+lmclogger_enable_clear_task_polling: !!str false
+
+# - ElementLogger properties
+lmclogger_se_log_level: 4
+lmclogger_enable_log_forwarding: !!str true
+
+
+##================
+##  ATTRIBUTES
+##================
+lmclogger_fast_poll_period: "{{fast_poll_period}}"
+lmclogger_fast_periodic_event_period: "{{fast_poll_period}}"
+lmclogger_fast_archive_event_period: "{{fast_poll_period}}"
+lmclogger_default_poll_period: "{{default_poll_period}}"
+lmclogger_default_periodic_event_period: "{{default_poll_period}}"
+lmclogger_default_archive_event_period: "{{default_poll_period}}"
+lmclogger_medium_poll_period: "{{medium_poll_period}}"
+lmclogger_medium_periodic_event_period: "{{medium_poll_period}}"
+lmclogger_medium_archive_event_period: "{{medium_poll_period}}"
+lmclogger_slow_poll_period: "{{slow_poll_period}}"
+lmclogger_slow_periodic_event_period: "{{slow_poll_period}}"
+lmclogger_slow_archive_event_period: "{{slow_poll_period}}"
+lmclogger_very_slow_poll_period: "{{very_slow_poll_period}}"
+lmclogger_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+lmclogger_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+#####################
+
+
+
+
+######################
+#### LMC STARTER  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+lmcstarter_ska_level: 2
+
+# - General properties
+lmcstarter_enable_config_from_file: "{{enable_config_from_file}}"
+lmcstarter_config_file: "{{lmc_config_dir}}/{{lmc_starter_config.name}}"
+lmcstarter_log_file: "lmc_starter.log"
+
+# - Dyn attr creation & management properties
+lmcstarter_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+lmcstarter_enable_dyn_attr_randomize: !!str false
+lmcstarter_dyn_attr_randomize_period: 3000
+lmcstarter_enable_fwd_attr_init_polling: !!str true
+lmcstarter_fwd_attr_init_poll_period: 5000
+lmcstarter_enable_status_attr_update_polling: !!str true
+lmcstarter_status_attr_update_poll_period: 3000
+
+# - Logging properties
+lmcstarter_enable_central_log_target: "{{enable_central_log_target}}"
+lmcstarter_central_log_target: "{{central_log_target}}"
+lmcstarter_central_log_level: "{{central_log_level}}"
+lmcstarter_enable_element_log_target: "{{enable_element_log_target}}"
+lmcstarter_element_log_target: "{{element_log_target}}"
+lmcstarter_element_log_level: "{{element_log_level}}"
+lmcstarter_enable_storage_log_target: "{{enable_storage_log_target}}"
+lmcstarter_storage_log_target: "{{storage_log_target}}"
+lmcstarter_storage_log_level: "{{storage_log_level}}"
+lmcstarter_syslog_facility: "{{syslog_facility}}"
+lmcstarter_syslog_host: "{{syslog_host}}"
+lmcstarter_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+lmcstarter_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+lmcstarter_enable_proxy_monitoring: !!str false ### This is performed by the ping dedicated thread not by polled cmd
+lmcstarter_enable_proxy_status_attr_creation: !!str true
+lmcstarter_enable_auto_admin_proxy_registration: !!str true
+lmcstarter_proxy_monitoring_period: 5000 # ms
+lmcstarter_proxy_status_attr_polling_period: 10000
+lmcstarter_proxy_status_attr_periodic_event_period: 10000
+lmcstarter_proxy_status_attr_archive_event_period: -1
+lmcstarter_proxy_timeout: 20 # s
+lmcstarter_enable_dev_proxy_init_polling: !!str true
+lmcstarter_dev_proxy_init_poll_period: 10000
+
+
+# - Formula attr properties
+lmcstarter_enable_formula_attr_update_polling: !!str true
+lmcstarter_formula_attr_update_poll_period: 5000
+lmcstarter_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+lmcstarter_enable_clear_task_polling: !!str true
+lmcstarter_clear_task_poll_period: 10000
+
+# - Tango starter properties
+lmcstarter_autorestart_duration: 0
+lmcstarter_interstartup_level_wait: 1
+lmcstarter_keep_log_files: 3
+lmcstarter_log_file_home: "/var/tmp"
+lmcstarter_server_startup_timeout: 5
+lmcstarter_startds_path: "{{lmc_ds_dir}}"
+lmcstarter_start_servers: !!str true
+lmcstarter_use_events: !!str false
+lmcstarter_wait_driver_startup: 0
+
+##================
+##  ATTRIBUTES
+##================
+lmcstarter_fast_poll_period: "{{fast_poll_period}}"
+lmcstarter_fast_periodic_event_period: "{{fast_poll_period}}"
+lmcstarter_fast_archive_event_period: "{{fast_poll_period}}"
+lmcstarter_default_poll_period: "{{default_poll_period}}"
+lmcstarter_default_periodic_event_period: "{{default_poll_period}}"
+lmcstarter_default_archive_event_period: "{{default_poll_period}}"
+lmcstarter_medium_poll_period: "{{medium_poll_period}}"
+lmcstarter_medium_periodic_event_period: "{{medium_poll_period}}"
+lmcstarter_medium_archive_event_period: "{{medium_poll_period}}"
+lmcstarter_slow_poll_period: "{{slow_poll_period}}"
+lmcstarter_slow_periodic_event_period: "{{slow_poll_period}}"
+lmcstarter_slow_archive_event_period: "{{slow_poll_period}}"
+lmcstarter_very_slow_poll_period: "{{very_slow_poll_period}}"
+lmcstarter_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+lmcstarter_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+############################
+
+
+######################
+#### LMC MONITOR  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+lmcmon_ska_level: 2
+
+# - General properties
+lmcmon_enable_config_from_file: "{{enable_config_from_file}}"
+lmcmon_config_file: "{{lmc_config_dir}}/{{lmc_monitor_config.name}}"
+lmcmon_log_file: "lmc_monitor.log"
+lmcmon_config_mode: full
+lmcmon_astor_controlled: !!str true
+lmcmon_startup_level: 5
+
+# - Dyn attr creation & management properties
+lmcmon_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+lmcmon_enable_dyn_attr_randomize: !!str false
+lmcmon_dyn_attr_randomize_period: 3000
+lmcmon_enable_fwd_attr_init_polling: !!str true
+lmcmon_fwd_attr_init_poll_period: 5000
+lmcmon_enable_status_attr_update_polling: !!str true
+lmcmon_status_attr_update_poll_period: 3000
+
+# - Logging properties
+lmcmon_enable_central_log_target: "{{enable_central_log_target}}"
+lmcmon_central_log_target: "{{central_log_target}}"
+lmcmon_central_log_level: "{{central_log_level}}"
+lmcmon_enable_element_log_target: "{{enable_element_log_target}}"
+lmcmon_element_log_target: "{{element_log_target}}"
+lmcmon_element_log_level: "{{element_log_level}}"
+lmcmon_enable_storage_log_target: "{{enable_storage_log_target}}"
+lmcmon_storage_log_target: "{{storage_log_target}}"
+lmcmon_storage_log_level: "{{storage_log_level}}"
+lmcmon_syslog_facility: "{{syslog_facility}}"
+lmcmon_syslog_host: "{{syslog_host}}"
+lmcmon_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+lmcmon_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+lmcmon_enable_proxy_monitoring: !!str true 
+lmcmon_enable_proxy_status_attr_creation: !!str true
+lmcmon_enable_auto_admin_proxy_registration: !!str true
+lmcmon_proxy_monitoring_period: 5000 # ms
+lmcmon_proxy_status_attr_polling_period: 10000
+lmcmon_proxy_status_attr_periodic_event_period: 10000
+lmcmon_proxy_status_attr_archive_event_period: -1
+lmcmon_proxy_timeout: 20 # s
+lmcmon_enable_dev_proxy_init_polling: !!str true
+lmcmon_dev_proxy_init_poll_period: 10000
+
+# - Formula attr properties
+lmcmon_enable_formula_attr_update_polling: !!str true
+lmcmon_formula_attr_update_poll_period: 5000
+lmcmon_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+lmcmon_enable_clear_task_polling: !!str true
+lmcmon_clear_task_poll_period: 10000
+
+# - Nagios interface
+lmcmon_nagios_queryhandler_path: "/usr/local/nagios/var/rw/nagios.qh"
+lmcmon_nagios_attr_poll_period: 60000 # ms
+lmcmon_nagios_attr_periodic_event_period: 60000 # ms
+lmcmon_nagios_attr_archive_event_period: 60000 # ms
+
+##================
+##  ATTRIBUTES
+##================
+lmcmon_fast_poll_period: "{{fast_poll_period}}"
+lmcmon_fast_periodic_event_period: "{{fast_poll_period}}"
+lmcmon_fast_archive_event_period: "{{fast_poll_period}}"
+lmcmon_default_poll_period: "{{default_poll_period}}"
+lmcmon_default_periodic_event_period: "{{default_poll_period}}"
+lmcmon_default_archive_event_period: "{{default_poll_period}}"
+lmcmon_medium_poll_period: "{{medium_poll_period}}"
+lmcmon_medium_periodic_event_period: "{{medium_poll_period}}"
+lmcmon_medium_archive_event_period: "{{medium_poll_period}}"
+lmcmon_slow_poll_period: "{{slow_poll_period}}"
+lmcmon_slow_periodic_event_period: "{{slow_poll_period}}"
+lmcmon_slow_archive_event_period: "{{slow_poll_period}}"
+lmcmon_very_slow_poll_period: "{{very_slow_poll_period}}"
+lmcmon_very_slow_periodic_event_period: "{{very_slow_poll_period}}"
+lmcmon_very_slow_archive_event_period: "{{very_slow_poll_period}}"
+############################
+
+#######################
+#### ALARM HANDLER  ###
+#######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+alarmhandler_ska_level: 2
+
+# - General properties
+alarmhandler_enable_config_from_file: "{{enable_config_from_file}}"
+alarmhandler_config_file: "{{lmc_config_dir}}/{{alarm_handler_config.name}}"
+alarmhandler_log_file: "alarm_handler.log"
+alarmhandler_astor_controlled: !!str true
+alarmhandler_startup_level: 3
+
+# - Dyn attr creation & management properties
+alarmhandler_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+alarmhandler_enable_dyn_attr_randomize: !!str false
+alarmhandler_dyn_attr_randomize_period: 3000
+alarmhandler_enable_fwd_attr_init_polling: !!str false
+alarmhandler_fwd_attr_init_poll_period: 5000
+alarmhandler_enable_status_attr_update_polling: !!str false
+alarmhandler_status_attr_update_poll_period: 3000
+
+# - Logging properties
+alarmhandler_enable_central_log_target: "{{enable_central_log_target}}"
+alarmhandler_central_log_target: "{{central_log_target}}"
+alarmhandler_central_log_level: "{{central_log_level}}"
+alarmhandler_enable_element_log_target: "{{enable_element_log_target}}"
+alarmhandler_element_log_target: "{{element_log_target}}"
+alarmhandler_element_log_level: "{{element_log_level}}"
+alarmhandler_enable_storage_log_target: "{{enable_storage_log_target}}"
+alarmhandler_storage_log_target: "{{storage_log_target}}"
+alarmhandler_storage_log_level: "{{storage_log_level}}"
+alarmhandler_syslog_facility: "{{syslog_facility}}"
+alarmhandler_syslog_host: "{{syslog_host}}"
+alarmhandler_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+alarmhandler_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+alarmhandler_enable_proxy_monitoring: !!str false ### This is performed by the ping dedicated thread not by polled cmd
+alarmhandler_enable_proxy_status_attr_creation: !!str false
+alarmhandler_enable_auto_admin_proxy_registration: !!str false
+alarmhandler_proxy_monitoring_period: 5000 # ms
+alarmhandler_proxy_status_attr_polling_period: 10000
+alarmhandler_proxy_status_attr_periodic_event_period: 10000
+alarmhandler_proxy_status_attr_archive_event_period: -1
+alarmhandler_proxy_timeout: 20 # s
+alarmhandler_enable_dev_proxy_init_polling: !!str false
+alarmhandler_dev_proxy_init_poll_period: 10000
+
+
+# - Formula attr properties
+alarmhandler_enable_formula_attr_update_polling: !!str false
+alarmhandler_formula_attr_update_poll_period: 5000
+alarmhandler_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+alarmhandler_enable_clear_task_polling: !!str false
+alarmhandler_clear_task_poll_period: 10000
+
+# - Alarm Handler specific properties
+alarmhandler_subscribe_retry_period: 30 # s
+alarmhandler_stats_time_window: 60 # s
+
+
+###########################
+#### NAGIOS MONITORING  ###
+###########################
+# == Config files ==
+lmc_server_nagios_cfg_file: lmc_server.cfg
+lmc_server_nagios_template_file: lmc_templates.cfg
+
+# == Hosts ==
+# - LMC server
+lmc_server_nagios_name: lmc_server
+lmc_server_nagios_address: 127.0.0.1
+lmc_server_check_interval: 1 # in minutes
+
+# == Services ==
+nagios_srv_timeout: 10 # in s
+
+# - Ping service
+nagios_ping_srv_name: "PingStatus"
+nagios_ping_rta_warn_thr: 100 # Round-trip average threshold in ms 
+nagios_ping_packet_loss_warn_thr: 20 # Percentage of packet loss (in %)
+nagios_ping_rta_alarm_thr: 500 # Round-trip average threshold in ms 
+nagios_ping_packet_loss_alarm_thr: 60 # Percentage of packet loss (in %)
+nagios_ping_packets: 5 # Number of packets exchanged
+nagios_ping_timeout: "{{nagios_srv_timeout}}" # in s
+nagios_ping_check_interval: 1 # in minutes
+
+# - Disk space
+nagios_disk_space_srv_name: "DiskSpaceStatus"
+nagios_disk_space_warn_thr: 20 # Residual disk space in %
+nagios_disk_space_alarm_thr: 10 # Residual disk space in %
+nagios_disk_space_partition: "/" # Disk partition to be monitored (e.g. root partition /)
+nagios_disk_space_units: "GB" # Units (kB, MB, GB, TB)
+nagios_disk_space_check_interval: 1 # in minutes
+
+# - Overall cpu load
+#   NB: Threshold in Nagios will be calculated as y = c * p / 100
+#       Where:  y = nagios value  c = number of cores  p = desired load thr 
+#       See: https://serverfault.com/questions/209566/what-warning-and-critical-values-to-use-for-check-load
+nagios_cpu_load_srv_name: "CpuLoadStatus"
+nagios_cpu_load_warn_thr_5min: 90 # in %
+nagios_cpu_load_warn_thr_10min: 70 # in %
+nagios_cpu_load_warn_thr_15min: 50 # in %
+nagios_cpu_load_warn_thr_5min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_warn_thr_5min|float/100) }}"
+nagios_cpu_load_warn_thr_10min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_warn_thr_10min|float/100) }}"
+nagios_cpu_load_warn_thr_15min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_warn_thr_15min|float/100) }}"
+nagios_cpu_load_alarm_thr_5min: 100 # in %
+nagios_cpu_load_alarm_thr_10min: 80 # in %
+nagios_cpu_load_alarm_thr_15min: 60 # in %
+nagios_cpu_load_alarm_thr_5min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_alarm_thr_5min|float/100) }}"
+nagios_cpu_load_alarm_thr_10min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_alarm_thr_10min|float/100) }}"
+nagios_cpu_load_alarm_thr_15min_scaled: "{{ (ansible_processor_cores|float) * (nagios_cpu_load_alarm_thr_15min|float/100) }}"
+nagios_cpu_load_check_interval: 1 # in minutes
+
+# - Process cpu & memory load
+nagios_proc_mem_warn_thr: 1024 # in MB
+nagios_proc_mem_alarm_thr: 2048 # in MB
+nagios_proc_cpu_warn_thr: 60 # in %
+nagios_proc_cpu_alarm_thr: 80 # in %
+nagios_proc_check_interval: 1 # in minutes
+
+# - Tango servers to be monitored
+nagios_monitored_tango_servers:
+  - "{{dsmgr_server_name}}"
+  - "{{lmc_master_server_name}}"
+  - "{{lmc_alarm_server_name}}"
+  - "{{lmc_logger_server_name}}"
+  - "{{lmc_starter_server_name}}"
+  - "{{lmc_monitor_server_name}}"
+  - "{{archiver_server_name}}"
+  - "{{pdumgr_server_name}}"
+
+#  - DSManager
+#  - DishManager
+#  - AlarmHandler
+#  - ElementLogger
+#  - LMCStarter
+#  - LMCMonitor
+#  - LMCArchiver
+#  - PDUManager
+
+# - Swap space
+nagios_swap_space_srv_name: "SwapSpaceStatus"
+nagios_swap_space_warn_thr: 20 # in %
+nagios_swap_space_alarm_thr: 10 # in %
+nagios_swap_space_check_interval: 1 # in minutes
+
+# - SSH 
+nagios_ssh_srv_name: "SSHStatus"
+nagios_ssh_check_interval: 1 # in minutes
+
+# - Hardware sensors 
+nagios_sensors_srv_name: "SensorStatus"
+nagios_sensors_check_interval: 1 # in minutes
+
+# - TangoDB service status
+nagios_tangodb_process_name: "DataBaseds"
+nagios_tangodb_status_srv_name: "TangoDBSrvStatus"
+
+# - Rsyslog service status
+nagios_rsyslog_process_name: "rsyslogd"
+nagios_rsyslog_status_srv_name: "RSyslogStatus"
+
+# - MySQL service status
+nagios_mysql_process_name: "mysqld"
+nagios_mysql_status_srv_name: "MySQLStatus"
+
+# - NTP service status
+nagios_ntp_process_name: "ntpd"
+nagios_ntp_status_srv_name: "NTPStatus"
+
+
+#######################
+#### ARCHIVER       ###
+#######################
+##====================
+##  MAIN PROPERTIES
+##====================
+# - SKA properties
+#archiver_ska_level: 2
+
+# - General properties
+#archiver_enable_config_from_file: "{{enable_config_from_file}}"
+#archiver_config_file: "{{lmc_config_dir}}/{{lmc_archiver_config.name}}"
+#archiver_log_file: "lmc_archiver.log"
+archiver_astor_controlled: !!str true
+archiver_startup_level: 6
+
+# - Dyn attr creation & management properties
+archiver_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+archiver_enable_dyn_attr_randomize: !!str false
+archiver_dyn_attr_randomize_period: 3000
+archiver_enable_fwd_attr_init_polling: !!str false
+archiver_fwd_attr_init_poll_period: 5000
+archiver_enable_status_attr_update_polling: !!str false
+archiver_status_attr_update_poll_period: 3000
+
+# - Logging properties
+archiver_enable_central_log_target: "{{enable_central_log_target}}"
+archiver_central_log_target: "{{central_log_target}}"
+archiver_central_log_level: "{{central_log_level}}"
+archiver_enable_element_log_target: "{{enable_element_log_target}}"
+archiver_element_log_target: "{{element_log_target}}"
+archiver_element_log_level: "{{element_log_level}}"
+archiver_enable_storage_log_target: "{{enable_storage_log_target}}"
+archiver_storage_log_target: "{{storage_log_target}}"
+archiver_storage_log_level: "{{storage_log_level}}"
+archiver_syslog_facility: "{{syslog_facility}}"
+archiver_syslog_host: "{{syslog_host}}"
+archiver_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+archiver_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+archiver_enable_proxy_monitoring: !!str false ### This is performed by the ping dedicated thread not by polled cmd
+archiver_enable_proxy_status_attr_creation: !!str false
+archiver_enable_auto_admin_proxy_registration: !!str false
+archiver_proxy_monitoring_period: 5000 # ms
+archiver_proxy_status_attr_polling_period: 10000
+archiver_proxy_status_attr_periodic_event_period: 10000
+archiver_proxy_status_attr_archive_event_period: -1
+archiver_proxy_timeout: 20 # s
+archiver_enable_dev_proxy_init_polling: !!str false
+archiver_dev_proxy_init_poll_period: 10000
+
+# - Formula attr properties
+archiver_enable_formula_attr_update_polling: !!str false
+archiver_formula_attr_update_poll_period: 5000
+archiver_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+archiver_enable_clear_task_polling: !!str false
+archiver_clear_task_poll_period: 10000
+
+# - Archiver specific properties
+archiver_subscribe_retry_period: 60 # s
+archiver_stats_time_window: 60 # s
+archiver_periodic_timeout_delay: 5 # s
+archiver_polling_thread_period: 3 # s
+archiver_db_host: "localhost"
+archiver_db_user: "{{lmc_archive_user}}"
+archiver_db_user_password: "{{lmc_archive_user_pass}}"
+archiver_db_name: "{{lmc_archive_db_name}}"
+archiver_db_port: "3306"
+archiver_db_lib: "libhdb++mysql.so"
+archiver_default_strategy: "ALWAYS"
+archiver_default_ttl: 0 # in hours (0 means forever)
+archiver_archive_at_startup: !!str false
+
+#############################
+#### SPFRx ARCHIVER       ###
+#############################
+# - General properties
+archiver_rx_ska_level: 2
+archiver_rx_enable_config_from_file: "{{enable_config_from_file}}"
+archiver_rx_config_file: "{{lmc_config_dir}}/{{archiver_rx_config.name}}"
+archiver_rx_log_file: "archiver_rx.log"
+archiver_rx_astor_controlled: !!str true
+archiver_rx_startup_level: 6
+
+#############################
+#### SPF ARCHIVER         ###
+#############################
+# - General properties
+archiver_spf_ska_level: 2
+archiver_spf_enable_config_from_file: "{{enable_config_from_file}}"
+archiver_spf_config_file: "{{lmc_config_dir}}/{{archiver_spf_config.name}}"
+archiver_spf_log_file: "archiver_spf.log"
+archiver_spf_astor_controlled: !!str true
+archiver_spf_startup_level: 6
+
+#############################
+#### DS ARCHIVER          ###
+#############################
+# - General properties
+archiver_ds_ska_level: 2
+archiver_ds_enable_config_from_file: "{{enable_config_from_file}}"
+archiver_ds_config_file: "{{lmc_config_dir}}/{{archiver_ds_config.name}}"
+archiver_ds_log_file: "archiver_ds.log"
+archiver_ds_astor_controlled: !!str true
+archiver_ds_startup_level: 6
+
+#############################
+#### LMC ARCHIVER         ###
+#############################
+# - General properties
+archiver_lmc_ska_level: 2
+archiver_lmc_enable_config_from_file: "{{enable_config_from_file}}"
+archiver_lmc_config_file: "{{lmc_config_dir}}/{{archiver_lmc_config.name}}"
+archiver_lmc_log_file: "archiver_lmc.log"
+archiver_lmc_astor_controlled: !!str true
+archiver_lmc_startup_level: 6
+
+###################################
+#### ARCHIVER CONFIGURATOR      ###
+###################################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+archiver_cm_ska_level: 2
+
+# - General properties
+archiver_cm_enable_config_from_file: "{{enable_config_from_file}}"
+archiver_cm_config_file: "{{lmc_config_dir}}/{{archiver_cm_config.name}}"
+archiver_cm_log_file: "archiver_cm.log"
+archiver_cm_astor_controlled: !!str true
+archiver_cm_startup_level: 7
+
+# - Dyn attr creation & management properties
+archiver_cm_enable_dyn_attr_cleanup: "{{enable_dyn_attr_cleanup}}"
+archiver_cm_enable_dyn_attr_randomize: !!str false
+archiver_cm_dyn_attr_randomize_period: 3000
+archiver_cm_enable_fwd_attr_init_polling: !!str false
+archiver_cm_fwd_attr_init_poll_period: 5000
+archiver_cm_enable_status_attr_update_polling: !!str false
+archiver_cm_status_attr_update_poll_period: 3000
+
+# - Logging properties
+archiver_cm_enable_central_log_target: "{{enable_central_log_target}}"
+archiver_cm_central_log_target: "{{central_log_target}}"
+archiver_cm_central_log_level: "{{central_log_level}}"
+archiver_cm_enable_element_log_target: "{{enable_element_log_target}}"
+archiver_cm_element_log_target: "{{element_log_target}}"
+archiver_cm_element_log_level: "{{element_log_level}}"
+archiver_cm_enable_storage_log_target: "{{enable_storage_log_target}}"
+archiver_cm_storage_log_target: "{{storage_log_target}}"
+archiver_cm_storage_log_level: "{{storage_log_level}}"
+archiver_cm_syslog_facility: "{{syslog_facility}}"
+archiver_cm_syslog_host: "{{syslog_host}}"
+archiver_cm_enable_logger_init_polling: "{{enable_logger_init_polling}}"
+archiver_cm_logger_init_poll_period: "{{logger_init_poll_period}}"
+
+# - Proxy properties
+archiver_cm_enable_proxy_monitoring: !!str false ### This is performed by the ping dedicated thread not by polled cmd
+archiver_cm_enable_proxy_status_attr_creation: !!str false
+archiver_cm_enable_auto_admin_proxy_registration: !!str false
+archiver_cm_proxy_monitoring_period: 5000 # ms
+archiver_cm_proxy_status_attr_polling_period: 10000
+archiver_cm_proxy_status_attr_periodic_event_period: 10000
+archiver_cm_proxy_status_attr_archive_event_period: -1
+archiver_cm_proxy_timeout: 20 # s
+archiver_cm_enable_dev_proxy_init_polling: !!str false
+archiver_cm_dev_proxy_init_poll_period: 10000
+
+# - Formula attr properties
+archiver_cm_enable_formula_attr_update_polling: !!str false
+archiver_cm_formula_attr_update_poll_period: 5000
+archiver_cm_formula_var_max_time_interval: "{{formula_var_max_time_interval}}"
+
+# - Task management properties
+archiver_cm_enable_clear_task_polling: !!str false
+archiver_cm_clear_task_poll_period: 10000
+
+# - Archiver specific properties
+archiver_cm_max_search_size: 1000 
+
+
+######################
+#### PDU EMULATOR  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+pdu_ska_level: 3
+
+# - General properties
+pdu_log_file: "pdu_manager.log"
+pdu_astor_controlled: !!str true
+pdu_startup_level: 1
+
+######################
+#### TM EMULATOR  ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+tm_ska_level: 6
+
+# - General properties
+tm_astor_controlled: !!str true
+tm_startup_level: 1
+
+
+######################
+#### LOG PRINTER   ###
+######################
+##================
+##  PROPERTIES
+##================
+# - SKA properties
+logprinter_ska_level: 6
+
+# - General properties
+logprinter_astor_controlled: !!str false
+logprinter_startup_level: 1
+
+
+...
+

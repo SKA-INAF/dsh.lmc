@@ -1,0 +1,3286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            SPF ARCHIVER CONFIGURATION           -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{archiver_spf_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{archiver_spf_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{archiver_spf_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{archiver_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{archiver_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{archiver_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{archiver_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{archiver_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{archiver_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{archiver_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{archiver_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{archiver_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{archiver_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{archiver_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{archiver_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{archiver_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{archiver_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{archiver_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{archiver_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{archiver_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{archiver_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{archiver_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{archiver_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{archiver_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{archiver_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{archiver_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{archiver_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->		
+		<DeviceProperty name="LibConfiguration">
+			<Value> host={{archiver_db_host}} </Value>
+			<Value> user={{archiver_db_user}} </Value>
+			<Value> password={{archiver_db_user_password}} </Value>
+			<Value> dbname={{archiver_db_name}} </Value>
+			<Value> port={{archiver_db_port}} </Value>
+			<Value> libname={{archiver_db_lib}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SubscribeRetryPeriod">
+			<Value> {{archiver_subscribe_retry_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatisticsTimeWindow">
+			<Value> {{archiver_stats_time_window}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="CheckPeriodicTimeoutDelay">
+			<Value> {{archiver_periodic_timeout_delay}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ContextsList">
+			<Value> ALWAYS:always stored </Value>
+			<Value> RUN:stored during run </Value>
+			<Value> SHUTDOWN:stored during shutdown </Value>
+			<Value> SERVICE:stored during maintenance activities </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DefaultStrategy">
+			<Value> {{archiver_default_strategy}} </Value>
+		</DeviceProperty>
+		
+		<!--
+		<DeviceProperty name="AttributeList">
+			<Value>  </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+	</Attributes>
+	-->
+
+	<!-- ************************************************** -->
+	<!-- **              ARCHIVED ATTRS                     -->
+	<!-- ************************************************** -->
+	{% if spf_enabled_in_config | bool %}		
+	<ArchivedAttributes>
+
+		<!-- ************************************************** -->
+		<!-- **      Modes and States attributes                -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/operatingMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/powerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/healthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- Band Capabilities -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b5CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Band Health State -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+
+		<!-- Feed operating states -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1OperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2OperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3OperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4OperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5OperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Service (He/Va) states -->
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heOperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_vacuum}}/vaHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_vacuum}}/vaOperatingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<!-- Controller health state -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+	
+		<!-- Interface type -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/interfaceType </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<!-- ************************************************** -->
+		<!-- **      Control and setup attributes               -->
+		<!-- ************************************************** -->
+		<!-- LNA illumination -->
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaIlluminationEnabled </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- LNA power state -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaHPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaHPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaHPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaHPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaVPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaVPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaVPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaVPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Amp2 power state -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2HPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2HPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2HPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2HPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2HPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2VPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2VPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2VPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2VPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2VPowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Cal source power state -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourcePowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourcePowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourcePowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourcePowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourcePowerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+	
+		<!-- LNA temp setpoints -->	
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Rfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1DefaultLnaHTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1DefaultLnaVTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2DefaultRfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3DefaultRfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4DefaultRfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5DefaultRfe1TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- LNA 1st-stage temp controller state -->	
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Rfe1TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe1TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe1TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe1TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- RFE2 temp setpoint -->	
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3DefaultRfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4DefaultRfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5DefaultRfe2TempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- RFE 2 temp controller state -->	
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe2TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe2TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe2TempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- Cal source temp setpoint -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1DefaultCalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2DefaultCalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3DefaultCalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4DefaultCalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5DefaultCalSourceTempSetPoint </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- Cal source temp controller state -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourceTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourceTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourceTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourceTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourceTempCtrlState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Cryo motor state & speed -->
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CryoMotorState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345CryoMotorState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CryoMotorSpeed </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345CryoMotorSpeed </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Valve state -->
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2VaValveState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345VaValveState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Expected online flags -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b1ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b2ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b3ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b4ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/b5ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/heExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/vaExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+
+		<!-- Default feed startup state -->		
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1DefaultStartState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2DefaultStartState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3DefaultStartState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4DefaultStartState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5DefaultStartState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- ************************************************** -->
+		<!-- **      Diagnostics attributes                     -->
+		<!-- ************************************************** -->
+		<!-- Time to reach full capability -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CapTime2OpFull </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CapTime2OpFull </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CapTime2OpFull </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CapTime2OpFull </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CapTime2OpFull </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Controller pars (voltage, temp, current) -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcSupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcSupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- Helium compressor pressure -->
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heCompSupplyPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heCompReturnPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- LNA pars (voltage/current) -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaHDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaHDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaHDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaHDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaVDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaVDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaVDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaVDrainVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaHGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaHGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaHGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaHGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaVGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaVGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaVGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaVGateVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaHDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaHDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaHDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaHDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaVDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaVDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaVDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaVDrainCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Amp2 pars (voltage/current) -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2HVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2HVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2HVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2HVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2HVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2VVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2VVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2VVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2VVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2VVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2HCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2HCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2HCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2HCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2HCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Amp2VCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Amp2VCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Amp2VCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Amp2VCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Amp2VCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Cal source pars -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourceCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourceCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourceCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourceCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourceCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourceVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourceVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourceVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourceVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourceVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourceTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourceTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourceTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourceTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourceTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Rfe1PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Rfe1PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe1PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe1PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe1PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1Rfe2PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe2PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe2PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe2PidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CalSourcePidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CalSourcePidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CalSourcePidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CalSourcePidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CalSourcePidCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- Cryo pressure -->
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CryoPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345CryoPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2ManifoldPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345ManifoldPressure </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- LNA temperature -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2Rfe1Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe1Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe1Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe1Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3Rfe2Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4Rfe2Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5Rfe2Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Omt pars -->
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2OmtTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3OmtTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4OmtTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5OmtTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- Cryocooler pars -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1CryocoolStage1Temp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CryocoolStage1Temp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3CryocoolStage1Temp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4CryocoolStage1Temp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5CryocoolStage1Temp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- Cryostat body temp -->
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1ChamberBodyTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2CryostatBodyTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b345CryostatBodyTemp </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- LNA mean gain -->		
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaHMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaHMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaHMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaHMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaHMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1LnaVMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2LnaVMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3LnaVMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4LnaVMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5LnaVMeanGain </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+
+		<!-- ************************************************** -->
+		<!-- **      Fault attributes                           -->
+		<!-- ************************************************** -->
+		<!-- Error codes --> 	
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1ErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2ErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3ErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4ErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5ErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/serviceErrorCode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- Operational times --> 	
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/b1OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/b2OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b3OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b4OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/b5OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_helium}}/heOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+
+		<ArchivedAttribute>
+			<Name> {{spf_vacuum}}/vaTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_vacuum}}/vaOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/spfcOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- ************************************************** -->
+		<!-- **      Software/Firmware/Serial attributes        -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/serialNumbers </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/swVersions </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/fwVersions </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>	
+
+
+		<!-- ************************************************** -->
+		<!-- **     Progress attributes                         -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/setOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/setStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+			
+		<ArchivedAttribute>
+			<Name> {{spf_controller}}/setMaintenanceModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>	
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/setB1FeedOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/setB2FeedOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB3FeedOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB4FeedOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB5FeedOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/setB1FeedRegenerationModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/setB2FeedRegenerationModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB3FeedRegenerationModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB4FeedRegenerationModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB5FeedRegenerationModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+	
+		{% if spf_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B1}}/setB1FeedStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B2}}/setB2FeedStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB3FeedStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if spf_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB4FeedStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if spf_enable_b5_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{spf_B345}}/setB5FeedStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+	</ArchivedAttributes>
+	{% endif %}
+
+</DeviceConfiguration>
+

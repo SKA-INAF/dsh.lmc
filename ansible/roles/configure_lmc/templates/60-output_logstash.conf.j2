@@ -1,0 +1,34 @@
+template(name="TangoLogstashForwardMsgFormat"
+  type="list") {
+    constant(value="{")
+      constant(value="\"@timestamp\":\"")     property(name="timereported" dateFormat="rfc3339")
+      constant(value="\",\"@version\":\"1")
+      constant(value="\",\"message\":\"")     property(name="msg" format="json")
+      constant(value="\",\"sysloghost\":\"")  property(name="hostname")
+      constant(value="\",\"sourcehost\":\"")  property(name="fromhost")
+      constant(value="\",\"severity\":\"")    property(name="syslogseverity-text" caseConversion="upper")
+      constant(value="\",\"facility\":\"")    property(name="syslogfacility-text")
+      constant(value="\",\"tag\":\"")         property(name="syslogtag")
+      constant(value="\",\"programname\":\"") property(name="programname")
+      constant(value="\",\"app-name\":\"")     property(name="app-name")
+      constant(value="\",\"procid\":\"")      property(name="procid")
+    constant(value="\"}\n")
+}
+
+# This line sends all lines to defined IP address at port 10514,
+# using the json format template above
+
+## - Forward all Tango logs 
+## {{syslog_facility}}.* @{{lmc_tango_syslog_forward_host}}:{{lmc_tango_syslog_forward_port}};TangoLogstashForwardMsgFormat
+
+## - Forward Tango logs above given level
+## {{syslog_facility}}.{{lmc_tango_syslog_forward_level}} @{{lmc_tango_syslog_forward_host}}:{{lmc_tango_syslog_forward_port}};TangoLogstashForwardMsgFormat
+
+## - Forward all syslogs (including Tango) 
+*.* @{{lmc_tango_syslog_forward_host}}:{{lmc_tango_syslog_forward_port}};TangoLogstashForwardMsgFormat
+
+## - Forward all syslogs (including Tango) above given level 
+## {{syslog_facility}}.{{lmc_tango_syslog_forward_level}} @{{lmc_tango_syslog_forward_host}}:{{lmc_tango_syslog_forward_port}};TangoLogstashForwardMsgFormat
+
+
+

@@ -1,0 +1,1342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            RX ARCHIVER CONFIGURATION           -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{archiver_rx_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{archiver_rx_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{archiver_rx_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{archiver_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{archiver_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{archiver_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{archiver_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{archiver_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{archiver_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{archiver_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{archiver_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{archiver_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{archiver_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{archiver_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{archiver_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{archiver_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{archiver_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{archiver_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{archiver_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{archiver_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{archiver_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{archiver_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{archiver_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{archiver_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{archiver_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{archiver_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{archiver_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->		
+		<DeviceProperty name="LibConfiguration">
+			<Value> host={{archiver_db_host}} </Value>
+			<Value> user={{archiver_db_user}} </Value>
+			<Value> password={{archiver_db_user_password}} </Value>
+			<Value> dbname={{archiver_db_name}} </Value>
+			<Value> port={{archiver_db_port}} </Value>
+			<Value> libname={{archiver_db_lib}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SubscribeRetryPeriod">
+			<Value> {{archiver_subscribe_retry_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatisticsTimeWindow">
+			<Value> {{archiver_stats_time_window}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="CheckPeriodicTimeoutDelay">
+			<Value> {{archiver_periodic_timeout_delay}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ContextsList">
+			<Value> ALWAYS:always stored </Value>
+			<Value> RUN:stored during run </Value>
+			<Value> SHUTDOWN:stored during shutdown </Value>
+			<Value> SERVICE:stored during maintenance activities </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DefaultStrategy">
+			<Value> {{archiver_default_strategy}} </Value>
+		</DeviceProperty>
+		
+		<!--
+		<DeviceProperty name="AttributeList">
+			<Value>  </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+	</Attributes>
+	-->
+
+	<!-- ************************************************** -->
+	<!-- **              ARCHIVED ATTRS                     -->
+	<!-- ************************************************** -->
+	{% if rx_enabled_in_config | bool %}		
+	<ArchivedAttributes>
+
+		
+		<!-- ************************************************** -->
+		<!-- **      Modes and States Attributes                -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/operatingMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/powerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aCapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bCapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/healthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+	
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4HealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuHealthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/interfaceType </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/engineeringModeEnabled </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/testMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- ************************************************** -->
+		<!-- **      Control & Setup Attributes                     -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs1ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs2ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs3ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs4ExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs5aExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxs5bExpectedOnline </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/configuredBand </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/noiseDiodeState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/periodicNoiseDiodePars </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/pseudoRandomNoiseDiodePars </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1PolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2PolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3PolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4PolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aPolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bPolHAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1PolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2PolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3PolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4PolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aPolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bPolVAttenuationDefault </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/attenuationPolH </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/attenuationPolV </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/samplingClockSynchronised </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/capturingData </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/dataCaptureStatus </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+		<!-- ************************************************** -->
+		<!-- **      Monitoring/Diagnostic/Fault Attributes     -->
+		<!-- ************************************************** -->
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4OperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4TotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuTotOperationalTime </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1SupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2SupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3SupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>	
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4SupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aSupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bSupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1SupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2SupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3SupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4SupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aSupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bSupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4Temperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuSupplyVoltage </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuSupplyCurrent </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/rxpuTemperature </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1AdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2AdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3AdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4AdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aAdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bAdcPower </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		
+		{% if rx_enable_b1_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b1AdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b2_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b2AdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b3_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b3AdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b4_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b4AdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5a_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5aAdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if rx_enable_b5b_in_config | bool %}
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/b5bAdcVariance </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/samplingClockFrequency </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<!-- ************************************************** -->
+		<!-- **      Software/Firmware/Serial Attributes        -->
+		<!-- ************************************************** -->
+		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/serialNumbers </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/swVersions </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/fwVersions </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware0UpdateInfo </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware1UpdateInfo </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware2UpdateInfo </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware3UpdateInfo </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware0UpdateAvailable </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware1UpdateAvailable </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware2UpdateAvailable </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware3UpdateAvailable </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+	
+		<!-- ************************************************** -->
+		<!-- **      Progress Attributes                        -->
+		<!-- ************************************************** -->
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware0UpdateProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware1UpdateProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware2UpdateProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/firmware3UpdateProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		
+	</ArchivedAttributes>
+	{% endif %}
+
+</DeviceConfiguration>
+

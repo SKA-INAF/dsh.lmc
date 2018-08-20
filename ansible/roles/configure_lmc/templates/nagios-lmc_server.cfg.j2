@@ -1,0 +1,202 @@
+
+
+
+# =================================================
+# ==           HOSTS 
+# =================================================
+# Define a host for the local machine
+define host{
+  use           dish-host                            ; Name of host template to use
+							                                       ; This host definition will inherit all variables that are defined
+							                                       ; in (or inherited by) the linux-server host template definition.
+  host_name       {{lmc_server_nagios_name}}         ; localhost
+  alias           {{lmc_server_nagios_name}}
+  address         {{lmc_server_nagios_address}}
+  check_interval  {{lmc_server_check_interval}}		                              ; Actively check the host every 1 minutes
+}
+
+
+# =================================================
+# ==           HOST GROUP 
+# =================================================
+# Define an optional hostgroup for Linux machines
+define hostgroup{
+  hostgroup_name  dish-servers              ; The name of the hostgroup
+  alias           SKA Dish Servers          ; Long name of the group
+  members         {{lmc_server_nagios_name}}                ; Comma separated list of hosts that belong to this group
+}
+
+
+# =================================================
+# ==           SERVICES 
+# =================================================
+# Define a service to "ping" the local machine
+# 'check_ping' command definition
+define command{
+	command_name    ping_host
+  command_line    $USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p $ARG3$ -t $ARG4$ 
+}
+
+define service{
+  use                        dish-service                      ; Name of service template to use
+  host_name                  {{lmc_server_nagios_name}}
+  service_description        {{nagios_ping_srv_name}}
+  check_interval             {{nagios_ping_check_interval}}
+	check_command	             ping_host!{{nagios_ping_rta_warn_thr}},{{nagios_ping_packet_loss_warn_thr}}%!{{nagios_ping_rta_alarm_thr}},{{nagios_ping_packet_loss_alarm_thr}}%!{{nagios_ping_packets}}!{{nagios_ping_timeout}}
+}
+
+
+# Define a service to check the disk space of the root partition
+# on the local machine.  Warning if < 20% free, critical if
+# < 10% free space on partition.
+define command{
+	command_name    check_disk_space
+  command_line    $USER1$/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$ -u $ARG4$
+}
+
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_disk_space_srv_name}}
+  check_interval                  {{nagios_disk_space_check_interval}}
+	check_command			              check_disk_space!{{nagios_disk_space_warn_thr}}%!{{nagios_disk_space_alarm_thr}}%!{{nagios_disk_space_partition}}!{{nagios_disk_space_units}}
+}
+
+# Define a service to check the memory used by processes
+define command{
+	command_name    check_proc_mem
+  command_line    $USER1$/check_proc_mem.sh -w $ARG1$ -c $ARG2$ --cmdpattern $ARG3$
+}
+
+
+{% for server in nagios_monitored_tango_servers %}
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{server}}MemUsageStatus
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_proc_mem!{{nagios_proc_mem_warn_thr}}!{{nagios_proc_mem_alarm_thr}}!{{server}}
+}
+{% endfor %}
+
+
+# Define a service to check the cpu used by processes
+define command{
+	command_name    check_proc_cpu
+  command_line    $USER1$/check_proc_cpu.sh -w $ARG1$ -c $ARG2$ --cmdpattern $ARG3$
+}
+
+{% for server in nagios_monitored_tango_servers %}
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{server}}CpuUsageStatus
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_proc_cpu!{{nagios_proc_cpu_warn_thr}}!{{nagios_proc_cpu_alarm_thr}}!{{server}}
+}
+{% endfor %}
+
+
+# Define a service to check the load on the local machine
+define service{
+	use                             dish-service                           ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_cpu_load_srv_name}}
+  check_interval                  {{nagios_cpu_load_check_interval}}
+  check_command			              check_local_load!{{nagios_cpu_load_warn_thr_5min_scaled}},{{nagios_cpu_load_warn_thr_10min_scaled}},{{nagios_cpu_load_warn_thr_15min_scaled}}!{{nagios_cpu_load_alarm_thr_5min_scaled}},{{nagios_cpu_load_alarm_thr_10min_scaled}},{{nagios_cpu_load_alarm_thr_15min_scaled}}
+}
+
+
+
+# Define a service to check the swap usage the local machine. 
+# Critical if less than 10% of swap is free, warning if less than 20% is free
+define service{
+  use                             dish-service                    ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_swap_space_srv_name}}
+  check_interval                  {{nagios_swap_space_check_interval}}
+	check_command			              check_local_swap!{{nagios_swap_space_warn_thr}}!{{nagios_swap_space_alarm_thr}}
+}
+
+
+
+# Define a service to check SSH on the local machine.
+# Disable notifications for this service by default, as not all users may have SSH enabled.
+define service{
+  use                             dish-service                    ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_ssh_srv_name}}
+  check_interval                  {{nagios_ssh_check_interval}}
+	check_command			              check_ssh
+	notifications_enabled		        0
+}
+
+# Define a service to check hardware sensors (using lm_sensor)
+define command{
+	command_name    check_sensors
+  command_line    $USER1$/check_sensors
+}
+define service{
+  use                             dish-service                    ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_sensors_srv_name}}
+  check_interval                  {{nagios_sensors_check_interval}}
+	check_command			              check_sensors
+}
+
+# ==============================================
+# Check running system & Tango services
+# ==============================================
+define command{
+  command_name    check_process_running
+ 	command_line    $USER1$/check_procs -c 1:1 -C $ARG1$
+}
+
+# - Tango LMC servers
+{% for server in nagios_monitored_tango_servers %}
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{server}}ProcessStatus
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_process_running!{{server}}
+}
+{% endfor %}
+
+# - TangoDB service
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_tangodb_status_srv_name}}
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_process_running!{{nagios_tangodb_process_name}}
+}
+
+# - MySQL service
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_mysql_status_srv_name}}
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_process_running!{{nagios_mysql_process_name}}
+}
+
+# - rsyslog service
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_rsyslog_status_srv_name}}
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_process_running!{{nagios_rsyslog_process_name}}
+}
+
+# - ntp service
+define service{
+  use                             dish-service                       ; Name of service template to use
+  host_name                       {{lmc_server_nagios_name}}
+  service_description             {{nagios_ntp_status_srv_name}}
+  check_interval                  {{nagios_proc_check_interval}}
+  check_command			              check_process_running!{{nagios_ntp_process_name}}
+}
+
+

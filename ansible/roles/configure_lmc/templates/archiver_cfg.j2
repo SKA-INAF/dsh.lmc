@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            RX INTERFACE CONFIGURATION           -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{lmcarchiver_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{lmcarchiver_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{lmcarchiver_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{lmcarchiver_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{lmcarchiver_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{lmcarchiver_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{lmcarchiver_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{lmcarchiver_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{lmcarchiver_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{lmcarchiver_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{lmcarchiver_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{lmcarchiver_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{lmcarchiver_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{lmcarchiver_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{lmcarchiver_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{lmcarchiver_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{lmcarchiver_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{lmcarchiver_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{lmcarchiver_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{lmcarchiver_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{lmcarchiver_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{lmcarchiver_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{lmcarchiver_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{lmcarchiver_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{lmcarchiver_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{lmcarchiver_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{lmcarchiver_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->		
+		<DeviceProperty name="LibConfiguration">
+			<Value> {{lmcarchiver_db_host}} </Value>
+			<Value> {{lmcarchiver_db_user}} </Value>
+			<Value> {{lmcarchiver_db_user_password}} </Value>
+			<Value> {{lmcarchiver_db_name}} </Value>
+			<Value> {{lmcarchiver_db_port}} </Value>
+			<Value> {{lmcarchiver_db_lib}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SubscribeRetryPeriod">
+			<Value> {{lmcarchiver_subscribe_retry_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatisticsTimeWindow">
+			<Value> {{lmcarchiver_stats_time_window}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="CheckPeriodicTimeoutDelay">
+			<Value> {{lmcarchiver_periodic_timeout_delay}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ContextsList">
+			<Value> ALWAYS:always stored </Value>
+			<Value> RUN:stored during run </Value>
+			<Value> SHUTDOWN:stored during shutdown </Value>
+			<Value> SERVICE:stored during maintenance activities </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DefaultStrategy">
+			<Value> {{lmcarchiver_default_strategy}} </Value>
+		</DeviceProperty>
+		
+		<!--
+		<DeviceProperty name="AttributeList">
+			<Value>  </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+	</Attributes>
+	-->
+
+	<!-- ************************************************** -->
+	<!-- **              ARCHIVED ATTRS                     -->
+	<!-- ************************************************** -->
+	<ArchivedAttributes>
+
+		<!-- ******************************* -->
+		<!-- ***   SPFRx Archived data     *** -->
+		<!-- ******************************* -->
+
+		<!-- Health state alarm -->
+		{% if rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{rx_controller}}/operatingMode </Name>
+			<Strategies> 
+				<Strategy> {{lmcarchiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{lmcarchiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+	</ArchivedAttributes>
+
+
+</DeviceConfiguration>
+

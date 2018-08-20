@@ -1,0 +1,3994 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **        LMC MONITOR CONFIGURATION                -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{lmcmon_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{lmcmon_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{lmcmon_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{lmcmon_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{lmcmon_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{lmcmon_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{lmcmon_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FwdAttrInitPollPeriod">
+			<Value> {{lmcmon_fwd_attr_init_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{lmcmon_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatusAttrUpdatePollPeriod">
+			<Value> {{lmcmon_status_attr_update_poll_period}} </Value>
+		</DeviceProperty>
+		
+
+		<!-- Logging options -->
+		<!-- Central Logger -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{lmcmon_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{lmcmon_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{lmcmon_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<!-- Element Logger -->
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{lmcmon_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{lmcmon_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{lmcmon_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<!-- Storage Logger -->
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{lmcmon_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{lmcmon_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{lmcmon_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{lmcmon_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{lmcmon_syslog_host}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{lmcmon_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{lmcmon_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{lmcmon_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{lmcmon_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+	
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{lmcmon_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyMonitoringPeriod">
+			<Value> {{lmcmon_proxy_monitoring_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrPollingPeriod">
+			<Value> {{lmcmon_proxy_status_attr_polling_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrPeriodicEventPeriod">
+			<Value> {{lmcmon_proxy_status_attr_periodic_event_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrArchiveEventPeriod">
+			<Value> {{lmcmon_proxy_status_attr_archive_event_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyTimeout">
+			<Value> {{lmcmon_proxy_timeout}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{lmcmon_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DevProxyInitPollPeriod">
+			<Value> {{lmcmon_dev_proxy_init_poll_period}} </Value>
+		</DeviceProperty>
+
+		{% if ds_enabled_in_config | bool or dshmgr_enabled_in_config | bool or lmclogger_enabled_in_config | bool or lmcstarter_enabled_in_config | bool or alarmhandler_enabled_in_config | bool %}
+		<DeviceProperty name="ProxyDevices">
+			
+     	{% if rx_enabled_in_config | bool %}
+			<Value> {{rx_controller}} </Value>
+			{% endif %}
+			
+      {% if spf_enabled_in_config | bool %}
+			<Value> {{spf_controller}} </Value>
+			{% endif %}
+
+			{% if ds_enabled_in_config | bool %}
+			<Value> {{ds_manager}} </Value>
+			{% endif %}
+
+			{% if dshmgr_enabled_in_config | bool %}
+			<Value> {{lmc_master}} </Value>
+			{% endif %}
+
+			{% if lmclogger_enabled_in_config | bool %}	
+			<Value> {{lmc_logger}} </Value>
+			{% endif %}
+
+			{% if lmcstarter_enabled_in_config | bool %}	
+			<Value> {{lmc_starter}} </Value>
+			{% endif %}
+
+			{% if alarmhandler_enabled_in_config | bool %}	
+			<Value> {{alarm_handler}} </Value>
+			{% endif %}
+
+			{% if archiver_enabled_in_config | bool and archiver_lmc_enabled_in_config | bool %}	
+			<Value> {{archiver_lmc}} </Value>
+			{% endif %}
+
+			{% if archiver_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}	
+			<Value> {{archiver_ds}} </Value>
+			{% endif %}
+	
+			{% if archiver_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}	
+			<Value> {{archiver_spf}} </Value>
+			{% endif %}
+
+			{% if archiver_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}	
+			<Value> {{archiver_rx}} </Value>
+			{% endif %}
+
+			{% if pdu_enabled_in_config | bool %}	
+			<Value> {{pdu_manager}} </Value>
+			{% endif %}
+
+
+		</DeviceProperty>
+		{% endif %}
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{lmcmon_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FormulaAttrUpdatePollPeriod">
+			<Value> {{lmcmon_formula_attr_update_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FormulaVarMaxTimeInterval">
+			<Value> {{lmcmon_formula_var_max_time_interval}} </Value>
+		</DeviceProperty>
+
+		
+		<!-- Events and handlers options -->
+		<!--
+		<DeviceProperty name="EventSubscriptions">
+			{% if ds_enabled_in_config | bool %}
+			<Value> {{ds_manager}}/state </Value>
+			<Value> periodic </Value>
+
+			<Value> {{ds_manager}}/state </Value>
+			<Value> change_event </Value>
+
+			<Value> {{ds_manager}}/state </Value>
+			<Value> user_event </Value>
+			{% endif %}
+
+			{% if dshmgr_enabled_in_config | bool %}
+			<Value> {{lmc_master}}/state </Value>
+			<Value> periodic </Value>
+
+			<Value> {{lmc_master}}/state </Value>
+			<Value> change_event </Value>
+
+			<Value> {{lmc_master}}/state </Value>
+			<Value> user_event </Value>
+			{% endif %}
+
+			{% if lmclogger_enabled_in_config | bool %}	
+			<Value> {{lmc_logger}}/state </Value>
+			<Value> periodic </Value>
+
+			<Value> {{lmc_logger}}/state </Value>
+			<Value> change_event </Value>
+
+			<Value> {{lmc_logger}}/state </Value>
+			<Value> user_event </Value>
+			{% endif %}
+		</DeviceProperty>
+		-->		
+
+		<!--
+		<DeviceProperty name="EventHandlers">			
+
+		</DeviceProperty>
+		-->
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{lmcmon_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ClearTaskPollPeriod">
+			<Value> {{lmcmon_clear_task_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->	
+		
+		<!-- NAGIOS INTERFACE PROPERTIES -->
+		<DeviceProperty name="NagiosQueryHandlerPath">
+			<Value> {{nagios_queryhandler_socket_path}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="NagiosAttrPollPeriod">
+			<Value> {{lmcmon_nagios_attr_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="NagiosAttrPeriodicEventPeriod">
+			<Value> {{lmcmon_nagios_attr_periodic_event_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="NagiosAttrArchiveEventPeriod">
+			<Value> {{lmcmon_nagios_attr_archive_event_period}} </Value>
+		</DeviceProperty>
+
+	</DeviceProperties>
+
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<Attributes>
+
+		
+		<!-- ************************************************** -->
+		<!-- **      PROXY MONITORING ATTRS                     -->
+		<!-- ************************************************** -->
+		
+		<Attribute name = "rxControllerRunStatus" alias="rxControllerRunStatus">
+			<Description> Rx controller run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if rx_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = rx_controller.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "spfControllerRunStatus" alias="spfControllerRunStatus">
+			<Description> SPF controller run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if spf_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = spf_controller.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "dsManagerRunStatus" alias="dsManagerRunStatus">
+			<Description> DSManager run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if ds_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = ds_manager.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "dishManagerRunStatus" alias="dishManagerRunStatus">
+			<Description> DishManager run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if dshmgr_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = lmc_master.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "elementLoggerRunStatus" alias="elementLoggerRunStatus">
+			<Description> ElementLogger run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if lmclogger_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = lmc_logger.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "alarmHandlerRunStatus" alias="alarmHandlerRunStatus">
+			<Description> AlarmHandler run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if alarmhandler_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = alarm_handler.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+		<Attribute name = "lmcStarterRunStatus" alias="lmcStarterRunStatus">
+			<Description> LMCStarter run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if lmcstarter_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = lmc_starter.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+
+		
+		<Attribute name = "spfArchiverRunStatus" alias="spfArchiverRunStatus">
+			<Description> SPF Archiver run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = archiver_spf.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "rxArchiverRunStatus" alias="rxArchiverRunStatus">
+			<Description> SPFRx Archiver run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = archiver_rx.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+		
+		<Attribute name = "dsArchiverRunStatus" alias="dsArchiverRunStatus">
+			<Description> DS Archiver run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = archiver_ds.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+
+		
+		<Attribute name = "lmcArchiverRunStatus" alias="lmcArchiverRunStatus">
+			<Description> LMC Archiver run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>		
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		
+			{% if archiver_enabled_in_config | bool and archiver_lmc_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = archiver_lmc.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+		
+
+		<Attribute name = "pduManagerRunStatus" alias="pduManagerRunStatus">
+			<Description> PDUManager run status (0=UNKNOWN, 1=ONLINE, 2=SOFT-OFFLINE, 3=HARD-OFFLINE) </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+      	<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+        <Value> ONLINE </Value>
+        <Value> SOFT-OFFLINE </Value>
+        <Value> HARD-OFFLINE </Value>
+      </PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if pdu_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					if( x_0=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+					if( x_0=='ONLINE' )
+					{
+						res:= 'ONLINE';
+						return [0];
+					};	
+					if( x_0=='SOFT_OFFLINE' )
+					{
+						res:= 'SOFT-OFFLINE';
+						return [0];
+					};
+					if( x_0=='HARD_OFFLINE' )
+					{
+						res:= 'HARD-OFFLINE';
+						return [0];
+					};
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> x </Label>	
+						{% set name_list = pdu_manager.split('/') %}
+						<Value> proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SPECTRUM </ExpDataFormat>
+						<ExpDataSize> 2 </ExpDataSize>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+
+		</Attribute>
+
+		<!-- ************************************************** -->
+		<!-- **      Nagios HOST CHECKS                         -->
+		<!-- ************************************************** -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}HostStatus" alias="{{lmc_server_nagios_name|camelize|decapitalize}}HostStatus">
+			<Description> LMC Server Host Status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}HostStatus" alias="{{lmc_server_nagios_name|camelize|decapitalize}}HostStatusInfo">
+			<Description> LMC Server Host Status Info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- ************************************************** -->
+		<!-- **      Nagios SERVICE CHECKS                      -->
+		<!-- ************************************************** -->
+		<!-- Ping status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ping_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ping_srv_name}}">
+			<Description> LMC Server Ping Status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ping_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ping_srv_name}}Info">
+			<Description> LMC Server Ping Status Info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- Disk space -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_disk_space_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_disk_space_srv_name}}">
+			<Description> LMC Server Disk Space </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_disk_space_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_disk_space_srv_name}}Info">
+			<Description> LMC Server Disk Space Info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- LMC Servers Used Memory -->
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}MemUsageStatus" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}MemUsageStatus">
+			<Description> {{server}} Tango Server Memory Usage in MB </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}MemUsageStatusInfo" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}MemUsageStatusInfo">
+			<Description> {{server}} Tango Server Memory Usage Info in MB </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+	
+		<!-- LMC Servers CPU Load -->
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}CpuUsageStatus" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}CpuUsageStatus">
+			<Description> {{server}} Tango Server CPU Usage in % </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}CpuUsageStatusInfo" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}CpuUsageStatusInfo">
+			<Description> {{server}} Tango Server CPU Usage in % </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+
+		<!-- Overall CPU Load -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_cpu_load_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_cpu_load_srv_name}}">
+			<Description> LMC Server Overall CPU Load (5/10/15 minute load) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_cpu_load_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_cpu_load_srv_name}}Info">
+			<Description> LMC Server Overall CPU Load (5/10/15 minute load) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- Swap Space -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_swap_space_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_swap_space_srv_name}}">
+			<Description> LMC Server Swap Space (left in %) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_swap_space_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_swap_space_srv_name}}Info">
+			<Description> LMC Server Swap Space info (left in %) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- SSH -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ssh_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ssh_srv_name}}">
+			<Description> LMC Server SSH check </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ssh_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ssh_srv_name}}Info">
+			<Description> LMC Server SSH check info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- Sensor Status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_sensors_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_sensors_srv_name}}">
+			<Description> LMC Server Integrated Hardware Sensor status (using lm_sensors) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_sensors_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_sensors_srv_name}}Info">
+			<Description> LMC Server Integrated Hardware Sensor status info (using lm_sensors) </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+
+		<!-- LMC Servers Process Status -->
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}ProcessStatus" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}ProcessStatus">
+			<Description> {{server}} Tango Server Process Status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+
+		{% for server in nagios_monitored_tango_servers %}
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}ProcessStatusInfo" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{server}}ProcessStatusInfo">
+			<Description> {{server}} Tango Server Process Status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		{% endfor %}
+		
+		<!-- TangoDB Service Status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_tangodb_status_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_tangodb_status_srv_name}}">
+			<Description> TangoDB process status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_tangodb_status_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_tangodb_status_srv_name}}Info">
+			<Description> TangoDB process status info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- rsyslog Service Status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_rsyslog_status_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_rsyslog_status_srv_name}}">
+			<Description> Rsyslog daemon process status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_rsyslog_status_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_rsyslog_status_srv_name}}Info">
+			<Description> Rsyslog daemon process status info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<!-- MySQL Service Status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_mysql_status_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_mysql_status_srv_name}}">
+			<Description> MySQL daemon process status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_mysql_status_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_mysql_status_srv_name}}Info">
+			<Description> MySQL daemon process status info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+
+
+		<!-- NTP Service Status -->
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ntp_status_srv_name}}" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ntp_status_srv_name}}">
+			<Description> NTP daemon process status </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ntp_status_srv_name}}Info" alias="{{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ntp_status_srv_name}}Info">
+			<Description> NTP daemon process status info </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ </RWType>	
+			<DimX> 3 </DimX>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+		</Attribute>
+		
+		<!-- ************************************************** -->
+		<!-- **      Modes and States Attributes                -->
+		<!-- ************************************************** -->
+		<!-- DSManager/DSEmulator -->
+		<Attribute name = "dsManagerHealthState" alias="dsManagerHealthState">
+			<Description> DSManager health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if ds_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if ds_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> dsManagerRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{dsmgr_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{dsmgr_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{dsmgr_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<!-- DishManager -->
+		<Attribute name = "dishManagerHealthState" alias="dishManagerHealthState">
+			<Description> DishManager health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if dshmgr_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if dshmgr_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> dishManagerRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_master_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_master_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_master_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+		<!-- ElementLogger -->
+		<Attribute name = "elementLoggerHealthState" alias="elementLoggerHealthState">
+			<Description> ElementLogger health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if lmclogger_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if lmclogger_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> elementLoggerRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_logger_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_logger_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_logger_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+
+		<!-- AlarmHandler -->
+		<Attribute name = "alarmHandlerHealthState" alias="alarmHandlerHealthState">
+			<Description> AlarmHandler health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if alarmhandler_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if alarmhandler_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> alarmHandlerRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_alarm_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_alarm_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_alarm_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+	
+		<!-- LMCStarter -->
+		<Attribute name = "lmcStarterHealthState" alias="lmcStarterHealthState">
+			<Description> LMCStarter health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if lmcstarter_enabled_in_config | bool %}	
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if lmcstarter_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> lmcStarterRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_starter_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_starter_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{lmc_starter_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+
+
+
+		<!-- SPF Archiver -->
+		<Attribute name = "spfArchiverHealthState" alias="spfArchiverHealthState">
+			<Description> SPF Archiver health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if archiver_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> spfArchiverRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<!-- SPFRx Archiver -->
+		<Attribute name = "rxArchiverHealthState" alias="rxArchiverHealthState">
+			<Description> SPFRx Archiver health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if archiver_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> rxArchiverRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+
+		<!-- DS Archiver -->
+		<Attribute name = "dsArchiverHealthState" alias="dsArchiverHealthState">
+			<Description> DS Archiver health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if archiver_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> dsArchiverRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<!-- LMC Archiver -->
+		<Attribute name = "lmcArchiverHealthState" alias="lmcArchiverHealthState">
+			<Description> LMC Archiver health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if archiver_enabled_in_config | bool and archiver_lmc_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+			</Value>
+
+			{% if archiver_enabled_in_config | bool and archiver_lmc_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> lmcArchiverRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{archiver_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<!-- PDUManager -->
+		<Attribute name = "pduManagerHealthState" alias="pduManagerHealthState">
+			<Description> PDU Manager health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				{% if pdu_enabled_in_config | bool %}
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+				{% else %}
+				<InitValue> NOT-FITTED </InitValue>
+				<SafeValue> NOT-FITTED </SafeValue>
+				{% endif %}
+			</Value>
+
+			{% if pdu_enabled_in_config | bool %}	
+			<Formula>
+				<Expression> 
+					/* == Handle UNKNOWN case == */
+					if( runStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle ONLINE case == */
+					if( runStatus=='ONLINE' and (cpuLoad=='OK' and memUsed=='OK' and procStatus=='OK') )
+					{
+						res:= 'OK';
+						return [0];
+					};	
+					if( runStatus=='ONLINE' and (cpuLoad=='CRITICAL' or memUsed=='CRITICAL' or procStatus=='CRITICAL') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+					if( runStatus=='ONLINE' and (cpuLoad=='WARNING' or memUsed=='WARNING' or procStatus=='WARNING') )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle SOFT-OFFLINE case == */
+					if( runStatus=='SOFT-OFFLINE' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle HARD-OFFLINE case == */
+					if( runStatus=='HARD-OFFLINE' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> runStatus </Label>	
+						<Value> pduManagerRunStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{pdumgr_server_name}}CpuUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> memUsed </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{pdumgr_server_name}}MemUsageStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> procStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{pdumgr_server_name}}ProcessStatus </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<!-- LMC control system servers health state -->
+		<Attribute name = "lmcCSServerHealthState" alias="lmcCSServerHealthState">
+			<Description> LMC Control System server health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value> 
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			<Formula>
+				<Expression> 
+					/* == Handle FAILED case == */
+					if( ds=='FAILED' or dshmgr=='FAILED' or logger=='FAILED' or alarm=='FAILED' or starter=='FAILED' or spfArc=='FAILED' or rxArc=='FAILED' or dsArc=='FAILED' or lmcArc=='FAILED' or pdu=='FAILED' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+
+					/* == Handle UNKNOWN case == */
+					if( ds=='UNKNOWN' or dshmgr=='UNKNOWN' or logger=='UNKNOWN' or alarm=='UNKNOWN' or starter=='UNKNOWN' or spfArc=='UNKNOWN' or rxArc=='UNKNOWN' or dsArc=='UNKNOWN' or lmcArc=='UNKNOWN' or pdu=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle DEGRADED case == */
+					if( ds=='DEGRADED' or dshmgr=='DEGRADED' or logger=='DEGRADED' or alarm=='DEGRADED' or starter=='DEGRADED' or spfArc=='DEGRADED' or rxArc=='DEGRADED' or dsArc=='DEGRADED' or lmcArc=='DEGRADED' or pdu=='DEGRADED' )
+					{
+						res:= 'OK';
+						return [0];
+					};
+
+					/* == Handle OK case == */
+					if( (ds=='OK' or ds=='NOT-FITTED') and (dshmgr=='OK' or dshmgr=='NOT-FITTED') and (logger=='OK' or logger=='NOT-FITTED') and (alarm=='OK' or alarm=='NOT-FITTED') and (starter=='OK' or starter=='NOT-FITTED') and (spfArc=='OK' or spfArc=='NOT-FITTED') and (rxArc=='OK' or rxArc=='NOT-FITTED') and (dsArc=='OK' or dsArc=='NOT-FITTED') and (lmcArc=='OK' or lmcArc=='NOT-FITTED') and (pdu=='OK' or pdu=='NOT-FITTED') )
+					{
+						res:= 'OK';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> ds </Label>	
+						<Value> dsManagerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr </Label>	
+						<Value> dishManagerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> logger </Label>	
+						<Value> elementLoggerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarm </Label>	
+						<Value> alarmHandlerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> starter </Label>	
+						<Value> lmcStarterHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> spfArc </Label>	
+						<Value> spfArchiverHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> rxArc </Label>	
+						<Value> rxArchiverHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dsArc </Label>	
+						<Value> dsArchiverHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcArc </Label>	
+						<Value> lmcArchiverHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> pdu </Label>	
+						<Value> pduManagerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+				</FormulaVars>
+		
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+		
+		</Attribute>
+
+		<!-- LMC software services health state -->
+		<Attribute name = "lmcServicesHealthState" alias="lmcServicesHealthState">
+			<Description> LMC software services health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			<Formula>
+				<Expression> 
+					/* == Handle FAILED case == */
+					if( tangoDBStatus=='CRITICAL' or rsyslogStatus=='CRITICAL' or mysqlStatus=='CRITICAL' or ntpStatus=='CRITICAL')
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+
+					/* == Handle UNKNOWN case == */
+					if( tangoDBStatus=='UNKNOWN' or rsyslogStatus=='UNKNOWN' or mysqlStatus=='UNKNOWN' or ntpStatus=='UNKNOWN')
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle DEGRADED case == */
+					if( tangoDBStatus=='WARNING' or rsyslogStatus=='WARNING' or mysqlStatus=='WARNING' or ntpStatus=='WARNING')
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle OK case == */
+					if( tangoDBStatus=='OK' and rsyslogStatus=='OK' and mysqlStatus=='OK' and ntpStatus=='OK')
+					{
+						res:= 'OK';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> tangoDBStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_tangodb_status_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> rsyslogStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_rsyslog_status_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>		
+					<FormulaVar>
+						<Label> mysqlStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_mysql_status_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+					<FormulaVar>
+						<Label> ntpStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_ntp_status_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>		
+				</FormulaVars>
+		
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+		
+		</Attribute>
+
+
+
+		<!-- LMC server health state -->
+		<Attribute name = "lmcServerHealthState" alias="lmcServerHealthState">
+			<Description> LMC server health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value> <!-- NOT USED -->
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			<Formula>
+				<Expression> 
+					/* == Handle FAILED case == */
+					if( diskSpace=='FAILED' or cpuLoad=='FAILED' or swapSpace=='FAILED' or sensorStatus=='FAILED' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+
+					/* == Handle UNKNOWN case == */
+					if( diskSpace=='UNKNOWN' or cpuLoad=='UNKNOWN' or swapSpace=='UNKNOWN' or sensorStatus=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+
+					/* == Handle OK case == */
+					if( diskSpace=='OK' and cpuLoad=='OK' and swapSpace=='OK' and sensorStatus=='OK' )
+					{
+						res:= 'OK';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+					<FormulaVar>
+						<Label> diskSpace </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_disk_space_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> cpuLoad </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_cpu_load_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>		
+					<FormulaVar>
+						<Label> swapSpace </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_swap_space_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>		
+					<FormulaVar>
+						<Label> sensorStatus </Label>	
+						<Value> {{lmc_server_nagios_name|camelize|decapitalize}}{{nagios_sensors_srv_name}} </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STRING </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+				</FormulaVars>
+		
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+		</Attribute>
+
+
+
+		<!-- Overall LMC Health State -->
+		<Attribute name = "lmcHealthState" alias="lmcHealthState">
+			<Description> LMC health state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> OK </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+				<Value> NOT-FITTED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			<Formula>
+				<Expression> 
+					/* == Handle FAILED case == */
+					if( lmcServices=='FAILED' or lmcCSServer=='FAILED' or lmcServer=='FAILED' )
+					{
+						res:= 'FAILED';
+						return [0];
+					};
+
+					/* == Handle UNKNOWN case == */
+					if( lmcServices=='UNKNOWN' or lmcCSServer=='UNKNOWN' or lmcServer=='UNKNOWN' )
+					{
+						res:= 'UNKNOWN';
+						return [0];
+					};
+						
+			
+					/* == Handle DEGRADED case == */
+					if( lmcServices=='DEGRADED' or lmcCSServer=='DEGRADED' or lmcServer=='DEGRADED' )
+					{
+						res:= 'DEGRADED';
+						return [0];
+					};
+
+					/* == Handle OK case == */
+					if( (lmcServices=='OK' or lmcServices=='NOT-FITTED') and (lmcCSServer=='OK' or lmcCSServer=='NOT-FITTED') and (lmcServer=='OK' or lmcServer=='NOT-FITTED') )
+					{
+						res:= 'OK';
+						return [0];
+					};
+					
+					res:= 'UNKNOWN';
+					return [-1];
+				</Expression>
+		
+				<FormulaVars>
+
+					<FormulaVar>
+						<Label> lmcServices </Label>	
+						<Value> lmcServicesHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+
+					<FormulaVar>
+						<Label> lmcCSServer </Label>	
+						<Value> lmcCSServerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+
+					<FormulaVar>
+						<Label> lmcServer </Label>	
+						<Value> lmcServerHealthState </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> ENUM </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+							
+				</FormulaVars>
+		
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+		</Attribute>
+
+		
+		<!-- LMC state -->
+		<Attribute name = "lmcState" alias="lmcState">
+			<Description> LMC Control System state </Description>
+			<DataType> STATE </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ </RWType>	
+			<Polling> 
+				<Period> {{lmcmon_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmcmon_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmcmon_default_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+				<SafeValue> UNKNOWN </SafeValue>
+			</Value>
+
+			{% if ds_enabled_in_config | bool and dshmgr_enabled_in_config | bool and lmclogger_enabled_in_config | bool and alarmhandler_enabled_in_config | bool and lmcstarter_enabled_in_config | bool and archiver_enabled_in_config | bool and pdu_enabled_in_config | bool %}
+			<Formula>
+				<Expression>
+
+					/* Handle FAULT case */
+					if( ds==FAULT or dshmgr==FAULT or logger==FAULT or alarm==FAULT or starter==FAULT or pdu==FAULT or spfArc==FAULT or rxArc==FAULT or dsArc==FAULT or lmcArc==FAULT)
+					{
+						res:= FAULT;
+						return [0];
+					};
+
+					/* Handle ALARM case */
+					if( ds==ALARM or dshmgr==ALARM or logger==ALARM or alarm==ALARM or starter==ALARM or pdu==ALARM or spfArc==ALARM or rxArc==ALARM or dsArc==ALARM or lmcArc==ALARM)
+					{
+						res:= ALARM;
+						return [0];
+					};
+
+					/* Handle UNKNOWN case */
+					if( ds==UNKNOWN or dshmgr==UNKNOWN or logger==UNKNOWN or alarm==UNKNOWN or starter==UNKNOWN or pdu==UNKNOWN or spfArc==UNKNOWN or rxArc==UNKNOWN or dsArc==UNKNOWN or lmcArc==UNKNOWN)
+					{
+						res:= UNKNOWN;
+						return [0];
+					};
+
+					
+					/* Handle INIT case */
+					if( ds==INIT and dshmgr==INIT and logger==INIT and alarm==INIT and starter==INIT and pdu==INIT and spfArc==INIT and rxArc==INIT and dsArc==INIT and lmcArc==INIT)
+					{
+						res:= INIT;
+						return [0];
+					};
+					/* Handle transient INIT case */
+					if( ds==INIT and (dshmgr==ON or dshmgr==INIT) and (logger==ON or logger==INIT) and (alarm==ON or alarm==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					if( dshmgr==INIT and (ds==ON or ds==INIT) and (logger==ON or logger==INIT) and (alarm==ON or alarm==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					if( logger==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					if( alarm==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+
+					if( starter==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+
+
+					if( pdu==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+
+					if( spfArc==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+
+					if( rxArc==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (dsArc==ON or dsArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					if( dsArc==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (lmcArc==ON or lmcArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					if( lmcArc==INIT and (dshmgr==ON or dshmgr==INIT) and (ds==ON or ds==INIT) and (alarm==ON or alarm==INIT) and (logger==ON or logger==INIT) and (starter==ON or starter==INIT) and (pdu==ON or pdu==INIT) and (spfArc==ON or spfArc==INIT) and (rxArc==ON or rxArc==INIT) and (dsArc==ON or dsArc==INIT) )
+					{
+						res:= INIT;
+						return [0];
+					};
+					
+					/* Handle ON case */
+					if( ds==ON and dshmgr==ON and logger==ON and alarm==ON and starter==ON and pdu==ON and spfArc==ON and rxArc==ON and dsArc==ON and lmcArc==ON)
+					{
+						res:= ON;
+						return [0];
+					};
+
+					res:= UNKNOWN;
+					return [-1];
+				</Expression>
+
+				<FormulaVars>
+					
+					<FormulaVar>
+						<Label> ds </Label>	
+						<Value> {{ds_manager}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					
+					<FormulaVar>
+						<Label> dshmgr </Label>	
+						<Value> {{lmc_master}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+
+					<FormulaVar>
+						<Label> logger </Label>	
+						<Value> {{lmc_logger}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+
+					<FormulaVar>
+						<Label> alarm </Label>	
+						<Value> {{alarm_handler}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> starter </Label>	
+						<Value> {{lmc_starter}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> pdu </Label>	
+						<Value> {{pdu_manager}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> spfArc </Label>	
+						<Value> {{archiver_spf}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> rxArc </Label>	
+						<Value> {{archiver_rx}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> dsArc </Label>	
+						<Value> {{archiver_ds}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>	
+
+					<FormulaVar>
+						<Label> lmcArc </Label>	
+						<Value> {{archiver_lmc}}/State </Value>
+						<InitDataValue> UNKNOWN </InitDataValue> 
+						<ExpDataType> STATE </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>	
+
+		<!-- Test mode -->
+		<Attribute name = "testMode" alias="testMode">	
+			<Description> Enable/disable test mode </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{rx_very_slow_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{rx_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{rx_very_very_slow_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+
+
+	</Attributes>
+	
+</DeviceConfiguration>

@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            LMC ARCHIVER CONFIGURATION           -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{archiver_lmc_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{archiver_lmc_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{archiver_lmc_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{archiver_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{archiver_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{archiver_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{archiver_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{archiver_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{archiver_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{archiver_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{archiver_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{archiver_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{archiver_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{archiver_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{archiver_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{archiver_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{archiver_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{archiver_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{archiver_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{archiver_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{archiver_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{archiver_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{archiver_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{archiver_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{archiver_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{archiver_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{archiver_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->		
+		<DeviceProperty name="LibConfiguration">
+			<Value> host={{archiver_db_host}} </Value>
+			<Value> user={{archiver_db_user}} </Value>
+			<Value> password={{archiver_db_user_password}} </Value>
+			<Value> dbname={{archiver_db_name}} </Value>
+			<Value> port={{archiver_db_port}} </Value>
+			<Value> libname={{archiver_db_lib}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SubscribeRetryPeriod">
+			<Value> {{archiver_subscribe_retry_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatisticsTimeWindow">
+			<Value> {{archiver_stats_time_window}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="CheckPeriodicTimeoutDelay">
+			<Value> {{archiver_periodic_timeout_delay}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ContextsList">
+			<Value> ALWAYS:always stored </Value>
+			<Value> RUN:stored during run </Value>
+			<Value> SHUTDOWN:stored during shutdown </Value>
+			<Value> SERVICE:stored during maintenance activities </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DefaultStrategy">
+			<Value> {{archiver_default_strategy}} </Value>
+		</DeviceProperty>
+		
+		<!--
+		<DeviceProperty name="AttributeList">
+			<Value>  </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+	</Attributes>
+	-->
+
+	<!-- ************************************************** -->
+	<!-- **              ARCHIVED ATTRS                     -->
+	<!-- ************************************************** -->
+	{% if dshmgr_enabled_in_config | bool or alarmhandler_enabled_in_config | bool or lmclogger_enabled_in_config | bool or lmcstarter_enabled_in_config | bool or lmcmon_enabled_in_config | bool %}
+	<ArchivedAttributes>
+
+		<!-- ************************************************** -->
+		<!-- **      Dish Modes and States Attributes           -->
+		<!-- ************************************************** -->
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/dishMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/dishState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/powerState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}			
+		<!--
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/pointingState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		-->
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/controlMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/elementType </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/adminMode </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/healthState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/simulatedFlag </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/b1CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}	
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/b2CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/b3CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/b4CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/b5CapabilityState </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/requestedBand </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/configuredBand </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		
+		<!-- ************************************************** -->
+		<!-- **      DISH TASK PROGRESS ATTRIBUTES              -->
+		<!-- ************************************************** -->
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/setStowModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool and spf_enabled_in_config | bool and rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/setStandbyLPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool and spf_enabled_in_config | bool and rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/setStandbyFPModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool and spf_enabled_in_config | bool and rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/setMaintenanceModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool and spf_enabled_in_config | bool and rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/setOperateModeProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if dshmgr_enabled_in_config | bool and ds_enabled_in_config | bool and spf_enabled_in_config | bool and rx_enabled_in_config | bool %}		
+		<ArchivedAttribute>
+			<Name> {{lmc_master}}/configureBandProgress </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+
+		<!-- ************************************************** -->
+		<!-- **      PROXY MONITORING STATUS                    -->
+		<!-- ************************************************** -->
+		
+		{% if lmcmon_enabled_in_config | bool and rx_enabled_in_config | bool %}
+		<!-- RxController proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = rx_controller.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and spf_enabled_in_config | bool %}
+		<!-- SPFController proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = spf_controller.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and ds_enabled_in_config | bool %}
+		<!-- DSManager proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = ds_manager.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if lmcmon_enabled_in_config | bool and dshmgr_enabled_in_config | bool %}
+		<!-- DishManager proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = lmc_master.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and lmclogger_enabled_in_config | bool %}
+		<!-- ElementLogger proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = lmc_logger.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and alarmhandler_enabled_in_config | bool %}
+		<!-- AlarmHandler proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = alarm_handler.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and archiver_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}
+		<!-- SPF Archiver proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = archiver_spf.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and archiver_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}
+		<!-- Rx Archiver proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = archiver_rx.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+		
+		{% if lmcmon_enabled_in_config | bool and archiver_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}
+		<!-- DS Archiver proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = archiver_ds.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		{% if lmcmon_enabled_in_config | bool and archiver_enabled_in_config | bool and archiver_lmc_enabled_in_config | bool %}
+		<!-- LMC Archiver proxy monitoring -->
+		<ArchivedAttribute>
+			{% set name_list = archiver_lmc.split('/') %}
+			<Name> {{lmc_monitor}}/proxyRunStatus_{{ name_list[3] }}_{{ name_list[4] }}_{{ name_list[5] }} </Name>
+			<Strategies> 
+				<Strategy> {{archiver_default_strategy}} </Strategy>
+			</Strategies>
+			<TimeToLive> {{archiver_default_ttl}} </TimeToLive> 
+			<EnabledAtStartup> 1 </EnabledAtStartup> 
+		</ArchivedAttribute>
+		{% endif %}
+
+		<!-- ************************************************** -->
+		<!-- **      ALARMS & ALERTS                            -->
+		<!-- ************************************************** -->
+
+	
+	</ArchivedAttributes>
+	{% endif %}
+
+</DeviceConfiguration>
+

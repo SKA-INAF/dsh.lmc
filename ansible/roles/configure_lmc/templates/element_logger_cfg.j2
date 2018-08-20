@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            ELEMENT LOGGER                       -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{lmclogger_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{lmclogger_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{lmclogger_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{lmclogger_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{lmclogger_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{lmclogger_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{lmclogger_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{lmclogger_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{lmclogger_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{lmclogger_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{lmclogger_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{lmclogger_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{lmclogger_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{lmclogger_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{lmclogger_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{lmclogger_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{lmclogger_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{lmclogger_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{lmclogger_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{lmclogger_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{lmclogger_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{lmclogger_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{lmclogger_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{lmclogger_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{lmclogger_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{lmclogger_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{lmclogger_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->
+		<DeviceProperty name="SELogLevel">
+			<Value> {{lmclogger_se_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableLogForwardDefault">
+			<Value> {{lmclogger_enable_log_forwarding}} </Value>
+		</DeviceProperty>
+
+		{% if spf_enabled_in_config | bool or rx_enabled_in_config | bool %}
+		<DeviceProperty name="LogForwardSources">
+			<!-- SPF device sources-->
+			{% if spf_enabled_in_config | bool %}
+			<Value> {{spf_controller}} </Value>
+			<Value> {{spf_helium}} </Value>
+			<Value> {{spf_vacuum}} </Value>
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and spf_enable_b1_in_config | bool %}
+			<Value> {{spf_B1}} </Value>	
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and spf_enable_b1_in_config | bool %}
+			<Value> {{spf_B2}} </Value>	
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and (spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool) %}
+			<Value> {{spf_B345}} </Value>	
+			{% endif %}
+
+			<!-- Rx device sources-->
+			{% if rx_enabled_in_config | bool %}
+			<Value> {{rx_controller}} </Value>
+			{% endif %}
+
+			<!-- DS device sources-->
+			{% if ds_enabled_in_config | bool %}
+			<!-- <Value> {{ds_manager}} </Value>-->
+			{% endif %}
+	
+			<!-- LMC device sources-->
+			{% if pdu_enabled_in_config | bool %}
+			<Value> {{pdu_manager}} </Value>
+			{% endif %}
+			
+		</DeviceProperty>
+		{% endif %}
+
+		{% if ds_enabled_in_config | bool or dshmgr_enabled_in_config | bool or lmcmon_enabled_in_config | bool or alarmhandler_enabled_in_config | bool %}
+		<DeviceProperty name="ManagedLogDevicesDefault">
+			{% if ds_enabled_in_config | bool %}
+			<Value> {{ds_manager}} </Value>
+			{% endif %}
+	
+			{% if dshmgr_enabled_in_config | bool %}
+			<Value> {{lmc_master}} </Value>
+			{% endif %}
+
+			{% if lmcmon_enabled_in_config | bool %}
+			<Value> {{lmc_monitor}} </Value>
+			{% endif %}
+
+			{% if alarmhandler_enabled_in_config | bool %}
+			<Value> {{alarm_handler}} </Value>
+			{% endif %}
+
+			{% if archiver_lmc_enabled_in_config | bool %}
+			<Value> {{archiver_lmc}} </Value>
+			{% endif %}
+			{% if ds_enabled_in_config | bool and archiver_ds_enabled_in_config | bool %}
+			<Value> {{archiver_ds}} </Value>
+			{% endif %}
+			{% if spf_enabled_in_config | bool and archiver_spf_enabled_in_config | bool %}
+			<Value> {{archiver_spf}} </Value>
+			{% endif %}
+			{% if rx_enabled_in_config | bool and archiver_rx_enabled_in_config | bool %}
+			<Value> {{archiver_rx}} </Value>
+			{% endif %}
+
+			{% if pdu_enabled_in_config | bool %}
+			<Value> {{pdu_manager}} </Value>
+			{% endif %}
+
+		</DeviceProperty>
+		{% endif %}
+
+		{% if spf_enabled_in_config | bool or rx_enabled_in_config | bool %}
+		<DeviceProperty name="ManagedSELogDevicesDefault">
+			{% if spf_enabled_in_config | bool %}
+			<Value> {{spf_controller}} </Value>
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and spf_enable_b1_in_config | bool %}
+			<Value> {{spf_B1}} </Value>	
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and spf_enable_b2_in_config | bool %}
+			<Value> {{spf_B2}} </Value>	
+			{% endif %}
+
+			{% if spf_enabled_in_config | bool and (spf_enable_b3_in_config | bool or spf_enable_b4_in_config | bool or spf_enable_b5_in_config | bool) %}
+			<Value> {{spf_B345}} </Value>	
+			{% endif %}
+
+			{% if rx_enabled_in_config | bool %}
+			<Value> {{rx_controller}} </Value>
+			{% endif %}
+		</DeviceProperty>
+		{% endif %}
+
+		<DeviceProperty name="RxControllerAddress">
+			<Value> {{rx_controller}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SpfControllerAddress">
+			<Value> {{spf_controller}}  </Value>
+		</DeviceProperty>
+
+	</DeviceProperties>
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<Attributes>
+		
+		<Attribute name = "enableLogForward" alias="enableLogForward">	
+			<Description> Enable log forwarding </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	 	
+			<Memorized>  </Memorized>
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "logDevices" alias="logDevices">			
+			<Description> Log devices </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat>
+			<RWType> READ </RWType>	
+			<DimX> 100 </DimX> 	
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue>  </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "managedLogDevices" alias="managedLogDevices">			
+			<Description> Managed log devices </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat>
+			<RWType> READ </RWType>	
+			<DimX> 100 </DimX> 	
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue>  </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "managedSELogDevices" alias="managedSELogDevices">			
+			<Description> Managed Sub-Element log devices </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat>
+			<RWType> READ </RWType>	
+			<DimX> 100 </DimX> 	
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue>  </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "logSEDevices" alias="logSEDevices">			
+			<Description> Log devices </Description>
+			<DataType> STRING </DataType>
+			<DataFormat> SPECTRUM </DataFormat>
+			<RWType> READ </RWType>	
+			<DimX> 100 </DimX> 	
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue>  </InitValue>
+			</Value>
+		</Attribute>
+
+	
+	<Attribute name = "elementLogLevel" alias="elementLogLevel">
+			<Description> Rolled-up Element log level </Description>
+			<DataType> LONG </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ </RWType>
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>		
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+
+			{% if ds_enabled_in_config | bool and dshmgr_enabled_in_config | bool and lmcmon_enabled_in_config | bool and alarmhandler_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Log level is the max of all logging levels == */
+					res:= max(dsmgr*dsmgr_enabled,dshmgr*dshmgr_enabled,lmcmon*lmcmon_enabled,alarms*alarms_enabled);
+					return [-1];
+				</Expression>
+				
+				<FormulaVars>
+					<FormulaVar>
+						<Label> dsmgr_enabled </Label>	
+						<Value> {{ds_manager}}/elementLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dsmgr </Label>	
+						<Value> {{ds_manager}}/loggingLevelElement </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr_enabled </Label>	
+						<Value> {{lmc_master}}/elementLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr </Label>	
+						<Value> {{lmc_master}}/loggingLevelElement </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon_enabled </Label>	
+						<Value> {{lmc_monitor}}/elementLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon </Label>	
+						<Value> {{lmc_monitor}}/loggingLevelElement </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms_enabled </Label>	
+						<Value> {{alarm_handler}}/elementLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms </Label>	
+						<Value> {{alarm_handler}}/loggingLevelElement </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+
+		<Attribute name = "centralLogLevel" alias="centralLogLevel">
+			<Description> Rolled-up Central log level </Description>
+			<DataType> LONG </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ </RWType>
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>		
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+
+			{% if ds_enabled_in_config | bool and dshmgr_enabled_in_config | bool and lmcmon_enabled_in_config | bool and alarmhandler_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Log level is the max of all logging levels == */
+					res:= max(dsmgr*dsmgr_enabled,dshmgr*dshmgr_enabled,lmcmon*lmcmon_enabled,alarms*alarms_enabled);
+					return [-1];
+				</Expression>
+				
+				<FormulaVars>
+					<FormulaVar>
+						<Label> dsmgr_enabled </Label>	
+						<Value> {{ds_manager}}/centralLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dsmgr </Label>	
+						<Value> {{ds_manager}}/loggingLevelCentral </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr_enabled </Label>	
+						<Value> {{lmc_master}}/centralLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr </Label>	
+						<Value> {{lmc_master}}/loggingLevelCentral </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon_enabled </Label>	
+						<Value> {{lmc_monitor}}/centralLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon </Label>	
+						<Value> {{lmc_monitor}}/loggingLevelCentral </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms_enabled </Label>	
+						<Value> {{alarm_handler}}/centralLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms </Label>	
+						<Value> {{alarm_handler}}/loggingLevelCentral </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+
+		<Attribute name = "storageLogLevel" alias="storageLogLevel">
+			<Description> Rolled-up storage log level </Description>
+			<DataType> LONG </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ </RWType>
+			<Polling> 
+				<Period> {{lmclogger_medium_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{lmclogger_medium_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{lmclogger_medium_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>		
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+
+			{% if ds_enabled_in_config | bool and dshmgr_enabled_in_config | bool and lmcmon_enabled_in_config | bool and alarmhandler_enabled_in_config | bool %}
+			<Formula>
+				<Expression> 
+					/* == Log level is the max of all logging levels == */
+					res:= max(dsmgr*dsmgr_enabled,dshmgr*dshmgr_enabled,lmcmon*lmcmon_enabled,alarms*alarms_enabled);
+					return [-1];
+				</Expression>
+				
+				<FormulaVars>
+					<FormulaVar>
+						<Label> dsmgr_enabled </Label>	
+						<Value> {{ds_manager}}/storageLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dsmgr </Label>	
+						<Value> {{ds_manager}}/loggingLevelStorage </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr_enabled </Label>	
+						<Value> {{lmc_master}}/storageLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> dshmgr </Label>	
+						<Value> {{lmc_master}}/loggingLevelStorage </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon_enabled </Label>	
+						<Value> {{lmc_monitor}}/storageLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> lmcmon </Label>	
+						<Value> {{lmc_monitor}}/loggingLevelStorage </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms_enabled </Label>	
+						<Value> {{alarm_handler}}/storageLoggerEnabled </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> BOOL </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+					<FormulaVar>
+						<Label> alarms </Label>	
+						<Value> {{alarm_handler}}/loggingLevelStorage </Value>
+						<InitDataValue> 0 </InitDataValue> 
+						<ExpDataType> LONG </ExpDataType>
+						<ExpDataFormat> SCALAR </ExpDataFormat>
+					</FormulaVar>
+				</FormulaVars>
+
+				<EvaluationMode>
+					<Value> CHANGE </Value>
+					<Value> PERIODIC </Value>
+					<Value> USER </Value>
+				</EvaluationMode>
+			</Formula>
+			{% endif %}
+		</Attribute>
+
+	</Attributes>
+			
+
+</DeviceConfiguration>
+
+
+	

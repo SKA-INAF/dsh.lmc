@@ -1,0 +1,33 @@
+
+{{lmc_tango_syslog_dir}}/{{alarmhandler_log_file}} {
+	# Rotate log file daily
+	daily
+
+	# Rotate log file if bigger than 100 MB
+	maxsize {{lmc_log_file_min_rotate_size}}
+
+	# Remove log file after 3 rotations
+	rotate {{lmc_log_file_nrotations}}
+	
+	# Enable log file compression    
+	compress
+
+	# Compress file on the next rotation
+  delaycompress
+
+	# Create a new log file after rotation
+  # create
+	# copytruncate
+
+	# Do not throw an error when the log file is not there.
+	missingok
+    
+	# Do not rotate the log if it is empty
+	notifempty
+
+	# Action to be performed after rotation
+	postrotate
+		## invoke-rc.d rsyslog rotate > /dev/null ## Ubuntu16
+		/etc/init.d/rsyslog rotate > /dev/null  ## Ubuntu 14
+	endscript
+}

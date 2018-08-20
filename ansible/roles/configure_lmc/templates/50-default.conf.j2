@@ -1,0 +1,136 @@
+#  Default rules for rsyslog.
+#
+#			For more information see rsyslog.conf(5) and /etc/rsyslog.conf
+
+#
+# First some standard log files.  Log by facility.
+#
+auth,authpriv.*			/var/log/auth.log
+*.*;{{syslog_facility}}.none;auth,authpriv.none		-/var/log/syslog
+#cron.*				/var/log/cron.log
+#daemon.*			-/var/log/daemon.log
+kern.*				-/var/log/kern.log
+#lpr.*				-/var/log/lpr.log
+mail.*				-/var/log/mail.log
+#user.*				-/var/log/user.log
+#{{syslog_facility}}.*			{{lmc_tango_syslog_dir}};TangoSysLogMsgFormatExt
+
+
+#
+# DSH LMC Logging Filters
+#
+## DS MANAGER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{ds_manager_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{dsmgr_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## DISH MANAGER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_master_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{dshmgr_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## LOGGER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_logger_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{lmclogger_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## ALARM HANDLER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{lmc_alarm_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{alarmhandler_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## LMC MONITOR
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{lmc_monitor_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{lmcmon_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## ARCHIVER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_lmc_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{archiver_lmc_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_spf_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{archiver_spf_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_rx_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{archiver_rx_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_device_family_name}}/{{archiver_ds_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{archiver_ds_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## LMC STARTER
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == 'tango/admin/{{ ansible_host }}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{lmcstarter_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+## PDU
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{pdu_manager_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{pdu_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+#
+# DSH Sub-Element Logging Filters
+#
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/spf/controller:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{spf_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/spfrx/controller:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{rx_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+if ($syslogfacility-text == '{{syslog_facility}}' and $syslogtag == '{{lmc_domain_name}}/{{lmc_internal_device_family_name}}/{{ds_emulator_device_name}}:') then {
+	action(type="omfile" file="{{lmc_tango_syslog_dir}}/{{ds_log_file}}" fileOwner="{{rsyslog_file_owner}}" fileGroup="{{rsyslog_file_group}}" template="TangoSysLogMsgFormatExt")
+}
+
+#
+# Logging for the mail system.  Split it up so that
+# it is easy to write scripts to parse these files.
+#
+#mail.info			-/var/log/mail.info
+#mail.warn			-/var/log/mail.warn
+mail.err			/var/log/mail.err
+
+#
+# Logging for INN news system.
+#
+news.crit			/var/log/news/news.crit
+news.err			/var/log/news/news.err
+news.notice			-/var/log/news/news.notice
+
+
+#
+# Some "catch-all" log files.
+#
+#*.=debug;\
+#	auth,authpriv.none;\
+#	news.none;mail.none	-/var/log/debug
+#*.=info;*.=notice;*.=warn;\
+#	auth,authpriv.none;\
+#	cron,daemon.none;\
+#	mail,news.none		-/var/log/messages
+
+#
+# Emergencies are sent to everybody logged in.
+#
+*.emerg                                :omusrmsg:*
+
+#
+# I like to have messages displayed on the console, but only on a virtual
+# console I usually leave idle.
+#
+#daemon,mail.*;\
+#	news.=crit;news.=err;news.=notice;\
+#	*.=debug;*.=info;\
+#	*.=notice;*.=warn	/dev/tty8
+
+# The named pipe /dev/xconsole is for the `xconsole' utility.  To use it,
+# you must invoke `xconsole' with the `-file' option:
+#
+#    $ xconsole -file /dev/xconsole [...]
+#
+# NOTE: adjust the list below, or you'll go crazy if you have a reasonably
+#      busy site..
+#
+daemon.*;mail.*;\
+	news.err;\
+	*.=debug;*.=info;\
+	*.=notice;*.=warn	|/dev/xconsole

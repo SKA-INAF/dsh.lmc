@@ -1,0 +1,25 @@
+---
+
+- name: Restart rsyslog
+  become: yes
+  service:
+    name: "{{ rsyslog_service_name }}"
+    state: restarted
+  tags:
+    - rsyslog
+
+#- name: Reload logrotate
+#  become: yes
+#  shell: /usr/sbin/logrotate -v -f /etc/logrotate.d/lmc_logrotate.conf
+#  tags:
+#    - logrotate
+
+- name: Restart Nagios
+  become: yes
+  service:
+    name: "{{ nagios_service_name }}"
+    state: restarted
+  tags:
+    - Nagios
+
+...

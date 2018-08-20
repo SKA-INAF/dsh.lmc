@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE ControlSystem [
+<!ENTITY DSEmulatorConfig SYSTEM "{{ds_emulator_config.name}}">
+<!ENTITY RxEmulatorConfig SYSTEM "{{rx_emulator_config.name}}">
+<!ENTITY SPFEmulatorConfig SYSTEM "{{spf_emulator_config.name}}">
+<!ENTITY DSManagerConfig SYSTEM "{{ds_manager_config.name}}">
+<!ENTITY DishManagerConfig SYSTEM "{{dish_manager_config.name}}">
+<!ENTITY ElementLoggerConfig SYSTEM "{{element_logger_config.name}}">
+<!ENTITY LMCStarterConfig SYSTEM "{{lmc_starter_config.name}}">
+<!ENTITY AlarmHandlerConfig SYSTEM "{{alarm_handler_config.name}}">
+<!ENTITY LMCArchiverConfig SYSTEM "{{archiver_lmc_config.name}}">
+<!ENTITY SPFArchiverConfig SYSTEM "{{archiver_spf_config.name}}">
+<!ENTITY RxArchiverConfig SYSTEM "{{archiver_rx_config.name}}">
+<!ENTITY DSArchiverConfig SYSTEM "{{archiver_ds_config.name}}">
+<!ENTITY ArchiverCMConfig SYSTEM "{{archiver_cm_config.name}}">
+<!ENTITY LMCMonitorConfig SYSTEM "{{lmc_monitor_config.name}}">
+]>
+
+<ControlSystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   					 xsi:noNamespaceSchemaLocation='{{ lmc_config_dir }}/{{ lmc_config_schema_file }}'>
+	
+	<domain_name> {{lmc_domain_name}} </domain_name>
+	<host_name> {{ ansible_hostname }} </host_name>
+
+	<device_servers>
+
+		<!-- LMC DEVICES -->
+		
+		<!-- STARTER (name= tango/admin/HOSTNAME) -->
+		<server name="{{lmc_starter_server_name}}" instance="{{lmc_starter_server_instance}}">
+			<class name="{{lmc_starter_server_name}}"> 
+				<device domain="tango" family="admin" name="{{ ansible_hostname }}" alias="{{lmc_starter_alias}}">
+					&LMCStarterConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- ELEMENT MASTER (name= mid_dish_0001/elt/master) -->
+		<server name="{{lmc_master_server_name}}" instance="{{lmc_master_server_instance}}" startup_level="{{dshmgr_startup_level}}" astor_controlled="{{dshmgr_astor_controlled}}">
+			<class name="{{lmc_master_server_name}}"> 
+				<device family="{{lmc_device_family_name}}" name="{{lmc_master_device_name}}" alias="{{lmc_master_alias}}">
+					&DishManagerConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- ELEMENT LOGGER (name= mid_dish_0001/elt/logger) -->
+		<server name="{{lmc_logger_server_name}}" instance="{{lmc_logger_server_instance}}" startup_level="{{lmclogger_startup_level}}" astor_controlled="{{lmclogger_astor_controlled}}">
+			<class name="{{lmc_logger_server_name}}"> 
+				<device family="{{lmc_device_family_name}}" name="{{lmc_logger_device_name}}" alias="{{lmc_logger_alias}}">
+					&ElementLoggerConfig;
+				</device>
+			</class>
+		</server>
+
+
+		<!-- DS MANAGER (name= mid_dish_0001/lmc/ds_manager) -->
+		<server name="{{ds_manager_server_name}}" instance="{{ds_manager_server_instance}}" startup_level="{{dsmgr_startup_level}}" astor_controlled="{{dsmgr_astor_controlled}}">
+			<class name="{{ds_manager_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{ds_manager_device_name}}" alias="{{ds_manager_alias}}">
+					&DSManagerConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- PDU MANAGER (name= mid_dish_0001/lmc/pdu_manager) -->
+		<server name="{{pdu_manager_server_name}}" instance="{{pdu_manager_server_instance}}" startup_level="{{pdu_startup_level}}" astor_controlled="{{pdu_astor_controlled}}">
+			<class name="{{pdu_manager_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{pdu_manager_device_name}}" alias="{{pdu_manager_alias}}">
+					<!--&PDUManagerConfig;-->
+				</device>
+			</class>
+		</server>
+
+		<!-- LMC MONITOR (name= mid_dish_0001/lmc/lmc_monitor) -->
+		<server name="{{lmc_monitor_server_name}}" instance="{{lmc_monitor_server_instance}}" startup_level="{{lmcmon_startup_level}}" astor_controlled="{{lmcmon_astor_controlled}}">
+			<class name="{{lmc_monitor_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{lmc_monitor_device_name}}" alias="{{lmc_monitor_alias}}">
+					&LMCMonitorConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- ALARM HANDLER (name= mid_dish_0001/elt/alarms) -->
+		<server name="{{lmc_alarm_server_name}}" instance="{{lmc_alarm_server_instance}}" startup_level="{{alarmhandler_startup_level}}" astor_controlled="{{alarmhandler_astor_controlled}}">
+			<class name="{{lmc_alarm_server_name}}"> 
+				<device family="{{lmc_device_family_name}}" name="{{lmc_alarm_device_name}}" alias="{{lmc_alarm_alias}}">
+					&AlarmHandlerConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- ARCHIVER (name= mid_dish_0001/elt/archiver-lmc) -->
+		<server name="{{archiver_server_name}}" instance="{{archiver_server_instance}}" startup_level="{{archiver_startup_level}}" astor_controlled="{{archiver_astor_controlled}}">
+			<class name="HdbEventSubscriber"> 
+				<!-- ARCHIVER-LMC (name= mid_dish_0001/elt/archiver-lmc) -->
+				<device family="{{lmc_device_family_name}}" name="{{archiver_lmc_device_name}}" alias="{{archiver_lmc_alias}}">
+					&LMCArchiverConfig;
+				</device>
+
+				<!-- ARCHIVER-SPF (name= mid_dish_0001/elt/archiver-spf) -->
+				<device family="{{lmc_device_family_name}}" name="{{archiver_spf_device_name}}" alias="{{archiver_spf_alias}}">
+					&SPFArchiverConfig;
+				</device>
+		
+				<!-- ARCHIVER-Rx (name= mid_dish_0001/elt/archiver-rx) -->
+				<device family="{{lmc_device_family_name}}" name="{{archiver_rx_device_name}}" alias="{{archiver_rx_alias}}">
+					&RxArchiverConfig;
+				</device>
+
+				<!-- ARCHIVER-DS (name= mid_dish_0001/elt/archiver-ds) -->
+				<device family="{{lmc_device_family_name}}" name="{{archiver_ds_device_name}}" alias="{{archiver_ds_alias}}">
+					&DSArchiverConfig;
+				</device>
+			</class>
+		</server>
+
+		
+
+		<!-- ARCHIVER CONFIGURATOR MANAGER (name= mid_dish_0001/elt/archiver-cm) -->
+		<server name="{{archiver_cm_server_name}}" instance="{{archiver_cm_server_instance}}" startup_level="{{archiver_cm_startup_level}}" astor_controlled="{{archiver_cm_astor_controlled}}">
+			<class name="HdbConfigurationManager"> 
+				<device family="{{lmc_device_family_name}}" name="{{archiver_cm_device_name}}" alias="{{archiver_cm_alias}}">
+					&ArchiverCMConfig;
+				</device>
+			</class>
+		</server>
+
+		<!-- EMULATORS -->
+		<server name="{{ds_emulator_server_name}}" instance="{{ds_emulator_server_instance}}" startup_level="{{ds_startup_level}}" astor_controlled="{{ds_astor_controlled}}">
+			<class name="{{ds_emulator_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{ds_emulator_device_name}}" alias="{{ds_emulator_alias}}">
+					&DSEmulatorConfig;
+				</device>
+			</class>
+		</server>
+
+		<server name="{{rx_emulator_server_name}}" instance="{{rx_emulator_server_instance}}" startup_level="{{rx_startup_level}}" astor_controlled="{{rx_astor_controlled}}">
+			<class name="{{rx_emulator_server_name}}"> 
+				<device family="{{rx_device_family_name}}" name="{{rx_emulator_device_name}}" alias="{{rx_emulator_alias}}">
+					&RxEmulatorConfig;
+				</device>
+			</class>
+		</server>
+
+		<server name="{{spf_emulator_server_name}}" instance="{{spf_emulator_server_instance}}" startup_level="{{spf_startup_level}}" astor_controlled="{{spf_astor_controlled}}">
+			<class name="{{spf_emulator_server_name}}"> 
+				<device family="{{spf_device_family_name}}" name="{{spf_emulator_device_name}}" alias="{{spf_emulator_alias}}">
+					&SPFEmulatorConfig;
+				</device>
+			</class>
+		</server>
+
+		<server name="{{pdu_emulator_server_name}}" instance="{{pdu_emulator_server_instance}}" startup_level="{{pdu_startup_level}}" astor_controlled="{{pdu_astor_controlled}}">
+			<class name="{{pdu_emulator_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{pdu_emulator_device_name}}" alias="{{pdu_emulator_alias}}">
+					<!--&PDUEmulatorConfig;-->
+				</device>
+			</class>
+		</server>
+
+		<server name="{{tm_emulator_server_name}}" instance="{{tm_emulator_server_instance}}" startup_level="{{tm_startup_level}}" astor_controlled="{{tm_astor_controlled}}">
+			<class name="{{tm_emulator_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{tm_emulator_device_name}}" alias="{{tm_emulator_alias}}">
+					<!--&TMEmulatorConfig;-->
+				</device>
+			</class>
+		</server>
+
+    <!-- UTIL DEVICES -->
+    <server name="{{logprinter_server_name}}" instance="{{logprinter_server_instance}}" startup_level="{{logprinter_startup_level}}" astor_controlled="{{logprinter_astor_controlled}}">
+			<class name="{{logprinter_server_name}}"> 
+				<device family="{{lmc_internal_device_family_name}}" name="{{logprinter_device_name}}" alias="{{logprinter_alias}}">
+					<!-- -->
+				</device>
+			</class>
+		</server>
+
+	</device_servers>
+
+</ControlSystem>
+

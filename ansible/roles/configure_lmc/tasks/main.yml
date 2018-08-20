@@ -1,0 +1,264 @@
+---
+
+###########################################
+##     PRINT STUFF
+###########################################
+- name: Printing LMC server names
+  debug: msg="LMC server = {{item.name}}"
+  with_items:
+    - "{{spf_emulator_config}}"
+    - "{{rx_emulator_config}}"
+
+- name: Print TANGO_ROOT directory
+  debug: msg="TANGO_ROOT = {{tango_root}}"
+
+- name: Print number of cores
+  debug: msg="ncores= {{ansible_processor_cores}}"
+
+
+###########################################
+##     INSTALL RSYSLOG CONFIG
+###########################################
+- name: Install log rotate files
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+    backup: yes	
+  with_items:
+    - { src: 'dsmgr_logrotate.cfg.j2', dest: '/etc/logrotate.d/dsmgr_logrotate.conf' }
+    - { src: 'dshmgr_logrotate.cfg.j2', dest: '/etc/logrotate.d/dshmgr_logrotate.conf' }
+    - { src: 'lmcstarter_logrotate.cfg.j2', dest: '/etc/logrotate.d/lmcstarter_logrotate.conf' }
+    - { src: 'lmcmon_logrotate.cfg.j2', dest: '/etc/logrotate.d/lmcmon_logrotate.conf' }
+    - { src: 'lmclogger_logrotate.cfg.j2', dest: '/etc/logrotate.d/lmclogger_logrotate.conf' }
+    - { src: 'alarmhandler_logrotate.cfg.j2', dest: '/etc/logrotate.d/alarmhandler_logrotate.conf' }
+    - { src: 'spf_logrotate.cfg.j2', dest: '/etc/logrotate.d/spf_logrotate.conf' }
+    - { src: 'rx_logrotate.cfg.j2', dest: '/etc/logrotate.d/rx_logrotate.conf' }
+    - { src: 'ds_logrotate.cfg.j2', dest: '/etc/logrotate.d/ds_logrotate.conf' }
+    - { src: 'dsarchiver_logrotate.cfg.j2', dest: '/etc/logrotate.d/archiver_ds_logrotate.conf' }
+    - { src: 'spfarchiver_logrotate.cfg.j2', dest: '/etc/logrotate.d/archiver_spf_logrotate.conf' }
+    - { src: 'rxarchiver_logrotate.cfg.j2', dest: '/etc/logrotate.d/archiver_rx_logrotate.conf' }
+    - { src: 'lmcarchiver_logrotate.cfg.j2', dest: '/etc/logrotate.d/archiver_lmc_logrotate.conf' }
+    - { src: 'pdumgr_logrotate.cfg.j2', dest: '/etc/logrotate.d/pdumgr_lmc_logrotate.conf' }
+#  notify:
+#    - Reload logrotate
+  become: true
+
+- name: Install rsyslog config files
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+    backup: yes	
+  with_items:
+    - { src: '20-ufw.conf.j2', dest: '/etc/rsyslog.d/20-ufw.conf' }
+    - { src: '50-default.conf.j2', dest: '/etc/rsyslog.d/50-default.conf' }
+    - { src: '60-output_logstash.conf.j2', dest: '/etc/rsyslog.d/60-output_logstash.conf' }
+  notify:
+    - Restart rsyslog
+  become: true
+   
+
+- name: Install rsyslog main config file
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    backup: yes
+  notify:
+    - Restart rsyslog
+  become: true
+
+###########################################
+##     INSTALL NAGIOS CONFIG
+###########################################
+- name: Install Nagios plugins
+  copy:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+    owner: "{{nagios_user}}"
+    group: "{{nagios_group}}"
+    mode: 0755
+    backup: yes	
+  with_items:
+    - { src: 'check_proc_mem.sh', dest: "{{nagios_plugin_dir}}/check_proc_mem.sh" }
+    - { src: 'check_proc_cpu.sh', dest: "{{nagios_plugin_dir}}/check_proc_cpu.sh" }
+  become: true
+
+- name: Install Nagios config files
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+    backup: yes	
+  with_items:
+    - { src: 'nagios-templates.cfg.j2', dest: "{{nagios_cfg_object_dir}}/{{lmc_server_nagios_template_file}}" }
+    - { src: 'nagios-lmc_server.cfg.j2', dest: "{{nagios_cfg_object_dir}}/{{lmc_server_nagios_cfg_file}}" }
+    - { src: 'nagios.cfg.j2', dest: "{{nagios_cfg_dir}}/{{nagios_cfg_file}}" }
+  become: true
+  notify:
+    - Restart Nagios 
+
+###########################################
+##     CREATE LMC MYSQL USER & DATABASE
+###########################################
+# Create Archive Database
+#- name: Create LMC archive MySQL DB
+#  mysql_db:
+#    name: "{{lmc_archive_db_name}}"
+#    login_user: root
+#    login_password: "{{prompted_mysql_root_pass}}"
+#    state: present
+
+# Create LMC archive user
+#- name: Create LMC archive user
+#  mysql_user:
+#    name: "{{lmc_archive_user}}"
+#    password: "{{lmc_archive_user_pass}}"
+#    priv: "{{lmc_archive_db_name}}.*:ALL"
+#    login_user: root
+#    login_password: "{{prompted_mysql_root_pass}}"
+#    state: present
+
+# Create LMC archive DB tables
+#- name: Create LMC archive tables in DB with pass {{ lmc_archive_user_pass }}
+#  script: create_mysql_archive.sh '{{lmc_archive_user}}' '{{ lmc_archive_user_pass }}' '{{lmc_archive_db_name}}'
+
+
+###########################################
+##     CREATE CONFIG DIR & COPY CFG FILES
+###########################################
+# Check if config dir is writable
+- name: Print config dir
+  debug: msg="config_dir= {{ lmc_config_dir }}"
+
+- name: Check if config dir is writable to user
+  check_write_permission: 
+    path="{{ lmc_config_dir }}"
+  register: writable_result  
+
+- name: Print config dir writable result
+  debug: msg="writable_result= {{writable_result}}, {{writable_result['writable']}}"
+
+
+- name: Create config file directory with become privileges
+  file: path={{ lmc_config_dir }} state=directory mode=0755
+  become: true
+  when: writable_result['writable']==False
+
+
+
+- name: Copy main LMC config file with become privileges
+  template:
+    src: lmc_cfg.j2
+    dest: "{{ lmc_config_dir }}/{{ lmc_config_file }}"
+  become: true
+  when: writable_result['writable']==False
+
+- name: Copy main LMC config schema file with become privileges
+  template:
+    src: lmc_cfg_schema.j2
+    dest: "{{ lmc_config_dir }}/{{ lmc_config_schema_file }}"
+  become: true
+  when: writable_result['writable']==False
+
+- name: Copy LMC device server config files with become privileges
+  template:
+    src: "{{item.template}}"
+    dest: "{{ lmc_config_dir }}/{{item.name}}"
+  with_items: "{{ds_config_vars}}"    
+  become: true
+  when: writable_result['writable']==False
+
+
+- name: Create config file directory
+  file: path={{ lmc_config_dir }} state=directory mode=0755
+  when: writable_result['writable']==True
+
+- name: Copy main LMC config file 
+  template:
+    src: lmc_cfg.j2
+    dest: "{{ lmc_config_dir }}/{{ lmc_config_file }}"
+  when: writable_result['writable']==True
+
+- name: Copy main LMC config schema file
+  template:
+    src: lmc_cfg_schema.j2
+    dest: "{{ lmc_config_dir }}/{{ lmc_config_schema_file }}"
+  when: writable_result['writable']==True
+
+- name: Copy LMC device server config files
+  template:
+    src: "{{item.template}}"
+    dest: "{{ lmc_config_dir }}/{{item.name}}"
+  with_items: "{{ds_config_vars}}"    
+  when: writable_result['writable']==True
+  
+
+###########################################
+##     CREATE LOG DIR
+###########################################
+# Check if log dir is writable
+- name: Print log dir
+  debug: msg="log_dir= {{ lmc_tango_syslog_dir }}"
+
+- name: Check if log dir is writable to user
+  check_write_permission: 
+    path="{{ lmc_tango_syslog_dir }}"
+  register: logdir_writable_result  
+
+- name: Print log dir writable result
+  debug: msg="logdir_writable_result= {{logdir_writable_result}}, {{logdir_writable_result['writable']}}"
+
+
+- name: Create log file directory with become privileges
+  file: path={{ lmc_tango_syslog_dir }} state=directory mode=0755 owner=syslog group=adm
+  become: true
+  when: logdir_writable_result['writable']==False
+
+
+#- name: Create log file directory
+#  file: path={{ lmc_tango_syslog_dir }} state=directory mode=0755
+#  when: writable_result['writable']==True
+
+
+
+###########################################
+##     Start TangoDB
+###########################################
+#- name: Start TangoDB
+#  shell: "/usr/bin/nohup {{tango_root}}/bin/tango start > /tmp/tango.log 2>&1 & sleep 10s &" 
+#  async: 50
+#  poll: 0
+#  environment:
+#    PATH: "{{ ansible_env.PATH | default([]) }}:{{tango_root}}/bin"
+#    LD_LIBRARY_PATH: "{{ ansible_env.LD_LIBRARY_PATH | default([]) }}:{{tango_root}}/lib:{{omniorb_root}}/lib:{{zmq_root}}/lib;{{boost_root}}/lib"
+#    MYSQL_HOST: "{{mysql_host}}"
+#    MYSQL_USER: "{{mysql_user}}"
+#    MYSQL_PASSWORD: "{{mysql_pass}}"		
+
+###########################################
+##     REGISTER AND CONFIGURE DEVICES
+###########################################
+- name: Register and configure LMC devices
+  configure_lmc: 
+    inputfile={{ lmc_config_dir }}/{{ lmc_config_file }} 
+    schemafile={{ lmc_config_dir }}/{{ lmc_config_schema_file }}
+    clear_servers={{ lmc_clear_servers }}
+    export_servers={{ lmc_export_servers }}
+  environment:
+#    PATH: "{{ ansible_env.PATH | default([]) }}:{{tango_root}}/bin"
+#    PYTHONPATH: "{{ ansible_env.PYTHONPATH | default([]) }}:{{pytango_path}}"
+#    LD_LIBRARY_PATH: "{{ ansible_env.LD_LIBRARY_PATH | default([]) }}:{{tango_root}}/lib:{{omniorb_root}}/lib:{{zmq_root}}/lib;{{boost_root}}/lib"
+#    MYSQL_HOST: "{{mysql_host}}"
+#    MYSQL_USER: "{{mysql_user}}"
+#    MYSQL_PASSWORD: "{{mysql_pass}}"
+#    TANGO_HOST: "{{tango_host}}"
+    PATH: "{{ ansible_env.PATH | default([]) }}"
+    PYTHONPATH: "{{ ansible_env.PYTHONPATH | default([]) }}"
+    LD_LIBRARY_PATH: "{{ ansible_env.LD_LIBRARY_PATH | default([]) }}"
+    MYSQL_HOST: "{{ ansible_env.MYSQL_HOST }}"
+    MYSQL_USER: "{{ ansible_env.USER }}"
+    MYSQL_PASSWORD: "{{ ansible_env.PASSWORD }}"
+    TANGO_HOST: "{{ ansible_env.TANGO_HOST }}"
+
+
+
+
+...

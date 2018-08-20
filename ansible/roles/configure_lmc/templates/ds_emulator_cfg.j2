@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            DS EMULATOR CONFIGURATION             -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{ds_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{ds_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{ds_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{ds_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{ds_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{ds_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{ds_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{ds_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{ds_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{ds_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{ds_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{ds_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{ds_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{ds_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{ds_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{ds_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{ds_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{ds_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{ds_syslog_host}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{ds_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{ds_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{ds_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{ds_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{ds_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{ds_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{ds_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{ds_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->
+		<DeviceProperty name="StartupTime">
+			<Value> {{ds_startup_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStartupFailure">
+			<Value> {{ds_enable_startup_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StartupFailureProbability">
+			<Value> {{ds_startup_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowTime">
+			<Value> {{ds_stow_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStowFailure">
+			<Value> {{ds_enable_stow_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowFailureProbability">
+			<Value> {{ds_stow_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="IndexingTime">
+			<Value> {{ds_indexing_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableIndexingFailure">
+			<Value> {{ds_enable_indexing_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="IndexingFailureProbability">
+			<Value> {{ds_indexing_failure_prob}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="SetModeTime">
+			<Value> {{ds_set_mode_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableSetModeFailure">
+			<Value> {{ds_enable_set_mode_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SetModeFailureProbability">
+			<Value> {{ds_set_mode_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="PointingModelParamsDefault">
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>			
+			<Value> 0 </Value>	
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>	
+			<Value> 0 </Value>
+		</DeviceProperty>		
+
+		
+	
+		<DeviceProperty name="IndexerPositionDefault">
+			<Value> {{ds_indexer_position_default}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SmearPointingCoords">
+			<Value> {{ds_smear_pnt_coords}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="PointingResolution">
+			<Value> {{ds_pnt_resolution}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="MaxPointingQueueSize">
+			<Value> {{ds_max_pnt_queue_size}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="UseUTCTime">
+			<Value> {{ds_use_utc_in_pnt}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="TrackProgramMaxSize">
+			<Value> {{ds_track_program_max_size}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="TrackProgramTimeStep">
+			<Value> {{ds_track_program_time_step}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="MinAzimuth">
+			<Value> {{ds_min_azimuth}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="MaxAzimuth">
+			<Value> {{ds_max_azimuth}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="MinElevation">
+			<Value> {{ds_min_elevation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="MaxElevation">
+			<Value> {{ds_max_elevation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SlewRate">
+			<Value> {{ds_slew_rate}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SlewTimeStep">
+			<Value> {{ds_slew_time_step}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowAzimuthPos">
+			<Value> {{ds_stow_azimuth}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowElevationPos">
+			<Value> {{ds_stow_elevation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ShutdownTime">
+			<Value> {{ds_shutdown_time}} </Value>
+		</DeviceProperty>
+		
+	</DeviceProperties>
+
+
+	<Attributes>
+
+		<!-- ================================================== -->
+		<!-- ==      State & Modes                           == -->
+		<!-- ================================================== -->
+		
+		<Attribute name = "operatingMode" alias="operatingMode">
+			<Description> DS sub-element mode </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> OFF </Value>
+				<Value> STARTUP </Value>
+				<Value> STANDBY-LP </Value>
+				<Value> STOW </Value> 
+				<Value> ESTOP </Value> 
+				<Value> POINT </Value>
+				<Value> MAINTENANCE </Value>
+				<Value> UNKNOWN </Value> <!-- Not present in ICD -->
+				<Value> STANDBY-FP </Value> <!-- Not present in ICD -->
+			</PossibleValues>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>			
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "powerState" alias="powerState">
+			<Description> Current sub-element power state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> OFF </Value>
+				<Value> UPS </Value>
+				<Value> FULL-POWER </Value>
+				<Value> LOW-POWER </Value>
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>	
+			</Events>
+			<Value>
+				<InitValue> OFF </InitValue>
+			</Value>
+		</Attribute>
+
+
+		<Attribute name = "indexerPosition" alias="indexerPosition">
+			<Description> Current indexer position </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Memorized>  </Memorized>  <!-- Memorize previous band -->
+			<PossibleValues>
+				<Value> UNKNOWN </Value> 
+				<Value> B1 </Value>
+				<Value> B2 </Value>
+				<Value> B3 </Value>
+				<Value> B4 </Value>
+				<Value> B5 </Value>
+				<Value> MOVING </Value> <!-- Added wrt ICD -->
+				<Value> ERROR </Value> <!-- Added wrt ICD -->
+				<!-- <Value> UNKNOWN </Value> --> <!-- Added wrt ICD (set in LMC?) -->
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>	
+			</Events>	
+			<Value>
+				<InitValue> B1 </InitValue>
+			</Value>
+		</Attribute>
+		
+		<Attribute name = "interfaceType" alias="interfaceType">	
+			<Description> Type of interface to be managed </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> REAL </Value>
+				<Value> EMULATED </Value>
+				<Value> HYBRID </Value>				
+			</PossibleValues>
+			<Polling> 
+				<Period> {{ds_very_slow_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> EMULATED </InitValue>
+			</Value>
+		</Attribute>
+	
+		<!--
+		<Attribute name = "adminMode" alias="adminMode">	
+			<Description> Admin mode </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Memorized>  </Memorized>	
+			<PossibleValues>	
+				<Value> ONLINE </Value>
+				<Value> OFFLINE </Value>
+				<Value> MAINTENANCE </Value>
+				<Value> NOT-FITTED </Value>
+				<Value> RESERVED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{ds_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> ONLINE </InitValue>
+			</Value>
+		</Attribute>
+		-->
+
+		<Attribute name = "healthState" alias="healthState">
+			<Description> Aggregated sub-element health </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+				<Value> NORMAL </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>	
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "testMode" alias="testMode">	
+			<Description> Enable/disable test mode </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{rx_very_slow_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{rx_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{rx_very_very_slow_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<!-- ================================================== -->
+		<!-- ==      Pointing                                == -->
+		<!-- ================================================== -->
+		<Attribute name = "pointingState" alias="pointingState">
+			<Description> Current sub-element pointing state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> READY </Value>
+				<Value> SLEW </Value>
+				<Value> TRACK </Value>
+				<Value> SCAN </Value>
+				<Value> NONE </Value> <!-- Added wrt ICD -->
+				<Value> UNKNOWN </Value> <!-- Added wrt ICD (set in LMC?) -->
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{ds_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_default_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<AbsChange> 1 </AbsChange>
+				</ArchiveEvent>	
+			</Events>
+			<Value>
+				<InitValue> NONE </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "pointingModelParams" alias="pointingModelParams">
+			<Description> Parameters for local pointing corrections </Description>
+			<DataType> FLOAT </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 9 </DimX>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "antennaAzPosition" alias="antennaAzPosition">
+			<Description> Current antenna azimuth position in degrees </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Memorized> </Memorized>
+			<MemorizedDefaultProp> StowAzimuthPos </MemorizedDefaultProp>
+			<Polling> 
+				<Period> {{ds_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> {{ds_stow_azimuth}} </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "antennaElPosition" alias="antennaElPosition">
+			<Description> Current antenna elevation position in degrees </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Memorized> </Memorized>
+			<MemorizedDefaultProp> StowElevationPos </MemorizedDefaultProp>
+			<Polling> 
+				<Period> {{ds_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> {{ds_stow_elevation}} </InitValue>
+			</Value>
+		</Attribute>
+		
+		<!--
+		<Attribute name = "desiredPointing" alias="desiredPointing">
+			<Description> Desired pointing coordinates </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 3 </DimX>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+		-->
+
+		<!--
+		<Attribute name = "achievedPointing" alias="achievedPointing">
+			<Description> Actual pointing coordinates </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 3 </DimX>
+			<Polling> 
+				<Period> {{ds_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+		-->
+
+
+		
+		
+
+		<Attribute name = "azimuthBrakeState" alias="azimuthBrakeState">
+			<Description> Azimuth brake state (0=released, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> true </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "elevationBrakeState" alias="elevationBrakeState">
+			<Description> Elevation brake state (0=released, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> true </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "indexerBrakeState" alias="indexerBrakeState">
+			<Description> Feed indexer brake state (0=released, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> true </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "azimuthServoState" alias="azimuthServoState">
+			<Description> Azimuth servo state (0=disabled, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> false </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "elevationServoState" alias="elevationServoState">
+			<Description> Elevation servo state (0=disabled, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> false </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "indexerServoState" alias="indexerServoState">
+			<Description> Feed indexer servo state (0=disabled, 1=activated) </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_default_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+					<RelChange> {{default_attr_rel_change}} </RelChange>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> false </InitValue>
+			</Value>
+		</Attribute>
+
+		<!-- ================================================== -->
+		<!-- ==      Events                                  == -->
+		<!-- ================================================== -->
+		<Attribute name = "targetLock" alias="targetLock">
+			<Description> Flag indicating if dish has achieved the pointing target. </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> false </InitValue>
+			</Value>
+		</Attribute>
+
+
+		<Attribute name = "azimuthOverWrap" alias="azimuthOverWrap">
+			<Description> Flag indicating if dish has moved beyond an azimuth wrap limit </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{ds_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{ds_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{ds_very_slow_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> false </InitValue>
+			</Value>
+		</Attribute>
+		
+		
+	</Attributes>
+
+</DeviceConfiguration>

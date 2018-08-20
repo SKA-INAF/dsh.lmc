@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **            DS MANAGER CONFIGURATION             -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{dsmgr_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{dsmgr_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{dsmgr_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{dsmgr_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{dsmgr_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{dsmgr_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{dsmgr_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{dsmgr_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{dsmgr_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{dsmgr_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{dsmgr_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{dsmgr_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{dsmgr_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{dsmgr_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{dsmgr_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{dsmgr_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{dsmgr_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{dsmgr_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{dsmgr_syslog_host}} </Value>
+		</DeviceProperty>
+
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{dsmgr_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{dsmgr_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{dsmgr_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{dsmgr_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{dsmgr_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{dsmgr_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{dsmgr_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{dsmgr_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->
+		<DeviceProperty name="StartupTime">
+			<Value> {{dsmgr_startup_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStartupFailure">
+			<Value> {{dsmgr_enable_startup_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StartupFailureProbability">
+			<Value> {{dsmgr_startup_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowTime">
+			<Value> {{dsmgr_stow_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStowFailure">
+			<Value> {{dsmgr_enable_stow_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StowFailureProbability">
+			<Value> {{dsmgr_stow_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="IndexingTime">
+			<Value> {{dsmgr_indexing_time}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableIndexingFailure">
+			<Value> {{dsmgr_enable_indexing_failure}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="IndexingFailureProbability">
+			<Value> {{dsmgr_indexing_failure_prob}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="PointingModelParamsDefault">
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>			
+			<Value> 0 </Value>	
+			<Value> 0 </Value>
+			<Value> 0 </Value>
+			<Value> 0 </Value>	
+			<Value> 0 </Value>
+		</DeviceProperty>		
+
+		<!--
+		<DeviceProperty name="AdminModeDefault">
+			<Value> {{dsmgr_admin_mode_default}} </Value>
+		</DeviceProperty>
+		-->
+
+	</DeviceProperties>
+
+
+	<Attributes>
+
+		<!-- ================================================== -->
+		<!-- ==      State & Modes                           == -->
+		<!-- ================================================== -->
+		
+		<Attribute name = "operatingMode" alias="operatingMode">
+			<Description> DS sub-element mode </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> OFF </Value>
+				<Value> STARTUP </Value>
+				<Value> STANDBY-LP </Value>
+				<Value> STOW </Value> 
+				<Value> ESTOP </Value> 
+				<Value> POINT </Value>
+				<Value> MAINTENANCE </Value>
+				<Value> UNKNOWN </Value> <!-- Not present in ICD -->
+				<Value> STANDBY-FP </Value> <!-- Not present in ICD -->
+			</PossibleValues>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "powerState" alias="powerState">
+			<Description> Current sub-element power state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ </RWType>	
+			<PossibleValues>
+				<Value> OFF </Value>
+				<Value> UPS </Value>
+				<Value> FULL-POWER </Value>
+				<Value> LOW-POWER </Value>
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> OFF </InitValue>
+			</Value>
+		</Attribute>
+
+
+		<Attribute name = "indexerPosition" alias="indexerPosition">
+			<Description> Current indexer position </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Memorized>  </Memorized>  <!-- Memorize previous band -->
+			<PossibleValues>
+				<Value> UNKNOWN </Value> 
+				<Value> B1 </Value>
+				<Value> B2 </Value>
+				<Value> B3 </Value>
+				<Value> B4 </Value>
+				<Value> B5 </Value>
+				<Value> MOVING </Value> <!-- Added wrt ICD -->
+				<Value> ERROR </Value> <!-- Added wrt ICD -->
+				<!-- <Value> UNKNOWN </Value> --> <!-- Added wrt ICD (set in LMC?) -->
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<RelChangeEvent>
+					<ChangeValue> {{default_attr_rel_change}} </ChangeValue>
+				</RelChangeEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_medium_poll_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_medium_poll_period}} </Period>
+				</ArchiveEvent>
+			</Events>	
+			<Value>
+				<InitValue> B1 </InitValue>
+			</Value>
+		</Attribute>
+		
+		<Attribute name = "interfaceType" alias="interfaceType">	
+			<Description> Type of interface to be managed </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value>
+				<Value> REAL </Value>
+				<Value> EMULATED </Value>
+				<Value> HYBRID </Value>				
+			</PossibleValues>
+			<Polling> 
+				<Period> {{dsmgr_very_slow_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_slow_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_slow_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> EMULATED </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "adminMode" alias="adminMode">	
+			<Description> Admin mode </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<Memorized>  </Memorized>	
+			<PossibleValues>	
+				<Value> ONLINE </Value>
+				<Value> OFFLINE </Value>
+				<Value> MAINTENANCE </Value>
+				<Value> NOT-FITTED </Value>
+				<Value> RESERVED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> ONLINE </InitValue>
+			</Value>
+		</Attribute>
+
+
+		<Attribute name = "healthState" alias="healthState">
+			<Description> Aggregated sub-element health </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<PossibleValues>
+				<Value> UNKNOWN </Value> <!-- Set by LMC when connection is not established or when it is lost -->
+				<Value> NORMAL </Value>
+				<Value> DEGRADED </Value>
+				<Value> FAILED </Value>
+			</PossibleValues>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> UNKNOWN </InitValue>
+			</Value>
+		</Attribute>
+
+		<!-- ================================================== -->
+		<!-- ==      Pointing                                == -->
+		<!-- ================================================== -->
+		<Attribute name = "pointingState" alias="pointingState">
+			<Description> Current sub-element pointing state </Description>
+			<DataType> ENUM </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ </RWType>	
+			<PossibleValues>
+				<Value> READY </Value>
+				<Value> SLEW </Value>
+				<Value> TRACK </Value>
+				<Value> SCAN </Value>
+				<Value> NONE </Value> <!-- Added wrt ICD -->
+				<Value> UNKNOWN </Value> <!-- Added wrt ICD (set in LMC?) -->
+			</PossibleValues> 
+			<Polling> 
+				<Period> {{dsmgr_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> NONE </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "pointingModelParams" alias="pointingModelParams">
+			<Description> Parameters for local pointing corrections </Description>
+			<DataType> FLOAT </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 9 </DimX>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+		
+	
+		<Attribute name = "desiredPointing" alias="desiredPointing">
+			<Description> Desired pointing coordinates </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 3 </DimX>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "achievedPointing" alias="achievedPointing">
+			<Description> Actual pointing coordinates </Description>
+			<DataType> DOUBLE </DataType>
+			<DataFormat> SPECTRUM </DataFormat> 
+			<RWType> READ_WRITE </RWType>	
+			<DimX> 3 </DimX>
+			<Polling> 
+				<Period> {{dsmgr_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<!-- ================================================== -->
+		<!-- ==      Events                                  == -->
+		<!-- ================================================== -->
+		<Attribute name = "targetLock" alias="targetLock">
+			<Description> Flag indicating if dish has achieved the pointing target. </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{dsmgr_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+
+		<Attribute name = "azimuthOverWrap" alias="azimuthOverWrap">
+			<Description> Flag indicating if dish has moved beyond an azimuth wrap limit </Description>
+			<DataType> BOOL </DataType>
+			<DataFormat> SCALAR </DataFormat>
+			<RWType> READ_WRITE </RWType>	
+			<Polling> 
+				<Period> {{dsmgr_very_fast_poll_period}} </Period>
+			</Polling>
+			<Events>
+				<PushEvent> </PushEvent>
+				<AbsChangeEvent>
+					<ChangeValue> 1 </ChangeValue>
+				</AbsChangeEvent>
+				<PeriodicEvent>
+					<Period> {{dsmgr_very_fast_periodic_event_period}} </Period>
+				</PeriodicEvent>
+				<ArchiveEvent>
+					<Period> {{dsmgr_very_fast_archive_event_period}} </Period>
+				</ArchiveEvent>
+			</Events>
+			<Value>
+				<InitValue> 0 </InitValue>
+			</Value>
+		</Attribute>
+		
+		
+	</Attributes>
+
+</DeviceConfiguration>

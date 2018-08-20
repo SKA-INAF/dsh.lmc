@@ -1,0 +1,31 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Include vars for playbook
+      include_vars: defaults/main.yml
+
+    - name: Create config file directory
+      file: path={{ lmc_config_dir }} state=directory mode=0755
+      become: true
+
+    - name: Copy main LMC config file
+      template:
+        src: lmc_cfg.j2
+        dest: "{{ lmc_config_dir }}/{{ lmc_config_file }}"
+#      with_dict: "{{ java_versions }}"
+      become: true
+
+#    - name: Configure LMC
+#      configure_lmc: 
+#        inputfile='/home/riggi/Analysis/SKAProjects/DishLMC/dsh.lmc-install/config/DevConfig_riggi.xml' 
+#        schemafile='/home/riggi/Analysis/SKAProjects/DishLMC/dsh.lmc-install/config/DevConfig.xsd' 
+#        clear_servers=true
+###      action: configure_lmc inputfile='/home/riggi/Analysis/SKAProjects/DishLMC/dsh.lmc-install/config/DevConfig_riggi.xml' schemafile='/home/riggi/Analysis/SKAProjects/DishLMC/dsh.lmc-install/config/DevConfig.xsd' clear_servers=true
+
+...
+
+

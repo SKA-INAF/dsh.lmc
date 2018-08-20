@@ -1,0 +1,253 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!-- ************************************************** -->
+<!-- **                                                 -->
+<!-- **        LMC MANAGER CONFIGURATION                -->
+<!-- **                                                 -->
+<!-- ************************************************** -->
+
+<DeviceConfiguration>
+	
+	<!-- ************************************************** -->
+	<!-- **              PROPERTIES                         -->
+	<!-- ************************************************** -->
+	<DeviceProperties>
+
+		<!-- SKA options -->
+		<DeviceProperty name="SkaLevel">
+			<Value> {{lmcstarter_ska_level}} </Value>
+		</DeviceProperty>
+
+		<!-- General options -->
+		<DeviceProperty name="EnableConfigFromFile">
+			<Value> {{lmcstarter_enable_config_from_file}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ConfigFile">
+			<Value> {{lmcstarter_config_file}} </Value>
+		</DeviceProperty>
+
+		<!-- Dyn attr creation and update options -->
+		<DeviceProperty name="EnableDynAttrCleanup">
+			<Value> {{lmcstarter_enable_dyn_attr_cleanup}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDynAttrRandomize">
+			<Value> {{lmcstarter_enable_dyn_attr_randomize}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DynAttrRandomizePeriod">
+			<Value> {{lmcstarter_dyn_attr_randomize_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableFwdAttrInitPolling">
+			<Value> {{lmcstarter_enable_fwd_attr_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FwdAttrInitPollPeriod">
+			<Value> {{lmcstarter_fwd_attr_init_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableStatusAttrUpdatePolling">
+			<Value> {{lmcstarter_enable_status_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StatusAttrUpdatePollPeriod">
+			<Value> {{lmcstarter_status_attr_update_poll_period}} </Value>
+		</DeviceProperty>
+		
+
+		<!-- Logging options -->
+		<DeviceProperty name="CentralLoggerEnabledDefault">
+			<Value> {{lmcstarter_enable_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetCentralDefault">
+			<Value> {{lmcstarter_central_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelCentralDefault">
+			<Value> {{lmcstarter_central_log_level}}  </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ElementLoggerEnabledDefault">
+			<Value> {{lmcstarter_enable_element_log_target}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="LoggingTargetElementDefault">
+			<Value> {{lmcstarter_element_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelElementDefault">
+			<Value> {{lmcstarter_element_log_level}} </Value>
+		</DeviceProperty>
+		
+		<DeviceProperty name="StorageLoggerEnabledDefault">
+			<Value> {{lmcstarter_enable_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingTargetStorageDefault">
+			<Value> {{lmcstarter_storage_log_target}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggingLevelStorageDefault">
+			<Value> {{lmcstarter_storage_log_level}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogFacility">
+			<Value> {{lmcstarter_syslog_facility}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="SyslogHost">
+			<Value> {{lmcstarter_syslog_host}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableLoggerInitPolling">
+			<Value> {{lmcstarter_enable_logger_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LoggerInitPollPeriod">
+			<Value> {{lmcstarter_logger_init_poll_period}} </Value>
+		</DeviceProperty>
+
+
+		<!-- Proxy options -->
+		<DeviceProperty name="EnableProxyMonitoring">
+			<Value> {{lmcstarter_enable_proxy_monitoring}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableProxyStatusAttrCreation">
+			<Value> {{lmcstarter_enable_proxy_status_attr_creation}} </Value>
+		</DeviceProperty>
+	
+		<DeviceProperty name="EnableAutoAdminProxyRegistration">
+			<Value> {{lmcstarter_enable_auto_admin_proxy_registration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyMonitoringPeriod">
+			<Value> {{lmcstarter_proxy_monitoring_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrPollingPeriod">
+			<Value> {{lmcstarter_proxy_status_attr_polling_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrPeriodicEventPeriod">
+			<Value> {{lmcstarter_proxy_status_attr_periodic_event_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyStatusAttrArchiveEventPeriod">
+			<Value> {{lmcstarter_proxy_status_attr_archive_event_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProxyTimeout">
+			<Value> {{lmcstarter_proxy_timeout}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="EnableDevProxyInitPolling">
+			<Value> {{lmcstarter_enable_dev_proxy_init_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="DevProxyInitPollPeriod">
+			<Value> {{lmcstarter_dev_proxy_init_poll_period}} </Value>
+		</DeviceProperty>
+
+		<!-- Proxy options -->
+		<!--
+		<DeviceProperty name="ProxyDevices">
+		
+		</DeviceProperty>
+		-->
+
+		<!-- Formula options -->
+		<DeviceProperty name="EnableFormulaAttrUpdatePolling">
+			<Value> {{lmcstarter_enable_formula_attr_update_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FormulaAttrUpdatePollPeriod">
+			<Value> {{lmcstarter_formula_attr_update_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="FormulaVarMaxTimeInterval">
+			<Value> {{lmcstarter_formula_var_max_time_interval}} </Value>
+		</DeviceProperty>
+
+		
+		<!-- Events and handlers options -->
+		<!--
+		<DeviceProperty name="EventSubscriptions">
+
+		</DeviceProperty>
+		-->		
+
+		<!--
+		<DeviceProperty name="EventHandlers">			
+
+		</DeviceProperty>
+		-->
+
+		<!-- Task management options -->
+		<DeviceProperty name="EnableClearTaskPolling">
+			<Value> {{lmcstarter_enable_clear_task_polling}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ClearTaskPollPeriod">
+			<Value> {{lmcstarter_clear_task_poll_period}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ProcessEventsInQueueThread">
+			<Value> {{process_events_in_queue_thread}} </Value>
+		</DeviceProperty>
+
+		<!-- ================================= -->
+		<!-- ==     SPECIFIC PROPERTIES        -->
+		<!-- ================================= -->	
+		<!-- STARTER PROPERTIES -->
+		<DeviceProperty name="AutoRestartDuration">
+			<Value> {{lmcstarter_autorestart_duration}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="InterStartupLevelWait">
+			<Value> {{lmcstarter_interstartup_level_wait}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="KeepLogFiles">
+			<Value> {{lmcstarter_keep_log_files}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="LogFileHome">
+			<Value> {{lmcstarter_log_file_home}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="ServerStartupTimeout">
+			<Value> {{lmcstarter_server_startup_timeout}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StartDsPath">
+			<Value> {{lmcstarter_startds_path}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="StartServersAtStartup">
+			<Value> {{lmcstarter_start_servers}} </Value>
+		</DeviceProperty>
+	
+		<DeviceProperty name="UseEvents">
+			<Value> {{lmcstarter_use_events}} </Value>
+		</DeviceProperty>
+
+		<DeviceProperty name="WaitForDriverStartup">
+			<Value> {{lmcstarter_wait_driver_startup}} </Value>
+		</DeviceProperty>
+
+	</DeviceProperties>
+
+
+	<!-- ************************************************** -->
+	<!-- **              ATTRIBUTES                         -->
+	<!-- ************************************************** -->
+	<!--
+	<Attributes>
+
+		
+	</Attributes>
+	-->
+</DeviceConfiguration>

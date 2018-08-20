@@ -1,0 +1,58 @@
+---
+
+- name: Install python for Ansible
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  register: output
+  changed_when: output.stdout != ""
+  tags: always
+- setup: # aka gather_facts
+
+- debug:
+    msg: "hostname= {{box_hostname}}"
+
+- name: Set vagrant box hostname
+  hostname: name={{box_hostname}}
+
+- name: Set hostname entry in /etc/hosts
+  lineinfile: dest=/etc/hosts regexp='{{box_hostname}}' line='127.0.0.1 {{box_hostname}}' state=present
+    
+- name: Set hostname using "hostnamectl" command
+  shell: bash -c 'hostnamectl set-hostname {{box_hostname}}'
+
+- debug:
+    msg: "admin_user= {{box_admin_user}}, pass= {{box_admin_user_pass}}"
+
+- name: Setting up admin user with sudo privileges
+  user: 
+    name={{ box_admin_user }}
+    state=present
+    groups="sudo"
+    password="{{ box_admin_user_pass }}"
+    generate_ssh_key=yes
+    shell=/bin/bash
+    comment="Admin user" 	
+
+- name: Give admin user sudo rights
+  lineinfile: 
+    dest=/etc/sudoers
+    state=present
+    regexp='^ansible ALL\='
+    line='ansible ALL=(ALL) NOPASSWD:ALL'
+    validate='visudo -cf %s'	
+
+- name: Set authorized key for user ubuntu copying it from current user
+  authorized_key:
+    user: "{{ box_admin_user }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"	
+
+- name: Setting up a test user
+  user:
+    name="{{ box_test_user }}"
+    state=present
+    password="{{ box_test_user_pass }}"
+    generate_ssh_key=yes
+    shell=/bin/bash
+    comment="Test user" 	
+
+...

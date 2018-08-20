@@ -1,0 +1,9 @@
+---
+
+- name: Restart MySQL
+  service: name="{{ mysql_daemon }}" state=restarted
+
+- name: Restart ntp
+  service: name="{{ ntp_daemon }}" state=restarted
+
+...

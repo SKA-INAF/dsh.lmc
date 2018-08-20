@@ -1,0 +1,10 @@
+---
+
+- name: Download omniORB
+#  when: ruby_installed_version|failed or ruby_reinstall_from_source
+  get_url:
+    url: "{{omniorb_source_package_url}}"
+    dest: "{{software_tar_dir}}/omniORB-{{omniorb_version}}.tar.gz"
+    sha256sum: "{{ruby_sha256sum}}"
+
+...

@@ -1,0 +1,34 @@
+---
+
+## NTP vars
+ntp_daemon: ntp
+ntp_enabled_on_startup: yes
+
+## MySQL vars
+mysql_packages:
+  - python-mysqldb
+  - mysql-server
+  - mysql-client
+  - libmysqlclient-dev
+
+mysql_daemon: mysql
+mysql_daemon_path: /etc/init.d
+
+mysql_root_user: root
+mysql_root_password: mysql
+mysql_enabled_on_startup: yes
+
+
+## Software installation dirs
+software_root_dir: /opt/Software
+software_source_dir: "{{software_root_dir}}/Sources"
+software_tar_dir: "{{software_root_dir}}/TarFiles"
+
+## OmniORB
+omniorb_root_dir: "{{software_root_dir}}/omniORB"
+omniorb_version: 4.2.2
+omniorb_install_dir: "{{omniorb_root_dir}}/v{{omniorb_version}}"
+omniorb_source_package: "omniORB-{{omniorb_version}}.tar.bz2"
+omniorb_source_package_url: "https://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-{{omniorb_version}}/{{omniorb_source_package}}"
+
+...

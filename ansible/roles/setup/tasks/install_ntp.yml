@@ -1,0 +1,24 @@
+---
+
+## Install ntp
+- name: Install ntp
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - ntp
+
+## Copy ntp template file
+- name: Copy the ntp.conf template file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+    - Restart ntp
+  
+## Start and enable the service
+- name: Start/stop ntp service
+  service: 
+    name: "{{ntp_daemon}}"
+    state: started 
+    enabled: "{{ntp_enabled_on_startup}}" 
+    pattern: '/ntpd'
+
+
+...

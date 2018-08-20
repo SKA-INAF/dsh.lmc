@@ -1,0 +1,30 @@
+---
+
+
+
+## Install MySQL
+#- include: install_mysql.yml
+- include_tasks: install_mysql.yml
+
+## Install libraries
+- name: Install libraries
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libboost-dev
+    - libboost-python-dev
+    - libpugixml-dev
+    - libjsoncpp-dev
+    - libzmq-dev
+  become: true
+
+
+## Install python modules
+- name: Install python modules
+  pip: name={{ item }}
+  with_items:
+    - lxml
+    - behave
+    - nose
+  become: true
+
+...

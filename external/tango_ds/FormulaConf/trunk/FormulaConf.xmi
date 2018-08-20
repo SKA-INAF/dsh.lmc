@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pogoDsl:PogoSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pogoDsl="http://www.esrf.fr/tango/pogo/PogoDsl">
+  <classes name="FormulaConf" pogoRevision="9.1">
+    <description description="Configurable formula" title="FormulaConf" sourcePath="/home/graziano/workspace/git/servers/formulaconf/src" language="Cpp" filestogenerate="XMI   file,Code files,Protected Regions" license="GPL" copyright="" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false">
+      <inheritances classname="Device_Impl" sourcePath=""/>
+      <identification contact="at elettra.eu - graziano.scalamera" author="graziano.scalamera" emailDomain="elettra.eu" classFamily="SoftwareSystem" siteSpecific="" platform="Unix Like" bus="Not Applicable" manufacturer="none" reference=""/>
+    </description>
+    <deviceProperties name="Attr_config_file" description="File pathname containing configuration in the form:&#xA;attr;attr_type;attr_name;attr_index;formula;description">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="Attr_config_prop" description="Array of configuration strings in the form:&#xA;attr;attr_type;attr_name;attr_index;formula;description">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="Polling_period" description="Period of polling thread in seconds. Set -1 to disable polling.">
+      <type xsi:type="pogoDsl:DoubleType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>-1</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="Read_timeout" description="Timeout in seconds before forcing polling if enabled.">
+      <type xsi:type="pogoDsl:DoubleType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>100</DefaultPropValue>
+    </deviceProperties>
+    <commands name="State" description="This command gets the device state (stored in its device_state data member) and returns it to the caller." execMethod="dev_state" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device state">
+        <type xsi:type="pogoDsl:StateType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="Status" description="This command gets the device status (stored in its device_status data member) and returns it to the caller." execMethod="dev_status" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device status">
+        <type xsi:type="pogoDsl:ConstStringType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true"/>
+    </commands>
+    <attributes name="Version" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="DevicesStatus" attType="Spectrum" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="5000" maxY="" allocReadMember="true" isDynamic="false">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="Status of attributes involved in formulas with timestamp of last valid value, event status, polling status." label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <dynamicAttributes name="BoolScalarDyn" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="true" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="DoubleScalarDyn" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:DoubleType"/>
+      <changeEvent fire="true" libCheckCriteria="true"/>
+      <archiveEvent fire="true" libCheckCriteria="true"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="LongScalarDyn" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="true" libCheckCriteria="true"/>
+      <archiveEvent fire="true" libCheckCriteria="true"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="StringSpectrumDyn" attType="Spectrum" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="1000" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="true" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="BoolSpectrumDyn" attType="Spectrum" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="1000" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="true" libCheckCriteria="false"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="DoubleSpectrumDyn" attType="Spectrum" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="1000" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:DoubleType"/>
+      <changeEvent fire="true" libCheckCriteria="true"/>
+      <archiveEvent fire="true" libCheckCriteria="true"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <dynamicAttributes name="LongSpectrumDyn" attType="Spectrum" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="1000" maxY="" allocReadMember="false" isDynamic="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="true" libCheckCriteria="true"/>
+      <archiveEvent fire="true" libCheckCriteria="true"/>
+      <dataReadyEvent fire="false" libCheckCriteria="true"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </dynamicAttributes>
+    <preferences docHome="./doc_html" makefileHome="/usr/local/tango-8.1.2.c/share/pogo/preferences"/>
+  </classes>
+</pogoDsl:PogoSystem>

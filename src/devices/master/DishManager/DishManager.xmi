@@ -1,0 +1,1595 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pogoDsl:PogoSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pogoDsl="http://www.esrf.fr/tango/pogo/PogoDsl">
+  <classes name="DishManager" pogoRevision="9.4">
+    <description description="DishManager" title="DishManager" sourcePath="/home/riggi/Analysis/SKAProjects/DishLMC/dsh.lmc/src/devices/master/DishManager" language="Cpp" filestogenerate="XMI   file,Code files,Protected Regions" license="GPL" copyright="" hasMandatoryProperty="true" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false">
+      <inheritances classname="Device_Impl" sourcePath=""/>
+      <inheritances classname="LMCDevice" sourcePath="../../emulators/SPFEmulator/../../drivers/DSManager/../../monitoring/DishMonitor/../../core/LMCDevice"/>
+      <identification contact="at gmail.com - simone.riggi" author="simone.riggi" emailDomain="gmail.com" classFamily="SoftwareSystem" siteSpecific="" platform="Unix Like" bus="Not Applicable" manufacturer="none" reference=""/>
+    </description>
+    <deviceProperties name="StorageLoggerEnabledDefault" description="Enable log storage (e.g. logging to syslog)">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SyslogFacility" description="LOG_USER: A miscellaneous user process&#xA;LOG_MAIL: Mail&#xA;LOG_DAEMON: A miscellaneous system daemon&#xA;LOG_AUTH:  Security (authorization)&#xA;LOG_SYSLOG: Syslog&#xA;LOG_LPR: Central printer&#xA;LOG_NEWS: Network news (e.g. Usenet)&#xA;LOG_UUCP: UUCP&#xA;LOG_CRON: Cron and At&#xA;LOG_AUTHPRIV: Private security (authorization)&#xA;LOG_FTP: Ftp server&#xA;LOG_LOCAL0,1,2,3,4,5,6,7: Locally defined&#xA;&#xA;``auth``: LOG_AUTH&#xA;``authpriv``: LOG_AUTHPRIV&#xA;``cron``: LOG_CRON &#xA;``daemon``: LOG_DAEMON&#xA;``ftp``: LOG_FTP&#xA;``kern``: LOG_KERN&#xA;``lpr``: LOG_LPR&#xA;``mail``: LOG_MAIL&#xA;``mark``: INTERNAL_MARK&#xA;``news``: LOG_NEWS&#xA;``security``: LOG_AUTH,&#xA;``syslog``: LOG_SYSLOG&#xA;``user``: LOG_USER&#xA;``uucp``: LOG_UUCP&#xA;``local0``: LOG_LOCAL0&#xA;``local1``: LOG_LOCAL1 &#xA;``local2``: LOG_LOCAL2 &#xA;``local3``: LOG_LOCAL3 &#xA;``local4``: LOG_LOCAL4 &#xA;``local5``: LOG_LOCAL5 &#xA;``local6``: LOG_LOCAL6 &#xA;``local7``: LOG_LOCAL7">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>local6</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SkaLevel" description="Indication of importance of the device in the SKA hierarchy &#xA;to support drill-down navigation: 1..6, with 1 highest">
+      <type xsi:type="pogoDsl:ShortType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>6</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="LoggingLevelCentralDefault" mandatory="true" description="Default logging level to Central logging target&#xA;(0=OFF, 1=FATAL, 2=ERROR, 3=WARNING, 4=INFO, 5=DEBUG)&#xA;&#xA;Default: 3">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="LoggingLevelElementDefault" mandatory="true" description="Default logging level to Element logging target&#xA;(0=OFF, 1=FATAL, 2=ERROR, 3=WARNING, 4=INFO, 5=DEBUG)&#xA;&#xA;Default: 4">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="LoggingLevelStorageDefault" mandatory="true" description="Default logging level to Syslog logging target&#xA;(0=OFF, 1=FATAL, 2=ERROR, 3=WARNING, 4=INFO, 5=DEBUG)&#xA;&#xA;Default: 4">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="LoggingTargetCentralDefault" description="Pre-configured logging target CentralLogger DS">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>DSHLMC/LogConsumer/id1</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="LoggingTargetElementDefault" description="Pre-configured logging target ElementLogger DS">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>DSHLMC/LogConsumer/id2</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="LoggingTargetStorageDefault" description="Pre-configured logging target for syslog">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>localhost</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ElementLoggerEnabledDefault" description="Enable element logging target">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="CentralLoggerEnabledDefault" description="Enable central logging target">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SyslogHost" description="Hostname of syslog server used for log storage">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>localhost</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ConfigFile" description="String with full path to a XML file with device configuration&#xA;(attributes &amp; their properties)">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="EnableConfigFromFile" description="Configure device attribute from file">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableDynAttrCleanup" description="Enable/disable automatic cleanup of dynamical attributes created, &#xA;e.g. at device destroy all dynamical attributes created from&#xA;config file are removed from the device.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableDynAttrRandomize" description="Enable/disable randomization of dynamical attributes according&#xA;to configured random model &amp; parameters">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="DynAttrRandomizePeriod" description="Period t (in ms) to be used for randomization of dynamical&#xA;attributes (if enabled), e.g. attributes are randomized (and therefore)&#xA;updated each t.">
+      <type xsi:type="pogoDsl:UIntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>3000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyDevices" description="Proxy device list">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="FormulaVarMaxTimeInterval" description="Max time interval (in seconds) for an attribute value present in &#xA;attr formula after which &#xA;the formula is declared as `old` and relative formula &#xA;result attribute quality switched to INVALID">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableProxyMonitoring" description="Enable periodic monitoring of registered proxies in device&#xA;&#xA;If enabled, a monitoring thread will be started and&#xA;whenever a proxy is registered a corresponding &#xA;dyn attr is created in device with notation:&#xA;&#xA;proxyRunStatus_[domain_name]_[family_name]_[member_name]&#xA;&#xA;holding the monitoring status.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyMonitoringPeriod" description="Period (in ms) used to monitor registered proxies.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyStatusAttrPollPeriod" description="Polling period for proxy status attributes in ms">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyStatusAttrPeriodicEventPeriod" description="Periodic event period for proxy status attributes in ms">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyStatusAttrArchiveEventPeriod" description="Archive event period for proxy status attributes in ms">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>20000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProxyTimeout" description="Timeout (in s) after which a non responding proxy device is marked&#xA;as down (in hard state)">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>20</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EventSubscriptions" description="List of event subscriptions to be performed for this device in&#xA;the following format:&#xA;&#xA;[0]= full attr name 1&#xA;[1]= event type 1&#xA;...&#xA;[N]= full attr name N&#xA;[N+1]= event type N">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="EventHandlers" description="List of event handlers to be registered in device given in the following&#xA;format:&#xA;&#xA;[0]: full attr name&#xA;[1]: event type string&#xA;[2]: name of event handler command&#xA;[3]: execution delay (0=now)&#xA;[4]: priority (0=LOW,1=MEDIUM,2=HIGH)&#xA;...&#xA;[N]: ...&#xA;[N+1]: ...&#xA;[N+2]: ...&#xA;[N+3]: ...&#xA;[N+4]: ...&#xA;&#xA;Command handler name must exist in device otherwise registration&#xA;fails.">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="EnableEventRateMonitoring" description="Enable event rate monitoring">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="MaxQueueableTask" description="Maximum number of tasks that can be inserted in the task queue">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>20</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="MaxTrackableTasks" description="Maximum number of tasks that can be stored in cache list &#xA;(historical info).">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>100</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="TaskHistoryTimeDepth" description="Max time interval (in seconds) used to maintain tasks in the task &#xA;list.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>600</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="DefaultTaskTimeout" description="Default task timeout (in seconds) to be used in task manager">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>120</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="TaskStatusAttrList" description="List of asynch task status attr.&#xA;&#xA;NB: These are the attributes containing each task status progress&#xA;info. Task sequence status is contained in attribute &#xA;names listed in the TaskSequenceAttrList property.">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="TaskSequenceStatusAttrList" description="List of sequence task status progress attribute names.">
+      <type xsi:type="pogoDsl:StringVectorType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </deviceProperties>
+    <deviceProperties name="EnableLoggerInitPolling" description="Enable/disable periodic logging system initialization. &#xA;This is to allow adding log target devices if they are not present &#xA;(e.g. because down) at device initialization.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="LoggerInitPollPeriod" description="Logging initialization polling period in ms.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableDevProxyInitPolling" description="Enable/disable polling of proxy initialization &amp; registration. &#xA;This is to handle down proxy at startup. In this case if the &#xA;initialization is not re-attempted that proxies will never be &#xA;registered in device.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="DevProxyInitPollPeriod" description="">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableFwdAttrInitPolling" description="">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="FwdAttrInitPollPeriod" description="">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>5000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableFormulaAttrUpdatePolling" description="Enable/disable update of formula attrs present in device.&#xA;The update is needed to initialize the formula in case one/more &#xA;proxies  contained in the device were down at the startup.&#xA;If initialization is succesful, the formula attr is evaluated to &#xA;update the quality status. If not done, otherwise, the formula attr is&#xA;only computed when proxy events are received.&#xA;&#xA;You can turn off this flag if you don`t have formula attrs in your&#xA;device.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="FormulaAttrUpdatePollPeriod" description="">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>5000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableStatusAttrUpdatePolling" description="">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="StatusAttrUpdatePollPeriod" description="">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>3000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableClearTaskPolling" description="">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ClearTaskPollPeriod" description="">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>10000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableProxyStatusAttrCreation" description="Enable proxy status attr creation">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="EnableAutoAdminProxyRegistration" description="Enable/disable automatic registration of admin device whenever&#xA;a proxy registration is needed.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>false</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ProcessEventsInQueueThread" description="If enabled the events received in the callback are moved to &#xA;the EventHandlerTask queue thread.">
+      <type xsi:type="pogoDsl:BooleanType"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <DefaultPropValue>true</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ElementLoggerAddress" description="Address of ElementLogger device server.&#xA;CentralLogger will use this to find the ElementLogger to &#xA;connect to for configuring remote logging of devices &#xA;in the Element facility">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="ElementAlarmsAddress" description="Address of ElementAlarms device server.&#xA;CentralAlarms will use this to find the ElementAlarms to &#xA;connect to for subscribing to SKA Alarms on the Element.">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="ElementTelModelAddress" description="Address of ElementTelModel device server.&#xA;Any Element can use this to find the ElementTelModel &#xA;which exposes the Telescope Model items in the Element &#xA;so that it can subscribe to it for updates.">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="ElementDatabaseDSAddress" description="Address of Element Database device server.&#xA;Central Archiver will find the ElementDatabaseDS to discover &#xA;all the devices in the Element facility to subscribe for archive &#xA;events to populate the Central Archive">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="AdminModeDefault" mandatory="true" description="Default value assumed for adminMode if a memorized value&#xA;is not present in DB (e.g. at first initialization)">
+      <type xsi:type="pogoDsl:ShortType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </deviceProperties>
+    <deviceProperties name="AsynchCmdReplyTimeout" description="Timeout (in ms) used to get asynchronous command reply">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>100</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="AsynchCmdReplyNRetries" description="Number of attempts performed to retrieve asynchronous command&#xA;reply. Each attempt uses the AsynchCmdReplyTimeout property&#xA;as timeout.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>5</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ConfigureMonitoringPollPeriod" description="Polling period (in ms) used when monitoring band configuration&#xA;progress">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>5000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ConfigureMonitoringTimeout" description="Timeout (in ms) used when monitoring the band configuration&#xA;task. When the timeout is exceeded it is assumed that the &#xA;configuration is faulty or anomalous and an alarm attribute should&#xA;be set.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SynchCmdReplyTimeout" description="Timeout (in ms) to be used for synchronous commands&#xA;Default is 3000 ms in Tango.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>5000</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="StowTaskTimeout" description="Timeout (in seconds) to be used for stow task">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ConfigureTaskTimeout" description="Timeout (in seconds) to be used for Configure task">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="OperateTaskTimeout" description="Timeout (in seconds) of operate task">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ShutdownTaskTimeout" description="Timeout (in seconds) used for dish shutdown task">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="RxShutdownTimeDelay" description="Time delay (in seconds) before placing Rx in safe mode (STANDBY-LP)&#xA;when a power cut event is received.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="StandbyFPTaskTimeout" description="Timeout (in seconds) to be used in SetStandbyFPMode task">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SPFStartupTimeout" description="SPF startup timeout (in seconds) after which a startup alarm&#xA;is raised by the device.">
+      <type xsi:type="pogoDsl:IntType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>30</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="RxControllerAddress" description="FQDN of Rx controller Tango device">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>rx_controller</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="SpfControllerAddress" description="">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>spf_controller</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="DsManagerAddress" description="">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>ds_manager</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="ControlModeDefault" description="Default control mode applied when no memorized value is present.&#xA;Default is REMOTE control.">
+      <type xsi:type="pogoDsl:ShortType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>0</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="RequestedBandDefault" description="Requested band default applied when no memorized value is present.&#xA;Default is NONE">
+      <type xsi:type="pogoDsl:ShortType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>0</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="TmProxyAddressDefault" description="Default TM Tango device managing this Dish Element">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>ska_mid/tm_leaf_node/d0001</DefaultPropValue>
+    </deviceProperties>
+    <deviceProperties name="PduManagerAddress" description="Proxy address of PDU manager device">
+      <type xsi:type="pogoDsl:StringType"/>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <DefaultPropValue>pdu_manager</DefaultPropValue>
+    </deviceProperties>
+    <commands name="ClearTasks" description="Clear tasks older than the specified time depth property" execMethod="clear_tasks" displayLevel="OPERATOR" polledPeriod="10000">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetInitializedAttrFormulas" description="" execMethod="get_initialized_attr_formulas" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNFailedTasks" description="Get the number of tasks in FAILED state present in the list" execMethod="get_nfailed_tasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNQueuedTasks" description="Get the number of tasks currently present in the queue&#xA;(not in the list)&#xA;&#xA;NB: The list contains a cache of lately performed tasks and&#xA;therefore stores also completed, running, failed tasks.&#xA;The queue contains typically only IDLE tasks." execMethod="get_nqueued_tasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="The number of queued tasks">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="Status" description="This command gets the device status (stored in its device_status data member) and returns it to the caller." execMethod="dev_status" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device status">
+        <type xsi:type="pogoDsl:ConstStringType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="FlushTaskQueue" description="Remove all tasks from the queue" execMethod="flush_task_queue" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetInitializedFormulas" description="" execMethod="get_initialized_formulas" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNIdleTasks" description="Get number of tasks in IDLE state present in list" execMethod="get_nidle_tasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNRunningTasks" description="Get number of running tasks present in list" execMethod="get_nrunning_tasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="The number of running tasks">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="State" description="This command gets the device state (stored in its device_state data member) and returns it to the caller." execMethod="dev_state" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="none">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Device state">
+        <type xsi:type="pogoDsl:StateType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNTasks" description="Get the number of tasks currently present in the list&#xA;(not in the queue)&#xA;&#xA;NB: The list contains a cache of lately performed tasks and&#xA;therefore stores also completed, running, failed tasks.&#xA;The queue contains typically only IDLE tasks." execMethod="get_ntasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="Number of tasks">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetNTotFailedTasks" description="Get the number of total tasks FAILED (including also &#xA;EXPIRED and ABORTED)" execMethod="get_ntot_failed_tasks" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:IntType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetQueuedTaskInfo" description="Return the queued task info" execMethod="get_queued_task_info" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetRegisteredAttrFormulas" description="Returns a list of attr formulas currently registered in &#xA;device and expressed in json format." execMethod="get_registered_attr_formulas" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="The list of attr formulas currently registered in device &#xA;and expressed in json format.">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetRegisteredEvents" description="Get list of registered events in device" execMethod="get_registered_events" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetRegisteredFormulas" description="Returns a list of attr formulas currently registered in &#xA;device and expressed in json format." execMethod="get_registered_formulas" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="The list of attr formulas currently registered in device &#xA;and expressed in json format.">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetRegisteredProxies" description="Return list of device proxies registered in device" execMethod="get_registered_proxies" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetTaskInfo" description="Return the task info for tasks present in the list" execMethod="get_task_info" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:StringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="InitializeAttrFormulas" description="Initialize attr formula registered in device. &#xA;This is needed since device proxies specified in attr formula&#xA;may be offline when the formula is initially registered and &#xA;initialized. This command is periodically executed to ensure&#xA;that when proxies are online the formula is initialized.-" execMethod="initialize_attr_formulas" displayLevel="OPERATOR" polledPeriod="5000">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="InitializeDevProxies" description="Initialize device proxies. This command is periodically polled." execMethod="initialize_dev_proxies" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="InitializeFormulas" description="Initialize attr formula registered in device. &#xA;This is needed since device proxies specified in attr formula&#xA;may be offline when the formula is initially registered and &#xA;initialized. This command is periodically executed to ensure&#xA;that when proxies are online the formula is initialized.-" execMethod="initialize_formulas" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="InitializeFwdAttrs" description="Initialize fwd attributes. &#xA;Fwd attributes are dynamically added at device startup. &#xA;However when the root device server is down the initialization&#xA;fails. This command is supposed to be run periodically to&#xA;ensure fwd are created if the root device comes online." execMethod="initialize_fwd_attrs" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="InitializeLoggers" description="Initialize loggers" execMethod="initialize_loggers" displayLevel="EXPERT" polledPeriod="10000">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="IsTaskQuotaReached" description="Return true if task quota is reached in device and &#xA;false otherwise.&#xA;Task quota parameters can be modified in device properties." execMethod="is_task_quota_reached" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="The task quota flag">
+        <type xsi:type="pogoDsl:BooleanType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="MonitorProxies" description="Monitor list of registered proxies" execMethod="monitor_proxies" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="RandomizeDynAttrs" description="Randomize dynamical attribute (if enabled)" execMethod="randomize_dyn_attrs" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="RevokeTask" description="Find all sequence tasks with matching name and remove&#xA;tasks belonging to the sequence from the queue. &#xA;Set removed tasks (IDLE status) to CANCELED." execMethod="revoke_task" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="Name of task sequence to be canceled">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="UpdateFormulaAttrs" description="Initialize and update attr formula registered in device. &#xA;This is needed since device proxies specified in attr formula&#xA;may be offline when the formula is initially registered and &#xA;initialized. This command is periodically executed to ensure&#xA;that when proxies are online the formula is initialized.&#xA;It is also used to trigger switching of formula attr quality&#xA;factor to INVALID when one/more formula vars are old (e.g.&#xA;proxy down or events not received)." execMethod="update_formula_attrs" displayLevel="EXPERT" polledPeriod="5000">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="UpdateStatusAttrs" description="Update status attribute values from task manager info" execMethod="update_status_attrs" displayLevel="EXPERT" polledPeriod="3000">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="GetFormulaData" description="Find formula with given arg name and return formula var data&#xA;encoded in json string format." execMethod="get_formula_data" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="Formula attr name">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="Formula data encoded in json string">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="SetStandbyLPMode" description="This command triggers the Dish to transition to the &#xA;STANDBY-LP Dish Element Mode, and returns to the caller. &#xA;Standby_LP is the default mode when the Dish is &#xA;configured for low power consumption, and is the mode &#xA;wherein Dish ends after a start up procedure." execMethod="set_standby_lpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetStandbyFPMode" description="This command triggers the Dish to transition to the &#xA;STANDBY-FP Dish Element Mode, and returns to the caller.&#xA;To prepare all subsystems for active observation, once &#xA;a command is received by TM to go to the FULL_POWER &#xA;mode.&#xA;&#xA;Command allowed only in DIsh modes:&#xA;{STANDBY-LP/STOW/OPERATE/MAINTENANCE}" execMethod="set_standby_fpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetOperateMode" description="This command triggers the Dish to transition to the &#xA;OPERATE Dish Element Mode, and returns to the caller. &#xA;This mode fulfils the main purpose of the Dish, which is to &#xA;point to designated directions while capturing data and &#xA;transmitting it to CSP.&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP}" execMethod="set_operate_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetMaintenanceMode" description="This command triggers the Dish to transition to the &#xA;MAINTENANCE Dish Element Mode, and returns to the &#xA;caller. To go into a state that is safe to approach the &#xA;Dish by a maintainer, and to enable the Engineering &#xA;interface to allow direct access to low level control and&#xA;monitoring by engineers and maintainers. &#xA;This mode will also enable engineers and maintainers &#xA;to upgrade SW and FW. Dish also enters this mode &#xA;when an emergency stop button is pressed.&#xA;&#xA;Command allowed ony in Dish modes: &#xA;{STANDBY-LP/STANDBY-FP}" execMethod="set_maintenance_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="== Long field ==&#xA;[0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetStowMode" description="This command triggers the Dish to transition to the &#xA;STOW Dish Element Mode, and returns to the caller. &#xA;To point the dish in a direction that minimises the &#xA;wind loads on the structure, for survival in strong wind &#xA;conditions. The Dish is able to observe in the stow &#xA;position, for the purpose of transient detection." execMethod="set_stow_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="== Long field ==&#xA;[0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand1" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 1. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band1" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand2" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 2. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band2" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand3" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 3. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band3" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand4" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 4. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band4" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand5a" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 5. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band5a" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureBand5b" description="This command triggers the Dish to transition to the &#xA;CONFIGURE Dish Element Mode, and returns to the caller. &#xA;To configure the Dish to operate in frequency band 5. &#xA;On completion of the band configuration, Dish will &#xA;automatically revert to the previous Dish mode &#xA;(OPERATE or STANDBY-FP).&#xA;&#xA;Command allowed only in Dish modes:&#xA;{STANDBY-FP/OPERATE/STOW}" execMethod="configure_band5b" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetIndexerPosition" description="Set indexer position" execMethod="set_indexer_position" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="bandId position">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetIndexerPositionTask" description="Set indexer position in DS" execMethod="set_indexer_position_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Track" description="The Dish moves to the commanded pointing angle at &#xA;the maximum speed, as defined by the specified slew &#xA;rate. No pointing accuracy requirements are applicable &#xA;in this state. SLEW state will also be reported while the &#xA;Dish is settling onto a target and is still not within &#xA;the specified pointing accuracy. As soon as the &#xA;pointing accuracy is within specifications, the state &#xA;changes to TRACK.&#xA;&#xA;Command allowed only in DIsh modes:&#xA;{OPERATE}" execMethod="track" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Slew" description="The Dish is tracking the commanded pointing positions &#xA;within the specified TRACK pointing accuracy.&#xA;&#xA;Command allowed only in DIsh modes:&#xA;{OPERATE}" execMethod="slew" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Scan" description="The Dish is tracking the commanded pointing positions &#xA;within the specified SCAN pointing accuracy. (TBC)&#xA;NOTE: This pointing state is currently proposed and &#xA;there are currently no requirements for this functionality.&#xA;&#xA;Command allowed only in DIsh modes:&#xA;{OPERATE}" execMethod="scan" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[timestamp]">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandleBandFunctionalErrorEvent" description="Handler cmd for functional band error" execMethod="handle_band_functional_error_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandleEStopEvent" description="Handler command for emergency stop event" execMethod="handle_estop_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandlePowerCutEvent" description="Handler cmd for power cut event" execMethod="handle_power_cut_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded string including event data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandlePowerRestoreEvent" description="Handler cmd for power restoring event" execMethod="handle_power_restore_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandleTMCommLossEvent" description="Handler cmd for TM communication loss event.&#xA;Performs the following actions:&#xA;&#xA;- Flush the command queue&#xA;- Reset task progress attributes for mode transitions&#xA;- Command DS to go to STOW" execMethod="handle_tmcomm_loss_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="HandleBandInFocusEvent" description="Handle indexer position change event from DS.&#xA;Set band in focus attr in SPF when notified by DS that&#xA;a new band is in focus." execMethod="handle_band_in_focus_event" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="FlushCommandQueue" description="Flush the command queue (all queued command will be &#xA;removed)." execMethod="flush_command_queue" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxStandbyLPMode" description="Set SPFRx to its STANDBY-LP mode. &#xA;Command mainly for testing purposes.&#xA;Allowed only in SPFRx modes {STANDBY-LP, STANDBY-FP, MAINTENANCE}" execMethod="set_rx_standby_lpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxStandbyLPModeTask" description="Set Rx to STANDBY-LP mode" execMethod="set_rx_standby_lpmode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxStandbyFPMode" description="Set SPFRx STANDBY-FP mode.&#xA;Command mainly used for testing.&#xA;Allowed only in SPFRx modes: {STANDBY-LP,STANDBY-FP,MAINTENANCE,CONFIGURE,DATA-CAPTURE}" execMethod="set_rx_standby_fpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxStandbyFPModeTask" description="Command task to set SPFRx to STANDBY-FP mode" execMethod="set_rx_standby_fpmode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxMaintenanceMode" description="Set SPFRx to MAINTENANCE mode.&#xA;Command mainly used for testing. &#xA;Allowed only in SPFRx modes: {STANDBY-LP, STANDBY-FP, MAINTENANCE, DATA-CAPTURE}" execMethod="set_rx_maintenance_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetRxMaintenanceModeTask" description="Command task to set SPFRx to MAINTENANCE mode" execMethod="set_rx_maintenance_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureRxBand" description="Configure band in Rx sub-element.&#xA;Command allowed only in spfrx modes: {STANDBY-FP, DATA-CAPTURE, MAINTENANCE}" execMethod="configure_rx_band" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Band id">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureRxBandAsync" description="Configure band in Rx sub-element.&#xA;NB: This is the long running command version originally &#xA;intended to be used by Rx sub-element. In latest ICD &#xA;the configuration task has been marked as non long-running,&#xA;so consider this as DEPRECATED." execMethod="configure_rx_band_async" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Band id">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="== Long field ==&#xA;[0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureRxBandTask" description="Configure band in Rx" execMethod="configure_rx_band_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureAndSynchroniseRxBand" description="Configure and synchronize SPFRx band. &#xA;This performs configuration and at completion run synchronize&#xA;on SPFRx." execMethod="configure_and_synchronise_rx_band" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Band id {1=B1,2=B2,3=B3,4=B4,5=B5a,6=B5b}">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ConfigureRxAttenuation" description="Set the global attenuation. Changing this value will set &#xA;the attenuation across the system and will be applied to &#xA;all bands." execMethod="configure_rx_attenuation" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Attenuation par in DB">
+        <type xsi:type="pogoDsl:FloatType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Capture" description="Start/Stop capture on the configured band. &#xA;Command only valide in SPFRx DATA-CAPTURE mode&#xA;&#xA;Command allowed only in Dish modes:&#xA;{OPERATE}" execMethod="capture" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="ON/OFF">
+        <type xsi:type="pogoDsl:BooleanType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="StartCapture" description="Start capture on the configured band. &#xA;Command only valid in SPFRx Data_Capture mode.&#xA;&#xA;Allowed only in OPERATE dish mode" execMethod="start_capture" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="StopCapture" description="Stop capture on the configured band" execMethod="stop_capture" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="StartRxCaptureTask" description="Start capture on Rx sub-element" execMethod="start_rx_capture_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="Synchronise" description="Reset configured band sample counters. &#xA;Command only valid in SPFRx Data_Capture mode.&#xA;&#xA;Command allowed only in DIsh modes:&#xA;{OPERATE}" execMethod="synchronise" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SynchroniseRxBandTask" description="Synchronise Rx band" execMethod="synchronise_rx_band_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="EnableRxEngineeringMode" description="Enable/disable the SPFRx engineering mode.&#xA;NB: When enabled will allow to modify/fine-tune some receiver&#xA;parameters (e.g. attenuation, etc). Not to be confused with&#xA;receiver MAINTENANCE mode which is intended only&#xA;for software/firmware update." execMethod="enable_rx_engineering_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="enable/disable">
+        <type xsi:type="pogoDsl:BooleanType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ShutdownRXPU" description="Shutdown Rx controller" execMethod="shutdown_rxpu" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ShutdownRXPUTask" description="Shutdown SPFRx controller" execMethod="shutdown_rxputask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOffRXPU" description="Power off the RXPU from the PDU interface" execMethod="power_off_rxpu" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOnRXPU" description="Power on RXPU from the PDU interface" execMethod="power_on_rxpu" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOffRXPUTask" description="Power off the Rx controller from the PDU interface.&#xA;Typically invoked by the Dish power cut handler cmd." execMethod="power_off_rxputask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOnRXPUTask" description="Power on the Rx controller. &#xA;Typically inkoved by the power restore handler cmd." execMethod="power_on_rxputask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFStandbyLPMode" description="Set the SPF sub-element in its STANDBY-LP mode.&#xA;Allowed only in SPF modes {STANDBY-LP, OPERATE, MAINTENANCE}" execMethod="set_spfstandby_lpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFStandbyLPModeTask" description="Set SPF in standby LP mode.&#xA;Allowed only in SPF modes {STANDBY-LP, OPERATE, MAINTENANCE}" execMethod="set_spfstandby_lpmode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFOperateMode" description="Set SPF sub-element in its OPERATE mode." execMethod="set_spfoperate_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="== Long field ==&#xA;[0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFOperateModeTask" description="Set SPF to OPERATE mode. &#xA;This command is mainly for testing SPF Interface." execMethod="set_spfoperate_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFOperational" description="Set the SPF operational. &#xA;&#xA;1) Set SPF mode to OPERATE&#xA;2) Power on LNAs when 1) completes&#xA;3) TBD" execMethod="set_spfoperational" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Band id&#xA;&#xA;- bandId=-1 all bands&#xA;- bandId=0 active band&#xA;- band=[1-5] selected band">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="== Long field ==&#xA;[0]: ack code (0=OK, 1=QUEUED, 2=FAILED)&#xA;&#xA;== String field ==&#xA;[0]: Informative message or error/fault description">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFMaintenanceMode" description="Set the SPF sub-element in its MAINTENANCE mode" execMethod="set_spfmaintenance_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFMaintenanceModeTask" description="Set SPF to MAINTENANCE mode task" execMethod="set_spfmaintenance_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFFeedMode" description="Set SPF feed package mode&#xA;Allowed bands are {1-5}. &#xA;Allowed modes are {0=STANDBY-LP, 1=OPERATE, 2=MAINTENANCE}" execMethod="set_spffeed_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[0]: bandId [1-5]&#xA;[1]: mode&#xA;&#xA;Allowed modes are:&#xA;&#xA;0= STANDBY-LP&#xA;1= OPERATE&#xA;2= MAINTENANCE">
+        <type xsi:type="pogoDsl:ShortArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SendSPFFeedCommand" description="Send a once-off command directly to the feed. &#xA;Each feed can have different commands defined, and &#xA;currently they are all defined in the same manner.&#xA;&#xA;Command is valid in spf mode {STANDBY-LP, OPERATE, MAINTENANCE}&#xA;&#xA;&#xA;Valid values for mcBand argument are: {1-5}.&#xA;Valid values for feedComamnd argument are: {0,1}, &#xA;where each enum code corresponds to:&#xA;&#xA;0 = REGENERATE&#xA;1 = CLEAR-ERRORS&#xA;&#xA;Other additional commands defined in the future &#xA;will follow from the above list into separate lists for &#xA;each feed." execMethod="send_spffeed_command" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="[0]: mcBand&#xA;[1]: feedCommand {0=REGENERATE,1=CLEAR-ERRORS}">
+        <type xsi:type="pogoDsl:ShortArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFLnaPowerOff" description="Switch SPF LNA power off for selected bands, active band or&#xA;all bands depending on the input argument." execMethod="set_spflna_power_off" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="bandId: [1-5]&#xA;&#xA;If bandId=-1 turns on all bands&#xA;If bandId=0 turns on only active band. &#xA;If no band is active (was not configured) an exception &#xA;is thrown.">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFLnaPowerOn" description="Switch the SPF LNA power on for selected band or for all&#xA;bands or for active band depending on attributes." execMethod="set_spflna_power_on" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="bandId: [1-5]&#xA;&#xA;If bandId=-1 turns on all bands&#xA;If bandId=0 turns on only active band. &#xA;If no band is active (was not configured) an exception &#xA;is thrown.">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFLnaPowerOnTask" description="" execMethod="set_spflna_power_on_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFBandInFocus" description="Set the requested band in SPF. This can be done also via&#xA;the corresponding forwarded writable attribute. This command&#xA;is provided to support automated execution in task schedule." execMethod="set_spfband_in_focus" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Band id">
+        <type xsi:type="pogoDsl:ShortType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetSPFBandInFocusTask" description="Task to set the requested band in SPF. Used by the configure&#xA;schedule command." execMethod="set_spfband_in_focus_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Encoded task data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ShutdownSPFC" description="Shutdown the SPF controller" execMethod="shutdown_spfc" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ShutdownSPFCTask" description="Task command to shutdown the SPF controller" execMethod="shutdown_spfctask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOffSPFC" description="Power off SPFC from the PDU interface" execMethod="power_off_spfc" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOnSPFC" description="Power on SPFC from the PDU interface" execMethod="power_on_spfc" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOffSPFCTask" description="Task to power off the SPF controller from the PDU.&#xA;Typically invoked by the dish power off handler cmd." execMethod="power_off_spfctask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Encoded task data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="PowerOnSPFCTask" description="Power on the SPF controller. &#xA;Typically invoked by the power restore handler cmd." execMethod="power_on_spfctask" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStandbyLPMode" description="Set DS in STANDBY-LP mode" execMethod="set_dsstandby_lpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStandbyLPModeTask" description="Command task to set DS to STANDBY-LP mode" execMethod="set_dsstandby_lpmode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStandbyFPMode" description="Set DS in STANDBY-FP mode" execMethod="set_dsstandby_fpmode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStandbyFPModeTask" description="Command task to set DS to STANDBY-FP mode" execMethod="set_dsstandby_fpmode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSPointMode" description="Set DS point mode" execMethod="set_dspoint_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSPointModeTask" description="" execMethod="set_dspoint_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Task encoded data">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStowMode" description="Set DS stow mode" execMethod="set_dsstow_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSStowModeTask" description="Set DS stow mode task" execMethod="set_dsstow_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSMaintenanceMode" description="Set DS to MAINTENANCE mode" execMethod="set_dsmaintenance_mode" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetDSMaintenanceModeTask" description="Command task to set DS to MAINTENANCE mode" execMethod="set_dsmaintenance_mode_task" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ResetDishMode" description="Reset dish mode, e.g. when in FORBIDDEN state. &#xA;This command will clear all mode progress attributes, &#xA;flush all queued commands and&#xA;set STANDBY-LP mode." execMethod="reset_dish_mode" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ResetDishTasks" description="Flush all commands in queue and &#xA;reset all progress attributes." execMethod="reset_dish_tasks" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SendTestLogMsg" description="Generate a log in the device according to the given level.&#xA;Used for testing purposes." execMethod="send_test_log_msg" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="Long arg&#xA;[0]: Level of log message&#xA;(0=OFF, 1=FATAL, 2=ERROR, 3=WARNING, 4=INFO, 5=DEBUG)&#xA;&#xA;String arg&#xA;[0]: log message">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="SetTMProxyAddress" description="This command reset the TM proexy device to be monitored." execMethod="set_tmproxy_address" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="Name of TM proxy device to be monitored">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="RevokeTaskSequence" description="Find all sequence tasks with matching name and remove&#xA;tasks belonging to the sequence from the queue. &#xA;Set removed tasks (IDLE status) to CANCELED." execMethod="revoke_task_sequence" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="Name of task sequence to be revoked.">
+        <type xsi:type="pogoDsl:StringType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="RestartSPFComponents" description="Performs a complete restart of SPF software &#xA;components excluding the SPFController Tango &#xA;device." execMethod="restart_spfcomponents" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="ClearTaskHistory" description="Removed all tasks present in the list (including RUNNING&#xA;tasks)." execMethod="clear_task_history" displayLevel="OPERATOR" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <commands name="SetStandbyFPModeOnBandError" description="Set STANDBY-FP mode if:&#xA;&#xA;- dishMode=OPERATE&#xA;- configuredBand!=NONE&#xA;- bXCapability=UNAVAILABLE (X=configured band)" execMethod="set_standby_fpmode_on_band_error" displayLevel="EXPERT" polledPeriod="0" isDynamic="false">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="GetLogAppenderInfo" description="Return list of all log appenders with log levels" execMethod="get_log_appender_info" displayLevel="EXPERT" polledPeriod="0">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:LongStringArrayType"/>
+      </argout>
+      <status abstract="false" inherited="true" concrete="true"/>
+    </commands>
+    <dynamicCommands name="dummyDynCmd" description="" execMethod="dummy_dyn_cmd" displayLevel="EXPERT" polledPeriod="0" isDynamic="true">
+      <argin description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </dynamicCommands>
+    <attributes name="loggingLevelCentral" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true" concreteHere="false"/>
+      <properties description="Current  logging level to Central logging target for this device" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="1" period="10000"/>
+    </attributes>
+    <attributes name="loggingLevelElement" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true" concreteHere="false"/>
+      <properties description="Current  logging level to Element logging target for this device" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="1" period="10000"/>
+    </attributes>
+    <attributes name="loggingLevelStorage" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true" concreteHere="false"/>
+      <properties description="Current  logging level to Syslog for this device" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="1" period="10000"/>
+    </attributes>
+    <attributes name="loggingLevelConsole" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:IntType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Current console log level&#xA;&#xA;0= OFF&#xA;1= FATAL&#xA;2= ERROR&#xA;3= WARN&#xA;4= INFO&#xA;5= DEBUG" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="buildState" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="60000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Build state of this device" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="centralLoggerStatus" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="3000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:EnumType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Central logging target status. Possible values are:&#xA;&#xA;UNKNOWN: Typically set at device startup&#xA;DISABLED: When central logging target is disabled (see device properties)&#xA;OK: When central logging target is initialized with success&#xA;FAILED: When central logging target initialization fails, e.g. logger is offline or proxy name invalid " label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="3000"/>
+    </attributes>
+    <attributes name="elementLoggerStatus" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="3000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:EnumType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Element logging target status. Possible values are:&#xA;&#xA;UNKNOWN: Typically set at device startup&#xA;DISABLED: When element logging target is disabled (see device properties)&#xA;OK: When element logging target is initialized with success&#xA;FAILED: When element logging target initialization fails, e.g. logger is offline or proxy name invalid " label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="3000"/>
+    </attributes>
+    <attributes name="storageLoggerStatus" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="3000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:EnumType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Storage logging target status. Possible values are:&#xA;&#xA;UNKNOWN: Typically set at device startup&#xA;DISABLED: When storage logging target is disabled (see device properties)&#xA;OK: When storage logging target is initialized with success&#xA;FAILED: When storage logging target initialization fails, e.g. logger is offline or proxy name invalid " label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="3000"/>
+    </attributes>
+    <attributes name="eventRate" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:FloatType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Rate in Hz of events received from the device." label="eventRate" unit="Hz" standardUnit="Hz" displayUnit="Hz" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="exceptionRate" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:FloatType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Rate of internal exceptions thrown in the device" label="exceptionRate" unit="Hz" standardUnit="Hz" displayUnit="Hz" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="fwdAttrInitStatus" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:EnumType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Initialization status of fwd attributes in device. &#xA;&#xA;UNKNOWN: typically at startup&#xA;OK: All fwd attributes initialized or no fwd attributes present in device&#xA;FAILED: One/more fwd attributes not initialized yet (e.g. root device down)" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="centralLoggerEnabled" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Enable/disable the central logger in device.&#xA;NB: Attribute is not persisted after device restart." label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="elementLoggerEnabled" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Enable/disable the central logger in device.&#xA;NB: Attribute is not persisted after device restart." label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="storageLoggerEnabled" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="10000" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="true" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Enable/disable the storage logger in device.&#xA;NB: Attribute is not persisted after device restart." label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+      <eventCriteria relChange="" absChange="" period="10000"/>
+    </attributes>
+    <attributes name="loggingTargetCentral" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Current Central logging target" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="loggingTargetElement" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Current Element logging target" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="loggingTargetStorage" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" memorized="true" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:StringType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="Current storage logging target" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="attrRandomizationEnabled" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:BooleanType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <attributes name="attrRandomizationPeriod" attType="Scalar" rwType="READ_WRITE" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true">
+      <dataType xsi:type="pogoDsl:UIntType"/>
+      <changeEvent fire="false" libCheckCriteria="false"/>
+      <archiveEvent fire="false" libCheckCriteria="false"/>
+      <status abstract="false" inherited="true" concrete="true"/>
+      <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
+    </attributes>
+    <states name="INIT" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="STANDBY" description="SKA Control Model state: corresponds to STANDBY-LP mode defined&#xA;in Dish Model">
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </states>
+    <states name="DISABLE" description="SKA Control Model state: corresponds to MAINTENANCE, STOW mode defined&#xA;in Dish Model">
+      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+    </states>
+    <states name="ON" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="ALARM" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="FAULT" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="OFF" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="RUNNING" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="UNKNOWN" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <states name="MOVING" description="">
+      <status abstract="false" inherited="true" concrete="true"/>
+    </states>
+    <preferences docHome="./doc_html" makefileHome="/home/riggi/Software/TANGO/v9.2.5a/share/pogo/preferences"/>
+    <overlodedPollPeriodObject name="loggingLevelCentral" type="attribute" pollPeriod="0"/>
+    <overlodedPollPeriodObject name="loggingLevelElement" type="attribute" pollPeriod="0"/>
+    <overlodedPollPeriodObject name="loggingLevelStorage" type="attribute" pollPeriod="0"/>
+    <overlodedPollPeriodObject name="InitializeDevProxies" type="command" pollPeriod="0"/>
+    <overlodedPollPeriodObject name="InitializeFwdAttrs" type="command" pollPeriod="0"/>
+  </classes>
+</pogoDsl:PogoSystem>

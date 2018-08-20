@@ -1,0 +1,68 @@
+---
+
+## Install Python 
+- name: Install python
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items:
+    - python-dev
+    - python-setuptools
+    - python-virtualenv
+  become: true
+
+## Install python modules
+- name: Install python pip
+  easy_install:
+    name: pip
+    state: latest
+  become: true
+
+
+#- standard python modules
+- name: Install python basic modules
+  pip: name={{ item }}
+  with_items:
+    - numpy
+  become: true
+
+## Install standard libraries
+- name: Install standard libraries
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libtool
+    - pkg-config
+    - build-essential
+    - autoconf
+    - automake
+    - csh
+  become: true
+
+## Install git
+- name: Install git
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - git
+  become: true
+
+## Install doc stuff
+- name: Install Doxygen
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - doxygen
+  become: true
+
+- name: Install sphinx & breathe
+  pip: name={{ item }}
+  with_items:
+    - sphinx
+    - sphinx-rtd-theme
+    - breathe
+  become: true
+
+## Install cmake
+- name: Install cmake
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - cmake
+    - cmake-curses-gui
+  become: true
+...

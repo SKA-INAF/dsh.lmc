@@ -1,0 +1,11 @@
+## INC & SOURCE DIRS
+set(LogPrinter_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(LogPrinter_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+## EXE
+set(LogPrinterExe ${LogPrinter_SRC_DIR}/LogPrinter.py)
+set(LogPrinterExe ${LogPrinterExe} PARENT_SCOPE)
+
+list (APPEND INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+set (INCLUDE_DIRS ${INCLUDE_DIRS} PARENT_SCOPE)
+

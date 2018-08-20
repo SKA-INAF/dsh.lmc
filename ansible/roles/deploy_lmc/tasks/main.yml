@@ -1,0 +1,174 @@
+---
+
+###########################################
+##     PROMPT FOR PASSWORDS
+###########################################
+
+# Pause and ask for mysql password
+#- pause:
+#    prompt: "Please enter mysql password to create LMC archive db and tables "
+#  when: lmc_create_archive_db
+#  register: prompted_mysql_root_pass
+#  no_log: true
+  
+
+###########################################
+##     LOAD ENVIRONMENT
+###########################################
+#- name: Source environment 
+#  shell: source {{setvars_file}}
+#  args:
+#    executable: /bin/bash
+  
+#- name: Print host TANGO vars as a check
+#  debug: msg="TANGO_HOST= {{ lookup('env','TANGO_HOST') }}, TANGO_ROOT= {{ lookup('env','TANGO_ROOT') }}"
+
+#- name: Print host TANGO vars as a check
+#  debug: msg="TANGO_HOST= {{ ansible_env.TANGO_HOST }}, TANGO_ROOT= {{ ansible_env.TANGO_ROOT }}"
+
+- name: Print host TANGO vars as a check
+  debug: msg="TANGO_HOST= {{ ansible_env.TANGO_HOST }}, TANGO_ROOT= {{ ansible_env.TANGO_ROOT }}"
+
+
+###########################################
+##     BUILD LMC
+###########################################
+- name: Downloading LMC from git repository
+  debug: msg="lmc_repo_url= {{lmc_repo_url}}, lmc_source_dir= {{lmc_source_dir}}"
+
+- name: Download LMC from repository
+  git:
+    repo: "{{lmc_repo_url}}"
+    dest: "{{lmc_source_dir}}"
+    version: "{{lmc_version}}"
+
+- name: Create LMC build directory
+  file: path={{ lmc_source_dir }}-build state=directory
+  
+- name: Configure LMC cmake build
+  shell: cmake -DCMAKE_INSTALL_PREFIX={{lmc_install_dir}} {{ lmc_source_dir }}
+  args:
+    chdir: "{{ lmc_source_dir }}-build"
+
+- name: Build LMC
+  make:
+    chdir: "{{ lmc_source_dir }}-build"
+
+- name: Check if LMC install dir is writable by user
+  check_write_permission: 
+    path="{{ lmc_install_dir }}"
+  register: writable_result  
+
+- name: Install LMC to system directory
+  make:
+    target: install
+    chdir: "{{ lmc_source_dir }}-build"
+  become: yes
+  when: writable_result['writable']==False
+
+- name: Install LMC to user directory
+  make:
+    target: install
+    chdir: "{{ lmc_source_dir }}-build"
+  when: writable_result['writable']==True
+
+- name: Remove LMC build directory
+  file:
+    state: absent
+    path: "{{ lmc_source_dir }}-build/"
+  when: lmc_remove_sources_after_install
+
+- name: Remove LMC source directory
+  file:
+    state: absent
+    path: "{{ lmc_source_dir }}/"
+  when: lmc_remove_sources_after_install
+ 
+###########################################
+##     INSTALL TANGO DB DAEMON
+###########################################
+- name: Install tangorc file
+  template:
+    src: tangorc.j2  
+    dest: /etc/tangorc
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Install Tango DB daemon script
+  template:
+    src: tango-db.j2  
+    dest: /etc/init.d/tango-db
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: Install defaults for Tango DB daemon script
+  template:
+    src: tango-db_default.j2
+    dest: /etc/default/tango-db
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Enable TangoDB service on boot
+  service:
+    name: tango-db
+    state: started
+    enabled: yes
+  become: true
+  
+###########################################
+##     INSTALL LMC STARTER DAEMON
+###########################################
+- name: Install LMC starter script
+  template:
+    src: lmc-starter.j2  
+    dest: /etc/init.d/lmc-starter
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+
+- name: Install defaults for LMC daemon script
+  template:
+    src: lmc-starter_default.j2
+    dest: /etc/default/lmc-starter
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+
+###########################################
+##     CREATE LMC MYSQL USER & DATABASE
+###########################################
+
+
+# Create Archive Database
+- name: Create LMC archive MySQL DB
+  mysql_db:
+    name: "{{lmc_archive_db_name}}"
+    login_user: root
+    login_password: "{{prompted_mysql_root_pass}}"
+    state: present
+
+# Create LMC archive user
+- name: Create LMC archive user
+  mysql_user:
+    name: "{{lmc_archive_user}}"
+    password: "{{lmc_archive_user_pass}}"
+    priv: "{{lmc_archive_db_name}}.*:ALL"
+    login_user: root
+    login_password: "{{prompted_mysql_root_pass}}"
+    state: present
+
+# Create LMC archive DB tables
+- name: Create LMC archive tables in DB with pass {{ lmc_archive_user_pass }}
+  script: create_mysql_archive.sh '{{lmc_archive_user}}' '{{ lmc_archive_user_pass }}' '{{lmc_archive_db_name}}'
+
+
+...

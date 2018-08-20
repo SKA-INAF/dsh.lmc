@@ -1,0 +1,30 @@
+---
+############################################
+###     SOFTWARE INSTALL VARS               ###
+############################################
+setvars_file: "/home/{{ ansible_user }}/Software/setvars.sh"
+#setvars_file: "~.bashrc"
+
+
+############################################
+###     TANGO INSTALL VARS               ###
+############################################
+
+
+############################################
+###     LMC INSTALL VARS                 ###
+############################################
+lmc_repo_url: "git@gitlab.com:ska_dish/dsh.lmc.git"
+lmc_source_dir: "/home/{{ ansible_user }}/Software/SKA/dsh.lmc"
+lmc_install_dir: "/opt/Software/SKA/DishLMC/install"
+lmc_starter_daemon_instance: "1"
+lmc_version: "devel"
+lmc_remove_sources_after_install: false
+
+lmc_create_archive_db: true
+lmc_archive_user: 'lmc-archiver'
+lmc_archive_user_pass: 'lmc$archive'
+lmc_archive_db_name: 'lmc_histdb'
+
+
+...

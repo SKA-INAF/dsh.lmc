@@ -1,0 +1,22 @@
+##############################################
+##     LMC DEPENDENCIES DEFAULT VARS
+##############################################
+YAT_ROOT={{ ansible_env.YAT_ROOT }}
+YAT4TANGO_ROOT={{ ansible_env.YAT4TANGO_ROOT }}
+BOOST_ROOT={{ ansible_env.BOOST_ROOT }}
+JSONCPP_ROOT={{ ansible_env.JSONCPP_ROOT }}
+PUGIXML_ROOT={{ ansible_env.PUGIXML_ROOT }}
+PUGIXML_LIB_ROOT={{ ansible_env.PUGIXML_LIB_ROOT }}
+LOG4CXX_ROOT={{ ansible_env.LOG4CXX_ROOT }}
+
+##############################################
+##     LMC DEFAULT VARS
+##############################################
+##DSHLMC_DIR={{ ansible_env.DSHLMC_DIR }}
+##DSHLMC_CONFIG={{ ansible_env.DSHLMC_CONFIG }}
+##DSHLMC_LOG={{ ansible_env.DSHLMC_LOG }}
+DSHLMC_DIR={{ lmc_install_dir }}
+LMC_STARTER_INSTANCE={{ lmc_starter_daemon_instance }}
+LMC_STARTER_VERBOSITY=1
+
+

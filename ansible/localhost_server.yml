@@ -1,0 +1,10 @@
+---
+
+- hosts: local
+  roles:
+  - bootstrap
+  - setup
+  - deploy_lmc
+  - configure_lmc
+
+...

@@ -1,0 +1,19 @@
+[local]
+127.0.0.1 ansible_connection=local
+localhost ansible_connection=ssh
+
+[deploy_servers]
+127.0.0.1 ansible_connection=local
+localhost ansible_connection=local
+
+[lmc_servers]
+localhost ansible_host=127.0.0.1 ansible_connection=local
+ska_lmc_vm_local ansible_host=127.0.0.1 ansible_connection=ssh ansible_user=admin ansible_port=2223
+ska_lmc_vm ansible_host=151.97.17.80 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmctest-sam ansible_host=151.97.17.80 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmctest-oats ansible_host=151.97.17.82 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmctest-oact ansible_host=151.97.17.83 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmctest2-oact ansible_host=151.97.17.86 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmctest-eie ansible_host=151.97.17.84 ansible_connection=ssh ansible_user=admin ansible_port=22
+lmcprod ansible_host=151.97.17.77 ansible_connection=ssh ansible_user=admin ansible_port=2226
+

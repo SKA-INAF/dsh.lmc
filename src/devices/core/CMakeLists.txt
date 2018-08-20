@@ -1,0 +1,10 @@
+add_subdirectory(LMCDevice)
+
+# LMCDevice
+set (LMCDevice_SRCS ${LMCDevice_SRCS} PARENT_SCOPE)
+set (LMCDevice_HEADERS ${LMCDevice_HEADERS} PARENT_SCOPE)
+set (LMCDevice_HEADERS_WPATH ${LMCDevice_HEADERS_WPATH} PARENT_SCOPE)
+set (Main_LMCDevice_SRCS ${Main_LMCDevice_SRCS} PARENT_SCOPE)
+
+set (INCLUDE_DIRS ${INCLUDE_DIRS} PARENT_SCOPE)
+

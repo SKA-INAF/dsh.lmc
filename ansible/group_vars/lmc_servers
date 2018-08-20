@@ -1,0 +1,68 @@
+---
+python_path: /usr/lib/python2.7/site-packages
+
+
+## SOFTWARE BASE DIR
+software_root: /opt/Software
+
+## LIB DIR
+boost_root: "{{software_root}}/LIB/boost/v1.63.0"
+jsoncpp_root: "{{software_root}}/LIB/jsoncpp/trunk"
+pugixml_root: "{{software_root}}/LIB/pugixml/v1.8"
+pugixml_lib_root: "{{software_root}}/LIB/pugixml/v1.8/lib/pugixml-1.8"
+log4cxx_root: "{{software_root}}/LIB/log4cxx/v0.10.0"
+
+## RSYSLOG
+rsyslog_service_name: rsyslog
+rsyslog_repeated_msg_reduction: "on"
+rsyslog_action_file_default_template: RSYSLOG_TraditionalFileFormat
+rsyslog_klog_permit_non_kernel_facility: "on"
+rsyslog_udp_enable: false
+rsyslog_udp_address: 127.0.0.1
+rsyslog_udp_port: 514
+rsyslog_tcp_enable: false
+rsyslog_tcp_port: 514
+rsyslog_apps: []
+rsyslog_file_owner: syslog
+rsyslog_file_group: adm
+rsyslog_priv_drop_to_group: syslog
+rsyslog_priv_drop_to_user: syslog
+rsyslog_file_create_mode: '0640'
+rsyslog_dir_create_mode: '0755'
+rsyslog_umask: '0022'
+rsyslog_work_directory: /var/spool/rsyslog
+rsyslog_include_config: /etc/rsyslog.d/*.conf
+
+## NAGIOS
+nagios_user: nagios
+nagios_group: nagios
+nagios_service_name: nagios
+nagios_install_dir: /usr/local/nagios
+nagios_binary_dir: "{{nagios_install_dir}}/bin"
+nagios_plugin_dir: "{{nagios_install_dir}}/libexec"
+nagios_exe: nagios
+nagios_cfg_dir: "{{nagios_install_dir}}/etc"
+nagios_cfg_object_dir: "{{nagios_cfg_dir}}/objects"
+nagios_cfg_file: nagios.cfg
+nagios_log_dir: "{{nagios_install_dir}}/var"
+nagios_log_file: nagios.log
+nagios_queryhandler_socket_path: "{{nagios_log_dir}}/rw/nagios.qh"
+
+## MYSQL
+mysql_user: root
+mysql_pass: admin
+mysql_host: localhost
+
+## TANGO VARS
+tango_root: "{{software_root}}/TANGO/v9.2.2"
+omniorb_root: "{{software_root}}/omniORB/v4.2.1"
+zmq_root: "{{software_root}}/zeromq/v4.1.5"
+pytango_root: "{{software_root}}/TANGO/Addon/PyTango/v9.2.1"
+pytango_path: "{{pytango_root}}/lib/python2.7/site-packages/pytango-9.2.1-py2.7-linux-x86_64.egg" 
+tango_host: localhost:10000
+
+## TANGO ADDONS
+yat_root: "{{software_root}}/TANGO/Addon/yat/v1.12.0"
+yat4tango_root: "{{software_root}}/TANGO/Addon/yat4tango/trunk"
+
+...

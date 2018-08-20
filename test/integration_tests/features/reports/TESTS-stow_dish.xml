@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite errors="0" failures="2" name="stow_dish.Stow SKA dish" skipped="0" tests="2" time="0.012425"><testcase classname="stow_dish.Stow SKA dish" name="Stow dish in STANDBY-LP -- @1.1 Device name" status="failed" time="0.006286"><failure message="False != True" type="AssertionError">
+<![CDATA[
+Failing step: Given TangoDB is up and running ... failed in 0.006s
+Location: stow_dish.feature:7
+Assertion Failed: False != True]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Stow dish in STANDBY-LP -- @1.1 Device name
+    Given TangoDB is up and running ... failed in 0.006s
+    And LMC is up and running ... skipped in 0.000s
+    Given I am an "mid_dish_0001/elt/master" client (TM or operator) ... skipped in 0.000s
+    And Dish is in STANDBY-LP mode ... skipped in 0.000s
+    When I request dish LMC to stow ... skipped in 0.000s
+    Then I should be acknowledged that stowing was initiated by LMC ... skipped in 0.000s
+    And I should be notified within 30 s that dish is in STOW mode ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="stow_dish.Stow SKA dish" name="Stow dish in STANDBY-LP -- @1.2 Device name" status="failed" time="0.006139"><failure message="False != True" type="AssertionError">
+<![CDATA[
+Failing step: Given TangoDB is up and running ... failed in 0.006s
+Location: stow_dish.feature:7
+Assertion Failed: False != True]]>
+</failure><system-out>
+<![CDATA[
+@scenario.begin
+  Scenario Outline: Stow dish in STANDBY-LP -- @1.2 Device name
+    Given TangoDB is up and running ... failed in 0.006s
+    And LMC is up and running ... skipped in 0.000s
+    Given I am an "dish_master" client (TM or operator) ... skipped in 0.000s
+    And Dish is in STANDBY-LP mode ... skipped in 0.000s
+    When I request dish LMC to stow ... skipped in 0.000s
+    Then I should be acknowledged that stowing was initiated by LMC ... skipped in 0.000s
+    And I should be notified within 30 s that dish is in STOW mode ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

@@ -1,0 +1,11 @@
+[local]
+127.0.0.1 ansible_connection=local
+localhost ansible_connection=ssh
+
+[deploy_servers]
+127.0.0.1 ansible_connection=local
+vm02.oact.inaf.it ansible_connection=ssh
+
+[lmc_servers]
+127.0.0.1 ansible_connection=ssh ansible_user=admin ansible_port=2223
+##vm02.oact.inaf.it ansible_connection=ssh ansible_user=admin ansible_port=2222
